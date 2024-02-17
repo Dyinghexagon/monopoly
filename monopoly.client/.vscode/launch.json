@@ -2,18 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "edge",
+      "name": "Launch via npm",
+      "type": "node",
       "request": "launch",
-      "name": "localhost (Edge)",
-      "url": "https://localhost:4200",
-      "webRoot": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run-script", "start:windows" ],
+      "console": "externalTerminal"
     },
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "localhost (Chrome)",
-      "url": "https://localhost:4200",
-      "webRoot": "${workspaceFolder}"
-    }
   ]
 }

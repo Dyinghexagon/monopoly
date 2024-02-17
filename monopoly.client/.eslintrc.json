@@ -1,0 +1,83 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "quotes": ["error", "double", {
+          "allowTemplateLiterals": true
+        }],
+        "lines-between-class-members": ["error", "always", {
+          "exceptAfterSingleLine": true
+        }],
+        "arrow-parens": ["error", "as-needed"],
+        "semi": ["error", "always"],
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "padded-blocks": ["error", {
+            "classes": "always"
+        }],
+        "no-constant-condition": ["error", {
+                "checkLoops": false
+        }],
+        "no-case-declarations": "off",
+        "space-before-function-paren": "off",
+        "unicode-bom": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/explicit-member-accessibility": ["warn", {
+            "accessibility": "explicit",
+            "overrides": {
+                "constructors": "off"
+            }
+        }],
+        "@typescript-eslint/explicit-function-return-type": "warn",
+        "object-curly-spacing": ["warn", "always"],
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "no-multiple-empty-lines": ["warn", { "max": 1 }],
+        "no-trailing-spaces": "warn",
+        "no-multi-spaces": "warn",
+        "prefer-const": "warn",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-host-metadata-property": "off",
+        "@typescript-eslint/no-inferrable-types": "off"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {}
+    }
+  ]
+}
