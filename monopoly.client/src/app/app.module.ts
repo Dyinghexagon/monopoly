@@ -10,6 +10,7 @@ import { GamePageComponent } from "./pages/game-page/game-page.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -22,8 +23,10 @@ import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.com
         NotFoundPageComponent
     ],
     imports: [
-        BrowserModule, HttpClientModule,
-        AppRoutingModule
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

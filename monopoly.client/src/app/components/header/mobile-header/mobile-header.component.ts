@@ -15,7 +15,6 @@ export class MobileHeaderComponent {
 
         const body = document.querySelector("body");
         body?.classList.toggle("not-scroll", this.isMenuOpen);
-        console.warn("MobileHeaderComponent");
     }
 
 }

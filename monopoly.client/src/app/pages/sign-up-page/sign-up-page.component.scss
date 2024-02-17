@@ -1,0 +1,88 @@
+@import "../../../assets/shared/variables";
+@import "../../../assets/shared/mixins";
+
+$gap: 45px;
+
+.sign-up-page-wrapper {
+    background-color: $dark-purple-blue-color;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sign-up-form-wrapper {
+        position: relative;
+        z-index: $z-index-content;
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba($color: $marengo-color, $alpha: .3);
+            padding: 100px 54px 60px 52px;
+            border-radius: 20px;
+            width: 750px;
+
+            .title {
+                font-weight: bold;
+                font-size: 5rem;
+                color: $white-color;
+                margin-bottom: $gap;
+            }
+
+            .inputs-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: $gap;
+                margin-bottom: $gap;
+
+                input {
+                    @include forn-control;
+
+                    background-color: $marengo-color;
+                    padding: 20px;
+                    border-color: transparent;
+
+                    &::placeholder {
+                        color: $white-color;
+                    }
+                }
+            }
+
+            .submit-btn {
+                @include forn-control;
+
+                background-color: $gentian-blue-color;
+                color: $white-color;
+                font-weight: bold;
+                font-size: 2rem;
+                margin-bottom: $gap;
+                cursor: pointer;
+                border-color: transparent;
+            }
+
+            @include page-link();
+
+            .page {
+                color: $white-color;
+            }
+        }
+    }
+
+    .circle {
+        @include circle($mother-pearl-night-color);
+        @include filter-blur(5px);
+        position: absolute;
+        z-index: calc($z-index-content - 1);
+        opacity: .74;
+    }
+
+    #circle-up {
+        left: calc(100% - calc(375px + 250px + 125px)); //to-do исправить расчет. Привязаться к высоте/шире формы
+        top: 20%;
+    }
+
+    #circle-down {
+        left: 25%;
+        top: 75%;
+    }
+}

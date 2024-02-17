@@ -1,7 +1,7 @@
-@import "../../../../assets/shared/variables";
-@import "../../../../assets/shared/page";
+@import "../../../assets/shared/variables";
 
 .page-wrapper {
+    display: flex;
     align-items: center;
     justify-content: center;
 

@@ -1,8 +1,16 @@
 @import "./assets/shared/variables";
 
+@font-face {
+    font-family: "Code Pro";
+    src: url("./assets/fonts/code_pro.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
     *, *:before, *:after {
         box-sizing: border-box;
+        font-family: "Code Pro";
     }
 
     body {
