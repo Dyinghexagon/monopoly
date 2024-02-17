@@ -1,0 +1,76 @@
+@import "../../../../assets/shared/variables";
+@import "../../../../assets/shared/mixins";
+
+$padding-burger-menu: 10px;
+
+.menu-btn {
+    @include burger-menu-size;
+    border: 0;
+    background-color: transparent;
+    position: relative;
+
+    .menu-btn-icon {
+        @include burger-menu-size;
+
+        transition: all .3s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &.burger {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &.close {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &.active {
+        .menu-btn-icon {    
+            &.burger {
+                opacity: 0;
+                visibility: hidden;
+            }
+    
+            &.close {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}
+
+.burger-menu {
+    @include pages;
+
+    .pages-wrapper {
+        .pages-list {
+            display: none;
+    
+            &.active {
+                position: fixed;
+                top: $mobile-header-height;
+                left: 0;
+    
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+    
+                height: 100%;
+                width: 100%;
+                background-color: $white-color;
+                padding-inline-start: 0;
+                padding: 30px;
+                z-index: $z-index-layout-elements;
+    
+                .page-wrapper {
+                    width: calc(100% - 2 * $padding-burger-menu);
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

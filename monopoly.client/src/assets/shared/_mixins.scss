@@ -1,0 +1,39 @@
+@import "variables";
+
+$page-link-color: #606060;
+
+@mixin pages() {
+    .pages-wrapper {
+        .pages-list {
+            display: flex;
+            gap: 54px;
+            margin: 0;
+    
+            .page-wrapper {
+                list-style: none;
+    
+                .page {
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 27px;
+                    text-decoration: none;
+                    color: $page-link-color;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@mixin divider($margin-top: 29px, $margin-bottom: 57px) {
+    .divider {
+        margin-top: $margin-top;
+        margin-bottom: $margin-bottom;
+        color: $pearl-dark-grey-color;
+    }
+}
+
+@mixin burger-menu-size {
+    height: 25px;
+    width: 34px;
+}

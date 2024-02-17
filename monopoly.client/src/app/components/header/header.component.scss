@@ -1,0 +1,37 @@
+@import "../../../assets/shared/variables";
+@import "../../../assets/shared/mixins";
+
+header {
+    display: flex;
+    align-items: center;
+    height: $header-height;
+    padding: 0 25px;
+    border-bottom: 1px solid $grey-color;
+    background-color: $white-color;
+    z-index: $z-index-layout-elements;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    @include pages;
+
+    .mobile-menu-wrapper {
+        display: none;
+    }
+}
+
+@media #{$mobile} {
+    header {
+        height: $mobile-header-height;
+        padding: 0 30px;
+    
+        .pages-wrapper {
+            display: none;
+        }
+
+        .mobile-menu-wrapper  {
+            display: initial;
+            @include burger-menu-size;
+        }
+    }
+}

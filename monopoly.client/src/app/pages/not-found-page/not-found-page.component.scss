@@ -1,0 +1,17 @@
+@import "../../../../assets/shared/variables";
+@import "../../../../assets/shared/page";
+
+.page-wrapper {
+    align-items: center;
+    justify-content: center;
+
+    .messange {
+        font-size: xxx-large;
+        font-weight: 600;
+        line-height: 28px;
+
+        :first-child {
+            color: $purple-color;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<button class="menu-btn" (click)="onSidenavClick()" [class.active]="isMenuOpen">
+    <img src="../../../../assets/images/burger-icon.svg" alt="burger icon for mobile menu" class="menu-btn-icon burger">
+    <img src="../../../../assets/images/close-icon.svg" alt="close icon for mobile menu" class="menu-btn-icon close">
+</button>
+<div class="burger-menu">
+    <nav class="pages-wrapper">
+        <ul class="pages-list" [class.active]="isMenuOpen">
+            <li class="page-wrapper">
+                <a class="page" [routerLink]="['/login']">Login</a>
+            </li>
+            <li class="page-wrapper">
+                <a class="page" [routerLink]="['/sign-up']">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+</div>

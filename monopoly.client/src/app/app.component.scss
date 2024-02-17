@@ -1,0 +1,15 @@
+@import "../assets/shared/variables";
+
+.content-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 1px;
+    position: relative;
+    background-color: $white-color;
+
+    .content {
+        z-index: $z-index-conten;
+        position: relative;
+        overflow: hidden;
+    }
+}

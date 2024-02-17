@@ -1,0 +1,15 @@
+<header [class.with-submenu]="isMenuOpen">
+    <nav class="pages-wrapper">
+        <ul class="pages-list">
+            <li class="page-wrapper">
+                <a class="page" [routerLink]="['/login']">Login</a>
+            </li>
+            <li class="page-wrapper">
+                <a class="page" [routerLink]="['/sign-up']">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="mobile-menu-wrapper">
+        <app-mobile-header></app-mobile-header>
+    </div>
+</header>
