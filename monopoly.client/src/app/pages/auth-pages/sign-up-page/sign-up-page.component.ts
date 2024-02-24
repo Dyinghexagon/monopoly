@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { AuthPageBase } from "../auth-page-base.component";
 
 @Component({
     selector: "app-sign-up-component",
@@ -7,12 +8,13 @@ import { FormControl, FormGroup } from "@angular/forms";
     styleUrls: [ "./sign-up-page.component.scss" ]
 })
 
-export class SignUpPageComponent {
+export class SignUpPageComponent extends AuthPageBase {
 
-    public profileForm: FormGroup;
+    public signUpForm: FormGroup;
 
     constructor() {
-        this.profileForm = new FormGroup({
+        super();
+        this.signUpForm = new FormGroup({
             userName: new FormControl(""),
             password: new FormControl(""),
             confirmPassword: new FormControl(""),
@@ -20,7 +22,7 @@ export class SignUpPageComponent {
     }
 
     public onSubmit(): void {
-        console.warn(this.profileForm.get("userName")?.value);
+        console.warn(this.signUpForm.get("userName")?.value);
     }
 
 }

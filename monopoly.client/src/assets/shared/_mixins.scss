@@ -26,6 +26,11 @@ $page-link-color: #606060;
         text-decoration: none;
         color: $page-link-color;
         width: 100%;
+
+        &:hover {
+            -webkit-filter: invert(100%);
+            filter: invert(100%);
+        }
     }
 }
 

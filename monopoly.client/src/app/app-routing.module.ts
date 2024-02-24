@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { GamePageComponent } from "./pages/game-page/game-page.component";
-import { LoginPageComponent } from "./pages/login-page/login-page.component";
-import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component";
+import { LoginPageComponent } from "./pages/auth-pages/login-page/login-page.component";
+import { SignUpPageComponent } from "./pages/auth-pages/sign-up-page/sign-up-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 
 const routes: Routes = [

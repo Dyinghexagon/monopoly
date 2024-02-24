@@ -1,16 +1,17 @@
-@import "../../../assets/shared/variables";
-@import "../../../assets/shared/mixins";
+@import "./variables";
+@import "./mixins";
 
-$gap: 45px;
+$auth-gap: 45px;
+$form-width: 750px;
 
-.sign-up-page-wrapper {
+.auth-page-wrapper {
     background-color: $dark-purple-blue-color;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .sign-up-form-wrapper {
+    .auth-form-wrapper {
         position: relative;
         z-index: $z-index-content;
 
@@ -20,20 +21,20 @@ $gap: 45px;
             background-color: rgba($color: $marengo-color, $alpha: .3);
             padding: 100px 54px 60px 52px;
             border-radius: 20px;
-            width: 750px;
+            width: $form-width;
 
             .title {
                 font-weight: bold;
                 font-size: 5rem;
                 color: $white-color;
-                margin-bottom: $gap;
+                margin-bottom: $auth-gap;
             }
 
             .inputs-wrapper {
                 display: flex;
                 flex-direction: column;
-                gap: $gap;
-                margin-bottom: $gap;
+                gap: $auth-gap;
+                margin-bottom: $auth-gap;
 
                 input {
                     @include forn-control;
@@ -45,6 +46,12 @@ $gap: 45px;
                     &::placeholder {
                         color: $white-color;
                     }
+
+                    &:focus,:hover,:active {
+                        outline: none;
+                        box-shadow: 0px 0px 5px $white-color;
+                        border: 1px solid $white-color;
+                    }
                 }
             }
 
@@ -55,7 +62,7 @@ $gap: 45px;
                 color: $white-color;
                 font-weight: bold;
                 font-size: 2rem;
-                margin-bottom: $gap;
+                margin-bottom: $auth-gap;
                 cursor: pointer;
                 border-color: transparent;
             }
@@ -74,15 +81,5 @@ $gap: 45px;
         position: absolute;
         z-index: calc($z-index-content - 1);
         opacity: .74;
-    }
-
-    #circle-up {
-        left: calc(100% - calc(375px + 250px + 125px)); //to-do исправить расчет. Привязаться к высоте/шире формы
-        top: 20%;
-    }
-
-    #circle-down {
-        left: 25%;
-        top: 75%;
     }
 }
