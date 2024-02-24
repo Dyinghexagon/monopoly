@@ -1,7 +1,7 @@
 <div class="auth-page-wrapper">
     <div id="circle-up" class="circle"></div>
     <div class="auth-form-wrapper">
-        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="form">
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form">
             <span class="title">РЕГИСТРАЦИЯ</span>
             <div class="inputs-wrapper">
                 <input id="userName" type="text" formControlName="userName" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">

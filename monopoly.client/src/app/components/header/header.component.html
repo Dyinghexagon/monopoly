@@ -1,5 +1,5 @@
 <header [class.with-submenu]="isMenuOpen">
-    <nav class="pages-wrapper">
+    <nav class="pages-wrapper" *ngIf="!appState.authState.isSignedIn else isSignedIn">
         <ul class="pages-list">
             <li class="page-wrapper">
                 <a class="page" [routerLink]="['/login']">ВОЙТИ</a>
@@ -9,7 +9,12 @@
             </li>
         </ul>
     </nav>
+    <ng-template #isSignedIn>
+        <button (click)="signOut.emit()" class="sign-out-btn page">
+            ВЫЙТИ
+        </button>
+    </ng-template>
     <div class="mobile-menu-wrapper">
-        <app-mobile-header></app-mobile-header>
+        <app-mobile-header (signOut)="signOut.emit()"></app-mobile-header>
     </div>
 </header>

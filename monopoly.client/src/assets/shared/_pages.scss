@@ -82,4 +82,12 @@ $form-width: 750px;
         z-index: calc($z-index-content - 1);
         opacity: .74;
     }
+
+    @media #{$mobile} {
+        .auth-form-wrapper {
+            .form {
+                width: 100%;
+            }
+        }
+    }
 }

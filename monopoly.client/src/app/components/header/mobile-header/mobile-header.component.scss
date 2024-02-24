@@ -71,6 +71,14 @@ $padding-burger-menu: 10px;
                     text-align: center;
                 }
             }
+
+            @include page-link;
+
+            .sign-out-btn {
+                display: initial;
+                border: 0;
+                background-color: transparent;
+            }
         }
     }
 }

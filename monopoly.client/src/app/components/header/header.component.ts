@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { AppState } from "../../app.state";
 
 @Component({
     selector: "app-header",
@@ -8,7 +9,11 @@ import { Component } from "@angular/core";
 
 export class HeaderComponent {
 
+    @Output() public signOut = new EventEmitter<void>();
+
     public isMenuOpen: boolean = false;
+
+    constructor(protected appState: AppState) {}
 
     public onSidenavClick(): void {
         this.isMenuOpen = !this.isMenuOpen;

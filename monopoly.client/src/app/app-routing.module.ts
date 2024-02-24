@@ -4,9 +4,10 @@ import { GamePageComponent } from "./pages/game-page/game-page.component";
 import { LoginPageComponent } from "./pages/auth-pages/login-page/login-page.component";
 import { SignUpPageComponent } from "./pages/auth-pages/sign-up-page/sign-up-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
+import { AuthGuard } from "./guards/auth-guard/auth.guard";
 
 const routes: Routes = [
-    { path: "", component: GamePageComponent },
+    { path: "game", component: GamePageComponent, canActivate: [AuthGuard] },
     { path: "login", component: LoginPageComponent },
     { path: "sign-up", component: SignUpPageComponent },
     { path: "**", component: NotFoundPageComponent }

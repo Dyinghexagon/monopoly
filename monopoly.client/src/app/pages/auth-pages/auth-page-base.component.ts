@@ -1,8 +1,11 @@
-import { AfterContentInit, Directive } from "@angular/core";
-import { NumberUtils } from "../../components/utils/number-utils";
+import { AfterContentInit, Directive, OnDestroy } from "@angular/core";
+import { NumberUtils } from "../../utils/number-utils";
+import { Subject } from "rxjs";
 
 @Directive()
-export class AuthPageBase implements AfterContentInit {
+export class AuthPageBase implements AfterContentInit, OnDestroy {
+
+    protected readonly unsubscribe$ = new Subject<void>();
 
     public ngAfterContentInit(): void {
         const page = document.querySelector<HTMLElement>(".auth-page-wrapper");
@@ -17,6 +20,11 @@ export class AuthPageBase implements AfterContentInit {
 
         circleDown.style.top = `${NumberUtils.randomNumber(0, page.clientHeight)}px`;
         circleDown.style.left = `${NumberUtils.randomNumber(0, page.clientWidth)}px`;
+    }
+
+    public ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 
 }
