@@ -1,25 +1,32 @@
-import { AfterContentInit, Directive, OnDestroy } from "@angular/core";
+import { Directive, OnDestroy } from "@angular/core";
 import { NumberUtils } from "../../utils/number-utils";
 import { Subject } from "rxjs";
 
 @Directive()
-export class AuthPageBase implements AfterContentInit, OnDestroy {
+export class AuthPageBase implements OnDestroy {
 
+    protected readonly countCircles: number;
     protected readonly unsubscribe$ = new Subject<void>();
 
-    public ngAfterContentInit(): void {
+    constructor(countCircles: number = 5) {
+        this.countCircles = countCircles;
+    }
+
+    protected getCirclesInfo(): ICirclePosition[] {
         const page = document.querySelector<HTMLElement>(".auth-page-wrapper");
-        const circleUp = document.getElementById("circle-up");
-        const circleDown = document.getElementById("circle-down");
-        if (!page || !circleUp || !circleDown) {
-            return;
+        if (!page) {
+            return [];
         }
 
-        circleUp.style.top = `${NumberUtils.randomNumber(0, page.clientHeight)}px`;
-        circleUp.style.left = `${NumberUtils.randomNumber(0, page.clientWidth)}px`;
+        const circles: ICirclePosition[] = [];
+        for(let i = 0; i < this.countCircles; i++) {
+            circles.push({
+                top: `${NumberUtils.randomNumber(0, page.clientHeight)}px`,
+                left: `${NumberUtils.randomNumber(0, page.clientWidth)}px`
+            });
+        }
 
-        circleDown.style.top = `${NumberUtils.randomNumber(0, page.clientHeight)}px`;
-        circleDown.style.left = `${NumberUtils.randomNumber(0, page.clientWidth)}px`;
+        return circles;
     }
 
     public ngOnDestroy(): void {
@@ -27,4 +34,9 @@ export class AuthPageBase implements AfterContentInit, OnDestroy {
         this.unsubscribe$.complete();
     }
 
+}
+
+export interface ICirclePosition {
+    top: string;
+    left: string;
 }

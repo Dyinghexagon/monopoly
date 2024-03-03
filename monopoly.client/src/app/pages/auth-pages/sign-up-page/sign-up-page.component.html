@@ -1,5 +1,4 @@
 <div class="auth-page-wrapper">
-    <div id="circle-up" class="circle"></div>
     <div class="auth-form-wrapper">
         <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form">
             <span class="title">РЕГИСТРАЦИЯ</span>
@@ -12,6 +11,6 @@
             <a class="page" [routerLink]="['/login']">ВОЙТИ</a>
           </form>
     </div>
-    <div id="circle-down" class="circle"></div>
+    <div *ngFor="let circleInfo of getCirclesInfo()" class="circle" [style.top]="circleInfo.top" [style.left]="circleInfo.left"></div>
 </div>
 

@@ -2,40 +2,34 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using monopoly.Server.Models.Backend;
 using monopoly.Server.Models.CLient;
+using monopoly.Server.Options;
+using monopoly.Server.Services.UserService;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace monopoly.Server.Controllers
 {
     [ApiController]
     [Route("/api/auth")]
-    public class AuthController : Controller
+    public class AuthController(IUserService userService, IOptions<AuthOptions> options) : Controller
     {
-        private readonly List<User> _users =
-        [
-            new()
-            {
-                Id = new Guid(),
-                Name = "user1",
-                Password = "password1",
-            },
-            new()
-            {
-                Id = new Guid(),
-                Name = "user2",
-                Password = "password2",
-            },
-        ];
+        private readonly IUserService _userService = userService;
+        private readonly IOptions<AuthOptions> _options = options;
 
         [HttpPost("signin")]
         public async Task<IActionResult> SignInAsync([FromBody] UserModel userModel)
         {
-            var user = _users.FirstOrDefault(u => u.Id == userModel.Id && u.Name == userModel.Name && u.Password == userModel.Password);
+            var users = await _userService.GetAllAsync();
+            var userHash = MD5Hash(userModel.Password + _options.Value.Hash);
+            var user = users.FirstOrDefault(u => u.Name == userModel.Name && u.Password == userHash);
 
             if (user is null)
             {
-                return BadRequest(new Response(false, "user is null"));
+                return BadRequest(new Response(false, "Пользователь не найден"));
             }
 
             var claims = new List<Claim>() 
@@ -55,20 +49,23 @@ namespace monopoly.Server.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
                 });
 
-            return Ok(new Response(true, "Signed in successfully"));
+            return Ok(new Response(true, "Вход в систему успешно выполнен"));
         }
 
         [HttpPost("signup")]
-        public IActionResult SignUp([FromBody] UserModel userModel)
+        public async Task<IActionResult> SignUp([FromBody] UserModel userModel)
         {
-            var user = new User() { 
-                Id = new Guid(), 
+            var user = new User() {
+                Id = new Guid(),
                 Name = userModel.Name,
-                Password = userModel.Password
+                Password = MD5Hash(userModel.Password + _options.Value.Hash),
+                IsActive = true,
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
 
-            _users.Add(user);
-            return Ok(new Response(true, "Пользователь успешно добавлен!"));
+            var id = await _userService.AddAsync(user);
+            return Ok(new Response(true, $"Пользователь с id: {id} успешно добавлен!"));
         }
 
         [Authorize]
@@ -84,6 +81,12 @@ namespace monopoly.Server.Controllers
         public async Task SignOutAsync()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        private static string MD5Hash(string src)
+        {
+            var result = MD5.HashData(Encoding.ASCII.GetBytes(src));
+            return Encoding.ASCII.GetString(result);
         }
     }
 

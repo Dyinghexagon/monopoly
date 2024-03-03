@@ -1,4 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using monopoly.Server;
+using monopoly.Server.Context;
+using monopoly.Server.Options;
+using monopoly.Server.Repositories;
+using monopoly.Server.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +23,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
             return Task.CompletedTask;
         };
     });
+builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
+
+builder.Services.AddScoped<IDbRepository, DbRepository>();
+
+builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddOptions<AuthOptions>().Bind(builder.Configuration.GetSection("AuthOption")).ValidateDataAnnotations();
 
 var app = builder.Build();
 
