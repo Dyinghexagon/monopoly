@@ -4,13 +4,20 @@
 </button>
 <div class="burger-menu">
     <nav class="pages-wrapper">
-        <ul class="pages-list" [class.active]="isMenuOpen">
-            <li class="page-wrapper">
-                <a class="page" [routerLink]="['/login']">Login</a>
-            </li>
-            <li class="page-wrapper">
-                <a class="page" [routerLink]="['/sign-up']">Sign Up</a>
-            </li>
+        <ul class="pages-list" [class.active]="isMenuOpen" >
+            <ng-container *ngIf="!appState.authState.isSignedIn else isSignedIn">
+                <li class="page-wrapper">
+                    <a class="page" [routerLink]="['/login']" (click)="toggleMenu()">ВОЙТИ</a>
+                </li>
+                <li class="page-wrapper">
+                    <a class="page" [routerLink]="['/sign-up']" (click)="toggleMenu()">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+                </li>
+            </ng-container>
+            <ng-template #isSignedIn>
+                <button (click)="signOutSelect()" class="sign-out-btn page">
+                    ВЫЙТИ
+                </button>
+            </ng-template>
         </ul>
     </nav>
 </div>

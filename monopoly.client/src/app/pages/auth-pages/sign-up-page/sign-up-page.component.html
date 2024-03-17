@@ -1,0 +1,15 @@
+<div class="auth-page-wrapper">
+    <div class="auth-form-wrapper">
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form">
+            <span class="title">РЕГИСТРАЦИЯ</span>
+            <div class="inputs-wrapper">
+                <input id="userName" type="text" formControlName="userName" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">
+                <input id="password" type="password" formControlName="password" placeholder="ПАРОЛЬ">
+                <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="ПОВТОРИТЕ ПАРОЛЯ">
+            </div>
+            <button type="submit" class="submit-btn">Отправить</button>
+            <a class="page" [routerLink]="['/login']">ВОЙТИ</a>
+          </form>
+    </div>
+</div>
+

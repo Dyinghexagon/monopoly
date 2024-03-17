@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9PLGWzhUQanJi4bPmu4+oBYRya6ZNL8n0lLeNvxag28=",
+  "Hash": "PzneXM6p1/svr3I1EnXQmUxaG1aD4uKZ71FfQF5/2gw=",
   "Source": "monopoly.Server",
   "BasePath": "_content/monopoly.Server",
   "Mode": "Default",
@@ -18,6 +18,14 @@
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "monopoly.Server\\wwwroot",
+      "Source": "monopoly.Server",
+      "ContentRoot": "D:\\Projects\\monopoly\\monopoly.Server\\wwwroot\\",
+      "BasePath": "_content/monopoly.Server",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

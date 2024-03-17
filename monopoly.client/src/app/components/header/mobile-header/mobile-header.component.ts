@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { AppState } from "../../../app.state";
 
 @Component({
     selector: "app-mobile-header",
@@ -8,14 +9,25 @@ import { Component } from "@angular/core";
 
 export class MobileHeaderComponent {
 
+    @Output() public signOut = new EventEmitter<void>();
+
     public isMenuOpen: boolean = false;
 
-    public onSidenavClick(): void {
-        this.isMenuOpen = !this.isMenuOpen;
+    constructor(protected appState: AppState) {}
 
+    public onSidenavClick(): void {
+        this.toggleMenu();
         const body = document.querySelector("body");
         body?.classList.toggle("not-scroll", this.isMenuOpen);
-        console.warn("MobileHeaderComponent");
+    }
+
+    public toggleMenu(): void {
+        this.isMenuOpen = !this.isMenuOpen;
+    }
+
+    public signOutSelect(): void {
+        this.signOut.emit();
+        this.toggleMenu();
     }
 
 }

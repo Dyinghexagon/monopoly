@@ -1,0 +1,15 @@
+@import "../../../../assets/shared/pages";
+
+@media #{$mobile} {
+    .auth-page-wrapper {
+        .auth-form-wrapper {
+            .form {
+                width: 100%;
+
+                .title {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}

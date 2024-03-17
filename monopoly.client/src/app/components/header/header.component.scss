@@ -14,6 +14,13 @@ header {
     justify-content: center;
 
     @include pages;
+    @include page-link;
+
+    .sign-out-btn {
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
 
     .mobile-menu-wrapper {
         display: none;
@@ -26,6 +33,10 @@ header {
         padding: 0 30px;
     
         .pages-wrapper {
+            display: none;
+        }
+
+        .sign-out-btn {
             display: none;
         }
 

@@ -11,16 +11,25 @@ $page-link-color: #606060;
     
             .page-wrapper {
                 list-style: none;
-    
-                .page {
-                    font-weight: 500;
-                    font-size: 18px;
-                    line-height: 27px;
-                    text-decoration: none;
-                    color: $page-link-color;
-                    width: 100%;
-                }
+
+                @include page-link();
             }
+        }
+    }
+}
+
+@mixin page-link {
+    .page {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        text-decoration: none;
+        color: $page-link-color;
+        width: 100%;
+
+        &:hover {
+            -webkit-filter: invert(100%);
+            filter: invert(100%);
         }
     }
 }
@@ -36,4 +45,32 @@ $page-link-color: #606060;
 @mixin burger-menu-size {
     height: 25px;
     width: 34px;
+}
+
+@mixin forn-control {
+    height: 64px;
+    border-radius: 20px;
+}
+
+@mixin circle($color: red, $size: 250px) {
+    .circle {
+        width: $size;
+        height: $size;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        background: $color;
+        position: absolute;
+        z-index: calc($z-index-content - 1);
+        opacity: .74;
+        @include filter-blur(5px);
+    }
+}
+
+@mixin filter-blur($value: 5px) {
+    -webkit-filter: blur($value);
+    -moz-filter: blur($value);
+    -o-filter: blur($value);
+    -ms-filter: blur($value);
+    filter: blur($value);
 }
