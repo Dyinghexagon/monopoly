@@ -1,6 +1,6 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:4200",
+"ServerUrl": "https://localhost:5271",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
 "WorkingDirectory": "D:\\Projects\\monopoly\\monopoly.Server\\..\\monopoly.client",
