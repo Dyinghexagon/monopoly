@@ -1,19 +1,62 @@
+# Файлы и папки операционной системы
+*.swp
+*.*~
+.DS_Store
+Thumbs.db
+
+# Папки сборки и зависимостей
+[Bb]in/
+[Oo]bj/
+[Ll]ib/
+[Nn]pm-debug.log
+node_modules/
+bower_components/
+dist/
+out/
+.vs/
+.vscode/
+.idea/
+*.user
 *.suo
-*.orig
-output
-**/node_modules
-**/LogFiles/*.log
-**/app_offline.htm
-**/wwwroot/*.map
-**/bin
-**/obj
-.vs
-.idea
-.sass-cache
+*.userprefs
+*.sln.docstates
+monopoly/*/bin/
+monopoly/*/obj/
+monopoly/*/.vs/
+monopoly/*/appsettings.json
 
-**/*.user
-launchSettings.json
-global.json
+# Файлы секретов и ключей
+*.pfx
+*.cert
+*.key
+secret.*
 
-**/appsettings.json
-/monopoly.Server/appsettings.json
+
+# Игнорировать папки с логами
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Интермедийные фалы Angular
+*.ngfactory.js
+*.ngstyle.js
+*.ngsummary.json
+*.tsbuildinfo
+*.ngsummary.json
+
+# Файлы сборки Angular
+/dist
+
+# Артефакты TypeScript
+*.tsbuildinfo
+
+# Исключить файлы конфигурации и локальные скрипты
+*.conf
+*.config
+local_*
+
+# Специфичные для редакторов и IDE файлы
+*.sublime*
+*.iml
