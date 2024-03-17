@@ -17,6 +17,7 @@ import { AuthGuard } from "./guards/auth-guard/auth.guard";
 import { AuthInterceptor } from "./guards/auth-guard/auth.interceptor";
 import { Router } from "@angular/router";
 import { AppState } from "./app.state";
+import { CanvasBoxComponent } from "./components/canvas-box/canvas-box.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { AppState } from "./app.state";
         GamePageComponent,
         LoginPageComponent,
         SignUpPageComponent,
-        NotFoundPageComponent
+        NotFoundPageComponent,
+        CanvasBoxComponent
     ],
     imports: [
         BrowserModule,
