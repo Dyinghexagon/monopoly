@@ -1,4 +1,5 @@
 @import "./assets/shared/variables";
+@import "./assets/shared/mixins";
 
 @font-face {
     font-family: "Code Pro";
@@ -27,7 +28,9 @@ html {
         app-root {
             display: flex;
             flex-direction: column;
-            flex: 1 1 1px
+            flex: 1 1 1px;
+
+            @include circle($mother-pearl-night-color);
         }
     }
 }

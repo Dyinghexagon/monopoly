@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using monopoly.Server;
 using monopoly.Server.Context;
-using monopoly.Server.Options;
 using monopoly.Server.Repositories;
 using monopoly.Server.Services.UserService;
 
@@ -29,8 +28,6 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(b
 builder.Services.AddScoped<IDbRepository, DbRepository>();
 
 builder.Services.AddTransient<IUserService, UserService>();
-
-builder.Services.AddOptions<AuthOptions>().Bind(builder.Configuration.GetSection("AuthOption")).ValidateDataAnnotations();
 
 var app = builder.Build();
 

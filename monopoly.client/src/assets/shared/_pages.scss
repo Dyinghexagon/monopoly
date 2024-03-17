@@ -75,14 +75,6 @@ $form-width: 750px;
         }
     }
 
-    .circle {
-        @include circle($mother-pearl-night-color);
-        @include filter-blur(5px);
-        position: absolute;
-        z-index: calc($z-index-content - 1);
-        opacity: .74;
-    }
-
     @media #{$mobile} {
         .auth-form-wrapper {
             .form {

@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using monopoly.Server.Models.Backend;
 using monopoly.Server.Models.CLient;
-using monopoly.Server.Options;
 using monopoly.Server.Services.UserService;
+using monopoly.Server.Utils;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -15,17 +14,19 @@ namespace monopoly.Server.Controllers
 {
     [ApiController]
     [Route("/api/auth")]
-    public class AuthController(IUserService userService, IOptions<AuthOptions> options) : Controller
+    public class AuthController(IUserService userService) : Controller
     {
+        /*
+ Console.WriteLine($"Password hash: {hash}");
+Console.WriteLine($"Generated salt: {Convert.ToHexString(salt)}");
+ */
         private readonly IUserService _userService = userService;
-        private readonly IOptions<AuthOptions> _options = options;
 
         [HttpPost("signin")]
         public async Task<IActionResult> SignInAsync([FromBody] UserModel userModel)
         {
             var users = await _userService.GetAllAsync();
-            var userHash = MD5Hash(userModel.Password + _options.Value.Hash);
-            var user = users.FirstOrDefault(u => u.Name == userModel.Name && u.Password == userHash);
+            var user = users.FirstOrDefault(u => u.Name == userModel.Name && u.PasswordHash == userModel.Password);
 
             if (user is null)
             {
@@ -55,10 +56,13 @@ namespace monopoly.Server.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] UserModel userModel)
         {
+            var hash = CryptoUtils.HashPasword(userModel.Password, out var salt);
+
             var user = new User() {
                 Id = new Guid(),
                 Name = userModel.Name,
-                Password = MD5Hash(userModel.Password + _options.Value.Hash),
+                PasswordHash = hash,
+                PasswordSalt = salt,
                 IsActive = true,
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now

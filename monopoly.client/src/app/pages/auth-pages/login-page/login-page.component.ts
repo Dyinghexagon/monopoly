@@ -38,7 +38,6 @@ export class LoginPageComponent extends AuthPageBase {
 
         this.authService.signIn(
             {
-                id: "",
                 name: userName,
                 password: password
             }

@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using monopoly.Server.Models.Backend;
-using monopoly.Server.Models.CLient;
 
 namespace monopoly.Server
 {
@@ -8,7 +6,7 @@ namespace monopoly.Server
     {
         public ApplicationMappingProfile()
         {
-            CreateMap<User, UserModel>().ReverseMap();
+            //add map class
         }
     }
 }
