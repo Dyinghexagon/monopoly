@@ -16,3 +16,4 @@ launchSettings.json
 global.json
 
 **/appsettings.json
+/monopoly.Server/appsettings.json
