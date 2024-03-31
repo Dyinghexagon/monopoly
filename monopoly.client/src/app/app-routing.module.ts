@@ -10,6 +10,7 @@ const routes: Routes = [
     { path: "game", component: GamePageComponent, canActivate: [AuthGuard] },
     { path: "login", component: LoginPageComponent },
     { path: "sign-up", component: SignUpPageComponent },
+    { path: "", redirectTo: "game", pathMatch: "full" },
     { path: "**", component: NotFoundPageComponent }
 ];
 

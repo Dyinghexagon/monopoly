@@ -39,7 +39,6 @@ export class AuthService {
     public isSignedIn(): Observable<boolean> {
         return this.user().pipe(
             map(userClaim => {
-                console.warn(userClaim);
                 const hasClaims = userClaim.length > 0;
                 return !hasClaims ? false : true;
             }),
