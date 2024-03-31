@@ -47,7 +47,7 @@ export class SignUpPageComponent extends AuthPageBase {
             .subscribe(
                 response => {
                     if (response.isSuccess) {
-                        console.warn(response);
+                        console.warn("user sign up success!");
                     }
                 },
                 error => {
