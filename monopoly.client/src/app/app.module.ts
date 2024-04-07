@@ -17,6 +17,8 @@ import { AuthGuard } from "./guards/auth-guard/auth.guard";
 import { AuthInterceptor } from "./guards/auth-guard/auth.interceptor";
 import { Router } from "@angular/router";
 import { AppState } from "./app.state";
+import { AreaComponent } from "./components/area/area.component";
+import { StreetObjectComponent } from "./components/game-object/street-object/street-object.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import { AppState } from "./app.state";
         GamePageComponent,
         LoginPageComponent,
         SignUpPageComponent,
-        NotFoundPageComponent
+        NotFoundPageComponent,
+        AreaComponent,
+        StreetObjectComponent
     ],
     imports: [
         BrowserModule,
