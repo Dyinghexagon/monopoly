@@ -21,7 +21,7 @@ $page-link-color: #606060;
 @mixin page-link {
     .page {
         font-weight: 500;
-        font-size: 18px;
+        font-size: 5rem;
         line-height: 27px;
         text-decoration: none;
         color: $page-link-color;

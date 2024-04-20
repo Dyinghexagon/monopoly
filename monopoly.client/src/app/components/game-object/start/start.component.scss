@@ -1,0 +1,16 @@
+@import "../../../../assets/shared/variables";
+
+.game-object-wrapper {
+    width: $card-width;
+    align-items: center;
+    justify-content: center;
+
+    .game-object-name-wrapper {
+        transform: rotate(135deg);
+
+        .game-object-name {
+            font-weight: 700;
+            font-size: 96px;
+        }
+    }
+}

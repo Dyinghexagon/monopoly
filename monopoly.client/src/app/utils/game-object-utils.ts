@@ -1,37 +1,28 @@
-import { IStreetObjectModel } from "../models/street-object.model";
+import { StreetType } from "../models/street-object.model";
 
 export class GameObjectUtils {
 
-    public static getColorStreetByNumber(number: number): string {
-        switch(number) {
-            case 1:
-                return "#FF6161";
-            case 2:
-                return "#F2AD2E";
-            case 3:
-                return "#F7D185";
-            case 4:
-                return "#91C6CB";
-            case 5:
-                return "#A2D4A1";
-            case 6:
-                return "#F4ED62";
-            case 7:
-                return "#E8B5BB";
-            case 8:
+    public static getColorStreetByNumber(streetType: StreetType): string {
+        switch(streetType) {
+            case StreetType.Grey:
                 return "#E4E4E4";
+            case StreetType.Pink:
+                return "#E8B5BB";
+            case StreetType.Yellow:
+                return "#F4ED62";
+            case StreetType.Green:
+                return "#A2D4A1";
+            case StreetType.Blue:
+                return "#91C6CB";
+            case StreetType.Corn:
+                return "#F7D185";
+            case StreetType.Orange:
+                return "#F2AD2E";
+            case StreetType.Red:
+                return "#FF6161";
             default:
                 return "transparent";
         }
-    }
-
-    public static getStreetInfoByStreetNumber(number: number): IStreetObjectModel {
-        return {
-            number: number,
-            color: GameObjectUtils.getColorStreetByNumber(number),
-            price: 0,
-            name: ""
-        };
     }
 
 }

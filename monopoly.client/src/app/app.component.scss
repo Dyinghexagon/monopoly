@@ -11,6 +11,6 @@
     .content {
         z-index: $z-index-content;
         position: relative;
-        overflow: hidden;
+        overflow: auto;
     }
 }

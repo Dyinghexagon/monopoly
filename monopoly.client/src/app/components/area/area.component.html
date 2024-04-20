@@ -1,9 +1,190 @@
 <div class="game-area-wrapper">
     <div class="game-area">
-        <app-street
-            name="Смоленская площадь"
-            color="#F7D185"
-            [price]="280"
-        ></app-street>
+        <div class="first-line">
+            <app-start></app-start>
+            <app-street class="rotate"
+                [name]="greyStreet[0].name"
+                [color]="greyStreet[0].color"
+                [price]="greyStreet[0].price"
+            ></app-street>
+            <app-treasury class="rotate"></app-treasury>
+            <app-street class="rotate"
+                [name]="greyStreet[1].name"
+                [color]="greyStreet[1].color"
+                [price]="greyStreet[1].price"
+            ></app-street>
+            <app-income-tax class="rotate"
+                [price]="200"
+            ></app-income-tax>
+            <app-railway class="rotate"
+                name="РИЖСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
+            ></app-railway>
+            <app-street class="rotate"
+                [name]="pinkStreet[0].name"
+                [color]="pinkStreet[0].color"
+                [price]="pinkStreet[0].price"
+            ></app-street>
+            <app-chance class="rotate"></app-chance>
+            <app-street class="rotate"
+                [name]="pinkStreet[1].name"
+                [color]="pinkStreet[1].color"
+                [price]="pinkStreet[1].price"
+            ></app-street>
+            <app-street class="rotate"
+                [name]="pinkStreet[2].name"
+                [color]="pinkStreet[2].color"
+                [price]="pinkStreet[2].price"
+            ></app-street>
+            <app-jail></app-jail>
+        </div>
+        <div class="second-line">
+            <app-street class="rotate"
+                [name]="yellowStreet[0].name"
+                [color]="yellowStreet[0].color"
+                [price]="yellowStreet[0].price"
+            ></app-street>
+            <app-powerhouse class="rotate"></app-powerhouse>
+            <app-street class="rotate"
+                [name]="yellowStreet[1].name"
+                [color]="yellowStreet[1].color"
+                [price]="yellowStreet[1].price"
+            ></app-street>
+            <app-street class="rotate"
+                [name]="yellowStreet[2].name"
+                [color]="yellowStreet[2].color"
+                [price]="yellowStreet[2].price"
+            ></app-street>
+            <app-railway class="rotate"
+                name="КУРСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
+                [price]="200"
+            ></app-railway>
+            <app-street class="rotate"
+                [name]="greenStreet[0].name"
+                [color]="greenStreet[0].color"
+                [price]="greenStreet[0].price"
+            ></app-street>
+            <app-treasury class="rotate"></app-treasury>
+            <app-street class="rotate"
+                [name]="greenStreet[1].name"
+                [color]="greenStreet[1].color"
+                [price]="greenStreet[1].price"
+            ></app-street>
+            <app-street class="rotate"
+                [name]="greenStreet[2].name"
+                [color]="greenStreet[2].color"
+                [price]="greenStreet[2].price"
+            ></app-street>
+        </div>
+        <div class="third-line">
+            <app-arrested></app-arrested>
+            <app-street
+                [name]="cornStreet[2].name"
+                [color]="cornStreet[2].color"
+                [price]="cornStreet[2].price"
+            ></app-street>
+            <app-water-supply></app-water-supply>
+            <app-street
+                [name]="cornStreet[1].name"
+                [color]="cornStreet[1].color"
+                [price]="cornStreet[1].price"
+            ></app-street>
+            <app-street
+                [name]="cornStreet[0].name"
+                [color]="cornStreet[0].color"
+                [price]="cornStreet[0].price"
+            ></app-street>
+            <app-railway
+                name="КАЗАНСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
+            ></app-railway>
+            <app-street
+                [name]="blueStreet[2].name"
+                [color]="blueStreet[2].color"
+                [price]="blueStreet[2].price"
+            ></app-street>
+            <app-street
+                [name]="blueStreet[1].name"
+                [color]="blueStreet[1].color"
+                [price]="blueStreet[1].price"
+            ></app-street>
+            <app-chance></app-chance>
+            <app-street
+                [name]="blueStreet[0].name"
+                [color]="blueStreet[0].color"
+                [price]="blueStreet[0].price"
+            ></app-street>
+            <app-parking></app-parking>
+        </div>
+        <div class="fourth-line">
+            <app-street class="rotate"
+                [name]="redStreet[1].name"
+                [color]="redStreet[1].color"
+                [price]="redStreet[1].price"
+            ></app-street>
+            <app-income-tax class="rotate"
+                [price]="100"
+            ></app-income-tax>
+            <app-street class="rotate"
+                [name]="redStreet[0].name"
+                [color]="redStreet[0].color"
+                [price]="redStreet[0].price"
+            ></app-street>
+            <app-chance class="rotate"></app-chance>
+            <app-railway class="rotate"
+                name="ЛЕНИНГРАДСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
+            ></app-railway>
+            <app-street class="rotate"
+                [name]="orangeStreet[2].name"
+                [color]="orangeStreet[2].color"
+                [price]="orangeStreet[2].price"
+            ></app-street>
+            <app-treasury class="rotate"></app-treasury>
+            <app-street class="rotate"
+                [name]="orangeStreet[1].name"
+                [color]="orangeStreet[1].color"
+                [price]="orangeStreet[1].price"
+            ></app-street>
+            <app-street class="rotate"
+                [name]="orangeStreet[0].name"
+                [color]="orangeStreet[0].color"
+                [price]="orangeStreet[0].price"
+            ></app-street>
+        </div>
+        <div class="main">
+            <div class="first-quadrant">
+                <div class="chance-wrapper">
+                    <svg width="261" height="261" viewBox="0 0 261 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_332_262)">
+                        <path d="M116.919 236.264L185.747 259.837L246.006 199.581L176.702 176.48L116.919 236.264ZM147.912 232.584C144.266 236.23 138.325 237.808 134.639 236.107C130.956 234.407 130.921 230.076 134.57 226.43C138.215 222.784 144.156 221.206 147.842 222.907C151.528 224.607 151.557 228.939 147.912 232.584ZM170.138 240.37C166.492 244.015 160.551 245.593 156.865 243.893C153.182 242.192 153.148 237.861 156.796 234.215C160.444 230.57 166.382 228.992 170.069 230.692C173.752 232.393 173.783 236.724 170.138 240.37ZM214.951 205.509C218.597 201.864 224.537 200.285 228.224 201.986C231.907 203.686 231.941 208.018 228.296 211.663C224.651 215.309 218.71 216.887 215.023 215.187C211.337 213.486 211.306 209.155 214.951 205.509ZM192.79 198.225C196.436 194.579 202.377 193.001 206.063 194.701C209.746 196.402 209.78 200.733 206.132 204.379C202.487 208.024 196.546 209.603 192.859 207.902C189.176 206.202 189.145 201.87 192.79 198.225ZM192.23 237.977C195.913 239.677 195.947 244.009 192.299 247.654C188.653 251.3 182.713 252.878 179.026 251.178C175.34 249.477 175.309 245.146 178.954 241.5C182.603 237.858 188.543 236.279 192.23 237.977ZM183.836 186.913C187.519 188.613 187.554 192.945 183.906 196.59C180.26 200.236 174.319 201.814 170.633 200.113C166.95 198.413 166.915 194.082 170.563 190.436C174.209 186.79 180.15 185.215 183.836 186.913Z" fill="#292929"/>
+                        <path d="M247.124 191.253L224.369 122.983L156.098 100.224L178.854 168.491L247.124 191.253ZM196.43 137.721C198.979 135.172 204.103 136.158 207.873 139.929C211.644 143.7 212.633 148.824 210.082 151.373C207.532 153.922 202.409 152.936 198.638 149.165C194.867 145.394 193.877 140.27 196.43 137.721Z" fill="#292929"/>
+                        <path d="M83.8128 0.631836L19.444 32.8144L83.8122 64.9969L148.177 32.8144L83.8128 0.631836ZM83.8128 39.3441C78.4826 39.3441 74.1573 36.419 74.1573 32.8144C74.1573 29.2067 78.4795 26.2847 83.8128 26.2847C89.146 26.2847 93.4682 29.2097 93.4682 32.8144C93.4645 36.4221 89.143 39.3441 83.8128 39.3441Z" fill="#292929"/>
+                        <path d="M100.358 124.025C103.434 122.892 106.005 124.686 106.894 128.125L145.444 89.5753L153.276 92.1872V39.4912L87.9368 72.1625V147.082L94.5417 140.477C93.8683 139.284 93.4646 137.737 93.4646 135.905C93.4646 130.747 96.553 125.429 100.358 124.025ZM142.403 53.7661C146.211 52.3629 149.296 55.4042 149.296 60.5588C149.296 65.7135 146.211 71.0315 142.403 72.4347C138.595 73.8379 135.51 70.7966 135.51 65.6419C135.509 60.4867 138.595 55.1693 142.403 53.7661ZM122.76 87.4925C126.568 86.0893 129.653 89.1306 129.653 94.2853C129.653 99.44 126.568 104.758 122.76 106.161C118.952 107.564 115.867 104.523 115.867 99.3684C115.867 94.2137 118.955 88.8957 122.76 87.4925ZM93.4646 86.3744C93.4646 81.2197 96.5493 75.9017 100.358 74.4985C104.166 73.0953 107.251 76.1366 107.251 81.2913C107.251 86.4466 104.166 91.7639 100.358 93.1671C96.5499 94.5703 93.4646 91.5297 93.4646 86.3744Z" fill="#292929"/>
+                        <path d="M14.3425 124.705L78.7608 156.255L79.6845 155.331V72.1625L14.3425 39.4912L14.3425 124.705ZM67.104 124.025C70.9123 125.429 73.997 130.747 73.997 135.901C73.997 141.056 70.9123 144.097 67.104 142.694C63.2956 141.291 60.2109 135.973 60.2109 130.818C60.2109 125.663 63.2993 122.622 67.104 124.025ZM47.0138 86.4496C50.8222 87.8528 53.9069 93.1702 53.9069 98.3255C53.9069 103.48 50.8222 106.521 47.0138 105.118C43.2055 103.715 40.1207 98.397 40.1207 93.2424C40.1201 88.0877 43.2085 85.0464 47.0138 86.4496ZM26.337 53.7661C30.1454 55.1693 33.2301 60.4867 33.2301 65.6419C33.2301 70.7966 30.1454 73.8379 26.337 72.4347C22.5287 71.0315 19.444 65.7141 19.444 60.5588C19.444 55.4042 22.5287 52.3629 26.337 53.7661Z" fill="#292929"/>
+                        <path d="M147.767 101.339L87.5077 161.592L111.084 230.427L170.867 170.637L147.767 101.339ZM122.033 207.727C118.387 211.372 114.053 211.341 112.356 207.654C110.658 203.968 112.233 198.027 115.879 194.382C119.524 190.736 123.859 190.767 125.556 194.451C127.254 198.134 125.679 204.081 122.033 207.727ZM142.139 136.287C138.493 139.932 134.159 139.901 132.462 136.218C130.761 132.535 132.339 126.59 135.985 122.945C139.631 119.299 143.965 119.331 145.662 123.014C147.363 126.7 145.785 132.641 142.139 136.287Z" fill="#292929"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_332_262">
+                        <rect width="260" height="260" fill="white" transform="translate(0.631592 0.631836)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            <div class="second-quadrant"></div>
+            <div class="third-quadrant">
+                <div class="treasury-wrapper">
+                    <svg width="261" height="261" viewBox="0 0 261 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_332_920)">
+                        <path d="M18.3612 218.657H59.7255L59.7255 254.116C59.7255 255.841 60.2775 257.254 61.3881 258.358C62.4956 259.469 63.9115 260.024 65.6362 260.024H96.4727C98.0731 260.024 99.4579 259.469 100.628 258.358C101.797 257.254 102.38 255.841 102.38 254.116V218.657L195.633 218.657C197.354 218.657 198.77 218.109 199.881 216.997C200.992 215.887 201.543 214.474 201.543 212.749V189.112C201.543 187.396 200.992 185.974 199.881 184.87C198.774 183.759 197.354 183.203 195.633 183.203L102.377 183.203V161.413L165.161 161.413C189.781 161.413 209.875 153.911 225.453 138.885C241.024 123.876 248.813 104.487 248.813 80.7185C248.813 56.9655 241.024 37.5764 225.453 22.5516C209.878 7.54164 189.781 0.0244141 165.161 0.0244141L65.6332 0.0244141C63.9079 0.0244141 62.4951 0.579452 61.385 1.68392C60.2775 2.79451 59.7225 4.21651 59.7225 5.93208L59.7225 122.085H18.3612C16.6364 122.085 15.2231 122.669 14.113 123.838C13.006 125.008 12.4504 126.393 12.4504 127.993L12.4504 155.504C12.4504 157.229 13.0024 158.643 14.113 159.753C15.2236 160.864 16.6334 161.412 18.3612 161.412H59.7255V183.203H18.3612C16.6364 183.203 15.2231 183.758 14.113 184.869C13.006 185.973 12.4504 187.393 12.4504 189.111L12.4504 212.748C12.4504 214.474 13.0024 215.887 14.113 216.997C15.2231 218.109 16.6359 218.657 18.3612 218.657ZM102.377 39.3608L161.468 39.3608C174.516 39.3608 185.04 43.1757 193.044 50.8081C201.045 58.441 205.047 68.4159 205.047 80.7216C205.047 93.0333 201.045 103.011 193.044 110.635C185.04 118.274 174.515 122.089 161.468 122.089H102.377L102.377 39.3608Z" fill="#292929"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_332_920">
+                        <rect width="260" height="260" fill="white" transform="translate(0.631592 0.0244141)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>                        
+                </div>
+            </div>
+            <div class="fourth-quadrant"></div>
+          </div>
     </div>
 </div>

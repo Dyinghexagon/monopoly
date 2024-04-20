@@ -19,6 +19,16 @@ import { Router } from "@angular/router";
 import { AppState } from "./app.state";
 import { AreaComponent } from "./components/area/area.component";
 import { StreetObjectComponent } from "./components/game-object/street-object/street-object.component";
+import { TreasuryComponent } from "./components/game-object/treasury/treasury.component";
+import { IncomeTaxComponent } from "./components/game-object/income-tax/income-tax.component";
+import { RailwayComponent } from "./components/game-object/railway/railway.component";
+import { StartComponent } from "./components/game-object/start/start.component";
+import { ChanceComponent } from "./components/game-object/chance/chance.component";
+import { JailComponent } from "./components/game-object/jail/jail.component";
+import { PowerhouseComponent } from "./components/game-object/powerhouse/powerhouse.component";
+import { ParkingComponent } from "./components/game-object/parking/parking.component";
+import { WaterSupplyComponent } from "./components/game-object/water-supply/water-supply.component";
+import { ArrestedComponent } from "./components/game-object/arrested/arrested.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +40,17 @@ import { StreetObjectComponent } from "./components/game-object/street-object/st
         SignUpPageComponent,
         NotFoundPageComponent,
         AreaComponent,
-        StreetObjectComponent
+        StartComponent,
+        StreetObjectComponent,
+        TreasuryComponent,
+        IncomeTaxComponent,
+        RailwayComponent,
+        ChanceComponent,
+        JailComponent,
+        PowerhouseComponent,
+        ParkingComponent,
+        WaterSupplyComponent,
+        ArrestedComponent
     ],
     imports: [
         BrowserModule,

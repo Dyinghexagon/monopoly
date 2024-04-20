@@ -12,8 +12,14 @@ $desktop: "only screen and (max-width: 1440px)";
 $tablet: "only screen and (max-width: 1024px)";
 $mobile: "only screen and (max-width: 375px)";
 
+$border-card-width: 5px;
+
 $z-index-content: 10;
 $z-index-layout-elements: 20;
 
 $header-height: 134px;
 $mobile-header-height: 105px;
+
+$street-card-height: 600px;
+$street-card-width: 392px;
+$card-width: 600px;

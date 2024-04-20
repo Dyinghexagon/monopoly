@@ -1,10 +1,44 @@
 @import "../../../assets/shared/variables";
 
+$street-color: var(--street-color);
+
 .game-object-wrapper {
-    border: 1px solid $black-color;
-    height: 600px;
-    width: 392px;
+    border: $border-card-width solid $black-color;
+    height: $street-card-height;
+    width: $street-card-width;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .game-object-color {
+        height: 100px;
+        width: 100%;
+        background-color: $street-color;
+    }
+
+    .game-object-name-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-top: 52px;            
+        margin-bottom: 34px;
+
+        .game-object-name {
+            text-align: center;
+            margin: 0;
+            font-weight: 500;
+            font-size: 32px;
+        }
+    }
+
+    .game-object-icon {
+        margin-bottom: 96px;
+    }
+
+    .game-object-price {
+        margin: 0;
+        font-weight: 500;
+        font-size: 48px;
+    }
 }
