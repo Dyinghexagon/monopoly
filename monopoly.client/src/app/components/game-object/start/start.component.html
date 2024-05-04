@@ -1,7 +1,13 @@
-<div class="game-object-wrapper">
-    <div class="game-object-name-wrapper">
-        <p class="game-object-name">
-            {{ name }}
-        </p>
+<div class="card-wrapper">
+    <div class="game-object-wrapper large">
+        <div class="game-object-name-wrapper">
+            <p class="game-object-name">
+                {{ name }}
+            </p>
+        </div>
     </div>
+    <app-players-area class="child"
+        [position]="gameObjectId"
+        [players]="players"
+    ></app-players-area>
 </div>

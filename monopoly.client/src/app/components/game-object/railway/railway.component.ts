@@ -9,6 +9,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
 
 export class RailwayComponent extends GameObjectBaseComponent {
 
-    public override price: number = 200;
+    public price: number = 200;
 
 }

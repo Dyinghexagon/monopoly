@@ -24,7 +24,7 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(b
 
 builder.Services.AddScoped<IDbRepository, DbRepository>();
 
-builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
 
 var app = builder.Build();
 

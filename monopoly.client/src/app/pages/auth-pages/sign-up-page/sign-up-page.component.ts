@@ -2,8 +2,6 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { AuthPageBase } from "../auth-page-base.component";
 import { AuthService } from "../../../services/auth.service";
-import { Router } from "@angular/router";
-import { AppState } from "../../../app.state";
 import { takeUntil } from "rxjs";
 
 @Component({
@@ -16,14 +14,10 @@ export class SignUpPageComponent extends AuthPageBase {
 
     public signUpForm: FormGroup;
 
-    constructor(
-        private authService: AuthService,
-        private router: Router,
-        private appState: AppState
-    ) {
+    constructor(private authService: AuthService) {
         super();
         this.signUpForm = new FormGroup({
-            userName: new FormControl(""),
+            accountName: new FormControl(""),
             password: new FormControl(""),
             confirmPassword: new FormControl(""),
         });
@@ -34,12 +28,12 @@ export class SignUpPageComponent extends AuthPageBase {
             return;
         }
 
-        const userName = this.signUpForm.get("userName")?.value;
+        const accountName = this.signUpForm.get("accountName")?.value;
         const password = this.signUpForm.get("password")?.value;
 
         this.authService.signUp(
             {
-                name: userName,
+                name: accountName,
                 password: password
             }
         )

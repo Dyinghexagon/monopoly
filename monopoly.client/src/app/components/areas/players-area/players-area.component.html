@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <div class="players-wrapper">
+        <app-player *ngFor="let player of players; let index = index"
+            [position]="position"
+            [player]="player"
+            [playerNumber]="index"
+        ></app-player>
+    </div>
+</div>

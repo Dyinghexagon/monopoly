@@ -1,25 +1,48 @@
-import { StreetType } from "../models/street-object.model";
+import { PlayerNumber, StreetType } from "../models/game-object.model";
 
 export class GameObjectUtils {
 
-    public static getColorStreetByNumber(streetType: StreetType): string {
-        switch(streetType) {
-            case StreetType.Grey:
+    public static getColorStreetByType(type: StreetType): string {
+        switch(type) {
+            case "Grey":
                 return "#E4E4E4";
-            case StreetType.Pink:
+            case "Pink":
                 return "#E8B5BB";
-            case StreetType.Yellow:
+            case "Yellow":
                 return "#F4ED62";
-            case StreetType.Green:
+            case "Green":
                 return "#A2D4A1";
-            case StreetType.Blue:
+            case "Blue":
                 return "#91C6CB";
-            case StreetType.Corn:
+            case "Corn":
                 return "#F7D185";
-            case StreetType.Orange:
+            case "Orange":
                 return "#F2AD2E";
-            case StreetType.Red:
+            case "Red":
                 return "#FF6161";
+            default:
+                return "transparent";
+        }
+    }
+
+    public static getColorPlayerByType(number: PlayerNumber): string {
+        switch(number) {
+            case PlayerNumber.First:
+                return "#DEAA88";
+            case PlayerNumber.Second:
+                return "#BEF574";
+            case PlayerNumber.Third:
+                return "#E55137";
+            case PlayerNumber.Fourth:
+                return "#993366";
+            case PlayerNumber.Fifth:
+                return "#D1E231";
+            case PlayerNumber.Sixth:
+                return "#D1E231";
+            case PlayerNumber.Seventh:
+                return "#CDB891";
+            case PlayerNumber.Eighth:
+                return "#2A6478";
             default:
                 return "transparent";
         }

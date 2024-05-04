@@ -7,37 +7,35 @@ using monopoly.Server.Models.CLient;
 using monopoly.Server.Services.UserService;
 using monopoly.Server.Utils;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace monopoly.Server.Controllers
 {
     [ApiController]
     [Route("/api/auth")]
-    public class AuthController(IUserService userService) : Controller
+    public class AuthController(IAccountService accountService) : Controller
     {
-        private readonly IUserService _userService = userService;
+        private readonly IAccountService _accountService = accountService;
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignInAsync([FromBody] UserModel userModel)
+        public async Task<IActionResult> SignInAsync([FromBody] AccountModel accountModel)
         {
-            var users = await _userService.GetAllAsync();
-            var user = users.FirstOrDefault(u => u.Name == userModel.Name);
+            var accounts = await _accountService.GetAllAsync();
+            var account = accounts.FirstOrDefault(u => u.Name == accountModel.Name);
 
-            if (user is null)
+            if (account is null)
             {
                 return BadRequest(new Response(false, "Пользователь не найден!"));
             }
 
-            var hash = CryptoUtils.HashPasword(userModel.Password, out var salt);
-            if (!CryptoUtils.VerifyPassword(userModel.Password, hash, salt))
+            var hash = CryptoUtils.HashPasword(accountModel.Password, out var salt);
+            if (!CryptoUtils.VerifyPassword(accountModel.Password, hash, salt))
             {
                 return BadRequest(new Response(false, "Пароль не прошёл верификацию!"));
             }
 
             var claims = new List<Claim>() 
             { 
-                new(type: ClaimTypes.Name, value: userModel.Name)
+                new(type: ClaimTypes.Name, value: accountModel.Name)
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -56,13 +54,13 @@ namespace monopoly.Server.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp([FromBody] UserModel userModel)
+        public async Task<IActionResult> SignUp([FromBody] AccountModel userModel)
         {
             try
             {
                 var hash = CryptoUtils.HashPasword(userModel.Password, out var salt);
 
-                var user = new User()
+                var accoumt = new Account()
                 {
                     Id = new Guid(),
                     Name = userModel.Name,
@@ -73,7 +71,7 @@ namespace monopoly.Server.Controllers
                     DateUpdated = DateTime.UtcNow
                 };
 
-                var id = await _userService.AddAsync(user);
+                var id = await _accountService.AddAsync(accoumt);
                 return Ok(new Response(true, $"Пользователь с id: {id} успешно добавлен!"));
             } catch (Exception ex)
             {
@@ -82,7 +80,7 @@ namespace monopoly.Server.Controllers
         }
 
         [Authorize]
-        [HttpGet("user")]
+        [HttpGet("account")]
         public IActionResult GetUser()
         {
             var userClaims = User.Claims.Select(u => new UserClaim(u.Type, u.Value)).ToList();

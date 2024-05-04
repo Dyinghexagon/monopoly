@@ -30,7 +30,9 @@ html {
             flex-direction: column;
             flex: 1 1 1px;
 
-            @include circle($mother-pearl-night-color);
+            .auth-page-wrapper {
+                @include circle($mother-pearl-night-color);
+            }
         }
     }
 }
