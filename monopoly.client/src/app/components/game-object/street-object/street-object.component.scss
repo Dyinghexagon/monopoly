@@ -1,7 +1,9 @@
 $street-color: var(--street-color);
 
-.game-object-wrapper {
-    .game-object-icon {
-        fill: $street-color;
+.card-wrapper {
+    .game-object-wrapper {
+        .game-object-icon {
+            fill: $street-color;
+        }
     }
 }

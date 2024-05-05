@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
+import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -17,7 +17,7 @@ import { AuthGuard } from "./guards/auth-guard/auth.guard";
 import { AuthInterceptor } from "./guards/auth-guard/auth.interceptor";
 import { Router } from "@angular/router";
 import { AppState } from "./app.state";
-import { AreaComponent } from "./components/area/area.component";
+import { AreaComponent } from "./components/areas/area/area.component";
 import { StreetObjectComponent } from "./components/game-object/street-object/street-object.component";
 import { TreasuryComponent } from "./components/game-object/treasury/treasury.component";
 import { IncomeTaxComponent } from "./components/game-object/income-tax/income-tax.component";
@@ -29,6 +29,8 @@ import { PowerhouseComponent } from "./components/game-object/powerhouse/powerho
 import { ParkingComponent } from "./components/game-object/parking/parking.component";
 import { WaterSupplyComponent } from "./components/game-object/water-supply/water-supply.component";
 import { ArrestedComponent } from "./components/game-object/arrested/arrested.component";
+import { PlayerAreaComponent } from "./components/areas/players-area/players-area.component";
+import { PlayerComponent } from "./components/areas/players-area/player/player.component";
 
 @NgModule({
     declarations: [
@@ -50,13 +52,16 @@ import { ArrestedComponent } from "./components/game-object/arrested/arrested.co
         PowerhouseComponent,
         ParkingComponent,
         WaterSupplyComponent,
-        ArrestedComponent
+        ArrestedComponent,
+        PlayerAreaComponent,
+        PlayerComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [
         {

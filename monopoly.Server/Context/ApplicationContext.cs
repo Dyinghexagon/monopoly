@@ -5,7 +5,7 @@ namespace monopoly.Server.Context
 {
     public class ApplicationContext(DbContextOptions<ApplicationContext> options) : DbContext(options)
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

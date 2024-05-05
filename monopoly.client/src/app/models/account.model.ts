@@ -1,4 +1,4 @@
-export interface IUserModel {
+export interface IAccountModel {
     name: string;
     password: string;
 }

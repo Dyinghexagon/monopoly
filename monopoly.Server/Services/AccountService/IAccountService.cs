@@ -2,7 +2,7 @@
 
 namespace monopoly.Server.Services.UserService
 {
-    public interface IUserService : IService<User>
+    public interface IAccountService : IService<Account>
     {
 
     }

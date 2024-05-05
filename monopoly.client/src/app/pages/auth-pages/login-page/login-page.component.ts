@@ -23,7 +23,7 @@ export class LoginPageComponent extends AuthPageBase {
     ) {
         super();
         this.loginForm = new FormGroup({
-            userName: new FormControl("", [Validators.required]),
+            accountName: new FormControl("", [Validators.required]),
             password: new FormControl("", [Validators.required]),
         });
     }
@@ -33,12 +33,12 @@ export class LoginPageComponent extends AuthPageBase {
             return;
         }
 
-        const userName = this.loginForm.get("userName")?.value;
+        const accountName = this.loginForm.get("accountName")?.value;
         const password = this.loginForm.get("password")?.value;
 
         this.authService.signIn(
             {
-                name: userName,
+                name: accountName,
                 password: password
             }
         )

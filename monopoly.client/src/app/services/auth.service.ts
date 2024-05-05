@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IUserModel } from "../models/user.model";
+import { IAccountModel } from "../models/account.model";
 import { IResponse } from "../models/response.model";
 import { Observable, catchError, map, of } from "rxjs";
 import { AppConfig } from "../app.config";
@@ -14,17 +14,17 @@ export class AuthService {
         private config: AppConfig
     ) {}
 
-    public signIn(user: IUserModel): Observable<IResponse> {
+    public signIn(account: IAccountModel): Observable<IResponse> {
         return this.http.post<IResponse>(`${this.config.authUrl}/signin`, {
-            name: user.name,
-            password: user.password
+            name: account.name,
+            password: account.password
         });
     }
 
-    public signUp(user: IUserModel): Observable<IResponse> {
+    public signUp(account: IAccountModel): Observable<IResponse> {
         return this.http.post<IResponse>(`${this.config.authUrl}/signup`, {
-            name: user.name,
-            password: user.password
+            name: account.name,
+            password: account.password
         });
     }
 
@@ -32,12 +32,12 @@ export class AuthService {
         return this.http.get(`${this.config.authUrl}/signout`);
     }
 
-    public user(): Observable<IUserClaim[]> {
-        return this.http.get<IUserClaim[]>(`${this.config.authUrl}/user`);
+    public account(): Observable<IUserClaim[]> {
+        return this.http.get<IUserClaim[]>(`${this.config.authUrl}/account`);
     }
 
     public isSignedIn(): Observable<boolean> {
-        return this.user().pipe(
+        return this.account().pipe(
             map(userClaim => {
                 const hasClaims = userClaim.length > 0;
                 return !hasClaims ? false : true;

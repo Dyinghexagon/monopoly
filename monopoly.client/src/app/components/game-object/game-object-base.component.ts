@@ -1,10 +1,17 @@
-import { Directive, Input } from "@angular/core";
+import { Directive, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { PlayerModel } from "../../models/player.model";
 
 @Directive()
-export abstract class GameObjectBaseComponent {
+export abstract class GameObjectBaseComponent implements OnChanges {
 
-    @Input() public color: string = "transparent";
+    @Input() public gameObjectId: string = "";
     @Input() public name: string = "";
-    @Input() public price: number = 0;
+    @Input() public players?: PlayerModel[];
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if(changes["players"]) {
+            this.players = changes["players"].currentValue;
+        }
+    }
 
 }

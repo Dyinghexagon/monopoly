@@ -10,6 +10,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
 export class PowerhouseComponent extends GameObjectBaseComponent {
 
     public override name: string = "ЭЛЕКТРОСТАНЦИЯ";
-    public override price: number = 150;
+    public price: number = 150;
 
 }

@@ -52,7 +52,7 @@ $page-link-color: #606060;
     border-radius: 20px;
 }
 
-@mixin circle($color: red, $size: 250px) {
+@mixin circle($color: red, $size: 250px, $opacity: .74, $blur: 5px) {
     .circle {
         width: $size;
         height: $size;
@@ -62,8 +62,8 @@ $page-link-color: #606060;
         background: $color;
         position: absolute;
         z-index: calc($z-index-content - 1);
-        opacity: .74;
-        @include filter-blur(5px);
+        opacity: $opacity;
+        @include filter-blur($blur);
     }
 }
 

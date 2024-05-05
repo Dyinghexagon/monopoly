@@ -1,0 +1,30 @@
+@import "../../../../../assets/shared/variables";
+
+$player-color: var(--player-color);
+$player-top: var(--player-top);
+
+.player-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .player {
+        cursor: pointer;
+        display: flex;
+        height: 100%;
+        width: calc(100% / 4);
+        border: 1px solid $player-color;
+        border-radius: 50%;
+        background-color: $player-color;
+        order: $player-top;
+
+        .name {
+            font-size: 7rem;
+            margin: 0;
+        }
+
+        &:hover {
+            z-index: 100;
+        }
+    }
+}

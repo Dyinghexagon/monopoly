@@ -1,6 +1,6 @@
 ﻿namespace monopoly.Server.Models.Backend
 {
-    public class User : Entity
+    public class Account : Entity
     {
         public string Name { get; set; } = string.Empty;
 
