@@ -1,0 +1,10 @@
+.players-wrapper {
+    position: relative;
+
+    app-player {
+        position: absolute;
+        margin-top: var(--top);
+        width: 100%;
+        height: calc(600px/8);
+    }
+}
