@@ -31,6 +31,7 @@ import { WaterSupplyComponent } from "./components/game-object/water-supply/wate
 import { ArrestedComponent } from "./components/game-object/arrested/arrested.component";
 import { PlayerAreaComponent } from "./components/areas/players-area/players-area.component";
 import { PlayerComponent } from "./components/areas/players-area/player/player.component";
+import { DiceComponent } from "./components/dice/dice.component";
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { PlayerComponent } from "./components/areas/players-area/player/player.c
         WaterSupplyComponent,
         ArrestedComponent,
         PlayerAreaComponent,
-        PlayerComponent
+        PlayerComponent,
+        DiceComponent
     ],
     imports: [
         BrowserModule,
