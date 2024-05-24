@@ -3,6 +3,7 @@ import { GameObjectUtils } from "../../../utils/game-object-utils";
 import { StreetGameObjec } from "../../../models/street-object.model";
 import { PlayerModel, Players } from "../../../models/player.model";
 import { NumberUtils } from "../../../utils/number-utils";
+import { IDiceValue } from "../../../models/dice.model";
 
 @Component({
     selector: "app-area",
@@ -11,6 +12,11 @@ import { NumberUtils } from "../../../utils/number-utils";
     encapsulation: ViewEncapsulation.None
 })
 export class AreaComponent {
+
+    public diceValue: IDiceValue = {
+        firstValue: 1,
+        secondValue: 1
+    };
 
     @Input() public players?: Players;
 

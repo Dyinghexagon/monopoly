@@ -260,7 +260,11 @@
                     </svg>
                 </div>
             </div>
-            <div class="second-quadrant"></div>
+            <div class="second-quadrant">
+                <app-dice
+                    [(diceValue)]="diceValue"
+                ></app-dice>
+            </div>
             <div class="third-quadrant">
                 <div class="treasury-wrapper">
                     <svg width="261" height="261" viewBox="0 0 261 261" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -278,5 +282,4 @@
             <div class="fourth-quadrant"></div>
         </div>
     </div>
-    <button (click)="testMovePlayer()">click</button>
 </div>
