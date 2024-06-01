@@ -2,7 +2,7 @@ import { Guid } from "guid-typescript";
 import { GameObjectUtils } from "../utils/game-object-utils";
 import { IGameObjectBase, StreetType } from "./game-object.model";
 
-export class StreetGameObjec implements IStreetGameObject {
+export class StreetGameObject implements IStreetGameObject {
 
     public id: Guid;
     public name: string;

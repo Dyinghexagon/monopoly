@@ -11,4 +11,6 @@ export class StreetObjectComponent extends GameObjectBaseComponent {
     @Input() public color: string = "transperent";
     @Input() public price: number = 0;
 
+    public count: number = 0;
+
 }
