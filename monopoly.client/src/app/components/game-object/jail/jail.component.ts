@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { GameObjectBaseComponent } from "../game-object-base.component";
+import { Jail } from "../../../models/game-objects/jail.model";
 
 @Component({
     selector: "app-jail",
@@ -7,8 +8,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
     styleUrls: [ "../game-object-base.component.scss", "./jail.component.scss" ]
 })
 
-export class JailComponent extends GameObjectBaseComponent {
-
-    public override name: string = "ТЮРЬМА";
+export class JailComponent extends GameObjectBaseComponent<Jail> {
 
 }

@@ -17,13 +17,13 @@
             </svg>                 
             <div class="game-object-name-wrapper">
                 <p class="game-object-name">
-                    {{ name }}
+                    {{ data.name }}
                 </p>
             </div>
         </div>
     </div>
     <app-players-area
-        [position]="gameObjectId"
-        [players]="players"
+        [position]="data.id"
+        [players]="getPlayers()"
     ></app-players-area>
 </div>

@@ -1,9 +1,11 @@
-import { Guid } from "guid-typescript";
-
 export interface IGameObjectBase {
-    id: Guid;
+    id: string;
     name: string;
     type: GameObjectType;
+}
+
+export interface IWithPrice {
+    price: number;
 }
 
 export type GameObjectType = StreetType | "Treasury" | "IncomeTax" | "Railway" | "Chance" | "Jail" | "Powerhouse" | "Parking" | "WaterSupply" | "Arrested" | "Start";

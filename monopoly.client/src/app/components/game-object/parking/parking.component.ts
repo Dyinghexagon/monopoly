@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { GameObjectBaseComponent } from "../game-object-base.component";
+import { Parking } from "../../../models/game-objects/parking.model";
 
 @Component({
     selector: "app-parking",
@@ -7,8 +8,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
     styleUrls: [ "../game-object-base.component.scss", "./parking.component.scss" ]
 })
 
-export class ParkingComponent extends GameObjectBaseComponent {
-
-    public override name: string = "БЕСПЛАТНАЯ ПАРКОВКА";
+export class ParkingComponent extends GameObjectBaseComponent<Parking> {
 
 }

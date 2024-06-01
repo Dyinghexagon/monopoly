@@ -3,7 +3,7 @@
         <div class="game-object-color"></div>
         <div class="game-object-name-wrapper">
             <p class="game-object-name">
-                {{ name }}
+                {{ data.name }}
             </p>
         </div>
         <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="game-object-icon">
@@ -19,11 +19,11 @@
             </defs>
         </svg>                  
         <p class="game-object-price">
-            {{ price }}₽
+            {{ data.price }}₽
         </p>
     </div>
     <app-players-area
-        [position]="gameObjectId"
-        [players]="players"
+        [position]="data.id"
+        [players]="getPlayers()"
     ></app-players-area>
 </div>

@@ -1,14 +1,3 @@
-<div class="info-modal-wrapper">
-    <p class="text-info">
-        Текущий игрок: {{ playerMoveService.currentPlayer.name }}
-    </p>
-    <p class="text-info">
-        Позиция игрок: {{ playerMoveService.currentPlayer.position }}
-    </p>
-</div>
-
 <app-area
     [players]="players"
-    [gameObjects]="playerMoveService.gameObjects"
-    (diceValueChange)="diceValueChange($event)"
 ></app-area>

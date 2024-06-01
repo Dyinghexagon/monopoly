@@ -1,4 +1,4 @@
-import { PlayerNumber, StreetType } from "../models/game-object.model";
+import { PlayerNumber, StreetType } from "../models/game-objects/game-object.model";
 
 export class GameObjectUtils {
 
