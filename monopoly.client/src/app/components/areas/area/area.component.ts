@@ -1,9 +1,9 @@
-import { Component, Input, ViewEncapsulation } from "@angular/core";
-import { GameObjectUtils } from "../../../utils/game-object-utils";
-import { StreetGameObjec } from "../../../models/street-object.model";
-import { PlayerModel, Players } from "../../../models/player.model";
-import { NumberUtils } from "../../../utils/number-utils";
+import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Players } from "../../../models/player.model";
 import { IDiceValue } from "../../../models/dice.model";
+import { GameObjectCreateService } from "../../../services/game-object-create.service";
+import { PlayerMoveService } from "../../../services/player-move.service";
+import { IGameObjectBase } from "../../../models/game-objects/game-object.model";
 
 @Component({
     selector: "app-area",
@@ -11,125 +11,83 @@ import { IDiceValue } from "../../../models/dice.model";
     styleUrls: [ "./area.component.scss" ],
     encapsulation: ViewEncapsulation.None
 })
-export class AreaComponent {
-
-    public diceValue: IDiceValue = {
-        firstValue: 1,
-        secondValue: 1
-    };
+export class AreaComponent implements OnChanges {
 
     @Input() public players?: Players;
 
-    public gameObjectUtils = GameObjectUtils;
+    public gameObjectCreateService: GameObjectCreateService;
+    public playerMoveService?: PlayerMoveService;
 
-    public greyStreet: StreetGameObjec[] = [
-        new StreetGameObjec("ЖИТНАЯ УЛИЦА", 60, "Grey"),
-        new StreetGameObjec("НАГАТИНСКАЯ УЛИЦА", 60, "Grey")
-    ];
+    public objects: IGameObjectBase[] = [];
 
-    public pinkStreet: StreetGameObjec[] = [
-        new StreetGameObjec("ВАРШАВСКОЕ ШОССЕ", 100, "Pink"),
-        new StreetGameObjec("УЛИЦА ОГАРЕВА", 100, "Pink"),
-        new StreetGameObjec("ПЕРВАЯ ПАРКОВАЯ УЛИЦА", 120, "Pink")
-    ];
-
-    public yellowStreet: StreetGameObjec[] = [
-        new StreetGameObjec("УЛИЦА ПОЛНКА", 140, "Yellow"),
-        new StreetGameObjec("УЛИЦА СРЕТЕНКА", 140, "Yellow"),
-        new StreetGameObjec("РОСТОВСКАЯ НАБЕРЕЖНАЯ", 160, "Yellow")
-    ];
-
-    public greenStreet: StreetGameObjec[] = [
-        new StreetGameObjec("РЯЗАНСКИЙ ПРОСПЕКТ", 180, "Green"),
-        new StreetGameObjec("УЛИЦА ВАВИЛОВА", 180, "Green"),
-        new StreetGameObjec("РУБЛЕВСКОЕ ШОССЕ", 200, "Green")
-    ];
-
-    public blueStreet: StreetGameObjec[] = [
-        new StreetGameObjec("УЛИЦА ТВЕРСКАЯ", 200, "Blue"),
-        new StreetGameObjec("ПУШКИНСКАЯ УЛИЦА", 220, "Blue"),
-        new StreetGameObjec("ПЛОЩАДЬ МАЯКОВСКОГО", 240, "Blue")
-    ];
-
-    public cornStreet: StreetGameObjec[] = [
-        new StreetGameObjec("УЛИЦА ГРУЗИНСКАЯ ВАЛ", 260, "Corn"),
-        new StreetGameObjec("НОВИНСКИЙ БУЛЬВАР", 260, "Corn"),
-        new StreetGameObjec("СМОЛЕНСКАЯ ПЛОЩАДЬ", 280, "Corn")
-    ];
-
-    public orangeStreet: StreetGameObjec[] = [
-        new StreetGameObjec("УЛИЦА ЩУСЕВА", 300, "Orange"),
-        new StreetGameObjec("ГОГОЛЕВСКИЙ БУЛЬВАР", 300, "Orange"),
-        new StreetGameObjec("КУТУЗОВСКИЙ ПРОСПЕКТ", 320, "Orange")
-    ];
-
-    public redStreet: StreetGameObjec[] = [
-        new StreetGameObjec("УЛИЦА МАЛАЯ БРОННАЯ", 350, "Red"),
-        new StreetGameObjec("УЛИЦА АРБАТ", 400, "Red")
-    ];
-
-    public gameObjectIds: string[] = [
-        "start",
-        this.greyStreet[0].gameObjectId,
-        "treasury-1",
-        this.greyStreet[1].gameObjectId,
-        "income-tax-1",
-        "railway-1",
-        this.pinkStreet[0].gameObjectId,
-        "chance-1",
-        this.pinkStreet[1].gameObjectId,
-        this.pinkStreet[2].gameObjectId,
-        "jail",
-        this.yellowStreet[0].gameObjectId,
-        "powerhouse",
-        this.yellowStreet[1].gameObjectId,
-        this.yellowStreet[2].gameObjectId,
-        "railway-2",
-        this.greenStreet[0].gameObjectId,
-        "treasury-2",
-        this.greenStreet[1].gameObjectId,
-        this.greenStreet[2].gameObjectId,
-        "parking",
-        this.blueStreet[0].gameObjectId,
-        "chance-2",
-        this.blueStreet[1].gameObjectId,
-        this.blueStreet[2].gameObjectId,
-        "railway-3",
-        this.cornStreet[0].gameObjectId,
-        this.cornStreet[1].gameObjectId,
-        "water-supply",
-        this.cornStreet[2].gameObjectId,
-        "arrested",
-        this.orangeStreet[0].gameObjectId,
-        this.orangeStreet[1].gameObjectId,
-        "treasury-3",
-        this.orangeStreet[2].gameObjectId,
-        "railway-4",
-        "chance-3",
-        this.redStreet[0].gameObjectId,
-        "income-tax-2",
-        this.redStreet[1].gameObjectId
-    ];
-
-    public getPlayers(gameObjectId: string): PlayerModel[] {
-        return this.players?.Players.filter(p => p.position === gameObjectId) ?? [];
+    constructor() {
+        this.gameObjectCreateService = new GameObjectCreateService();
+        this.initObjects();
+        this.initPlayerMoveService();
     }
 
-    public testMovePlayer(): void {
-        const firstPlayer = this.players?.Players.find(player => player.name === "1");
+    private initObjects(): void {
+        this.objects.push(this.gameObjectCreateService.createStart());
+        this.objects.push(this.gameObjectCreateService.createStreet("ЖИТНАЯ УЛИЦА", 60, "Grey"));
+        this.objects.push(this.gameObjectCreateService.createTreasury());
+        this.objects.push(this.gameObjectCreateService.createStreet("НАГАТИНСКАЯ УЛИЦА", 60, "Grey"));
+        this.objects.push(this.gameObjectCreateService.createIncomeTax());
+        this.objects.push(this.gameObjectCreateService.createRailway("РИЖСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"));
+        this.objects.push(this.gameObjectCreateService.createStreet("ВАРШАВСКОЕ ШОССЕ", 100, "Pink"));
+        this.objects.push(this.gameObjectCreateService.createChance());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ОГАРЕВА", 100, "Pink"));
+        this.objects.push(this.gameObjectCreateService.createStreet("ПЕРВАЯ ПАРКОВАЯ УЛИЦА", 120, "Pink"));
+        this.objects.push(this.gameObjectCreateService.createJail());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ПОЛНКА", 140, "Yellow"));
+        this.objects.push(this.gameObjectCreateService.createPowerHouse());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА СРЕТЕНКА", 140, "Yellow"));
+        this.objects.push(this.gameObjectCreateService.createStreet("РОСТОВСКАЯ НАБЕРЕЖНАЯ", 160, "Yellow"));
+        this.objects.push(this.gameObjectCreateService.createRailway("КУРСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"));
+        this.objects.push(this.gameObjectCreateService.createStreet("РЯЗАНСКИЙ ПРОСПЕКТ", 180, "Green"));
+        this.objects.push(this.gameObjectCreateService.createTreasury());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ВАВИЛОВА", 180, "Green"));
+        this.objects.push(this.gameObjectCreateService.createStreet("РУБЛЕВСКОЕ ШОССЕ", 200, "Green"));
+        this.objects.push(this.gameObjectCreateService.createParking());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ТВЕРСКАЯ", 200, "Blue"));
+        this.objects.push(this.gameObjectCreateService.createChance());
+        this.objects.push(this.gameObjectCreateService.createStreet("ПУШКИНСКАЯ УЛИЦА", 210, "Blue"));
+        this.objects.push(this.gameObjectCreateService.createStreet("ПЛОЩАДЬ МАЯКОВСКОГО", 240, "Blue"));
+        this.objects.push(this.gameObjectCreateService.createRailway("КАЗАНСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"));
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ГРУЗИНСКАЯ ВАЛ", 260, "Corn"));
+        this.objects.push(this.gameObjectCreateService.createStreet("НОВИНСКИЙ БУЛЬВАР", 260, "Corn"));
+        this.objects.push(this.gameObjectCreateService.createWaterSupply());
+        this.objects.push(this.gameObjectCreateService.createStreet("СМОЛЕНСКАЯ ПЛОЩАДЬ", 280, "Corn"));
+        this.objects.push(this.gameObjectCreateService.createArrested());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА ЩУСЕВА", 300, "Orange"));
+        this.objects.push(this.gameObjectCreateService.createStreet("ГОГОЛЕВСКИЙ БУЛЬВАР", 300, "Orange"));
+        this.objects.push(this.gameObjectCreateService.createTreasury());
+        this.objects.push(this.gameObjectCreateService.createStreet("КУТУЗОВСКИЙ ПРОСПЕКТ", 320, "Orange"));
+        this.objects.push(this.gameObjectCreateService.createRailway("ЛЕНИНГРАДСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"));
+        this.objects.push(this.gameObjectCreateService.createChance());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА МАЛАЯ БРОННАЯ", 350, "Red"));
+        this.objects.push(this.gameObjectCreateService.createIncomeTax());
+        this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА АРБАТ", 400, "Red"));
+    }
 
-        if (!firstPlayer) {
+    public ngOnChanges(changes: SimpleChanges): void {
+        if(changes["players"]) {
+            this.players = changes["players"].currentValue;
+            this.initPlayerMoveService();
+        }
+    }
+
+    private initPlayerMoveService(): void {
+        if (this.players) {
+            this.playerMoveService = new PlayerMoveService(this.players, this.objects);
+        }
+    }
+
+    public diceValueChange(diceValue: IDiceValue): void {
+        if (!this.playerMoveService) {
             return;
         }
 
-        const nextNodeValue = Math.round(NumberUtils.randomNumber(1, 6)) + Math.round(NumberUtils.randomNumber(1, 6));
-        const currentPosition = this.gameObjectIds.indexOf(firstPlayer.position);
-        let targetPosition = currentPosition + nextNodeValue;
-        if (targetPosition >= 40) {
-            targetPosition -= 40;
-        }
-
-        firstPlayer.position = this.gameObjectIds[targetPosition];
+        this.playerMoveService.moveCurrentPlayer(diceValue);
     }
 
 }

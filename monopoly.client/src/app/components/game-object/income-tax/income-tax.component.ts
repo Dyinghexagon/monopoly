@@ -1,5 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { GameObjectBaseComponent } from "../game-object-base.component";
+import { IncomeTax } from "../../../models/game-objects/income-tax.model";
 
 @Component({
     selector: "app-income-tax",
@@ -7,10 +8,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
     styleUrls: [ "../game-object-base.component.scss" ]
 })
 
-export class IncomeTaxComponent extends GameObjectBaseComponent {
-
-    @Input() public price: number = 0;
-
-    public override name: string = "НАЛОГ С ДОХОДА";
+export class IncomeTaxComponent extends GameObjectBaseComponent<IncomeTax> {
 
 }

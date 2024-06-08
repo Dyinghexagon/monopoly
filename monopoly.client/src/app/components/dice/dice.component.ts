@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { NumberUtils } from "../../utils/number-utils";
 import { IDiceValue } from "../../models/dice.model";
 
@@ -10,7 +10,7 @@ import { IDiceValue } from "../../models/dice.model";
 
 export class DiceComponent {
 
-    @Input() public diceValue?: IDiceValue;
+    public diceValue?: IDiceValue;
     @Output() public diceValueChange = new EventEmitter<IDiceValue>();
 
     public rollDice(): void {

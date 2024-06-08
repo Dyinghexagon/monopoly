@@ -2,12 +2,12 @@
     <div class="game-object-wrapper large">
         <div class="game-object-name-wrapper">
             <p class="game-object-name">
-                {{ name }}
+                {{ gameObject.name }}
             </p>
         </div>
     </div>
     <app-players-area class="child"
-        [position]="gameObjectId"
-        [players]="players"
+        [position]="gameObject.id"
+        [players]="getPlayers()"
     ></app-players-area>
 </div>

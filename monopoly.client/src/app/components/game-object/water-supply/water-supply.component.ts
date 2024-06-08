@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { GameObjectBaseComponent } from "../game-object-base.component";
+import { WaterSupply } from "../../../models/game-objects/water-supply.model";
 
 @Component({
     selector: "app-water-supply",
@@ -7,9 +8,6 @@ import { GameObjectBaseComponent } from "../game-object-base.component";
     styleUrls: [ "../game-object-base.component.scss" ]
 })
 
-export class WaterSupplyComponent extends GameObjectBaseComponent {
-
-    public override name: string = "ВОДОПРОВОД";
-    public price: number = 150;
+export class WaterSupplyComponent extends GameObjectBaseComponent<WaterSupply> {
 
 }

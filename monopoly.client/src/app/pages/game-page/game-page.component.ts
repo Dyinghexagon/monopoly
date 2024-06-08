@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PlayerModel, Players } from "../../models/player.model";
-import { PlayerNumber } from "../../models/game-object.model";
+import { PlayerNumber } from "../../models/game-objects/game-object.model";
 
 @Component({
     selector: "app-game-page-component",

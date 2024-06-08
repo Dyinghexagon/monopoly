@@ -51,7 +51,7 @@ $street-color: var(--street-color);
         }
     
         .game-object-icon {
-            margin-bottom: 96px;
+            margin-bottom: $game-object-icon-matgin;
         }
     
         .game-object-price {

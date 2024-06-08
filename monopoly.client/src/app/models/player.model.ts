@@ -1,5 +1,5 @@
 import { GameObjectUtils } from "../utils/game-object-utils";
-import { PlayerNumber } from "./game-object.model";
+import { PlayerNumber } from "./game-objects/game-object.model";
 import { Guid } from "guid-typescript";
 
 export class Players {

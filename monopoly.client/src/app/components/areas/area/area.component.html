@@ -2,242 +2,170 @@
     <div class="game-area">
         <div class="first-line">
             <app-start
-                [gameObjectId]="'start'"
-                [players]="getPlayers('start')"
+                [gameObject]="objects[0]"
+                [players]="players?.Players"
             ></app-start>
-            <app-street class="rotate"
-                [gameObjectId]="greyStreet[0].gameObjectId"
-                [name]="greyStreet[0].name"
-                [color]="greyStreet[0].color"
-                [price]="greyStreet[0].price"
-                [players]="getPlayers(gameObjectIds[1])"
+            <app-street
+                [gameObject]="objects[1]"
+                [players]="players?.Players"
             ></app-street>
-            <app-treasury class="rotate"
-                [gameObjectId]="'treasury-1'"
-                [players]="getPlayers('treasury-1')"
+            <app-treasury
+                [gameObject]="objects[2]"
+                [players]="players?.Players"
             ></app-treasury>
-            <app-street class="rotate"
-                [gameObjectId]="gameObjectIds[3]"
-                [name]="greyStreet[1].name"
-                [color]="greyStreet[1].color"
-                [price]="greyStreet[1].price"
-                [players]="getPlayers(gameObjectIds[3])"
+            <app-street
+                [gameObject]="objects[3]"
+                [players]="players?.Players"
             ></app-street>
-            <app-income-tax class="rotate"
-                [gameObjectId]="'income-tax-1'"
-                [price]="200"
-                [players]="getPlayers('income-tax-1')"
+            <app-income-tax
+                [gameObject]="objects[4]"
+                [players]="players?.Players"
             ></app-income-tax>
-            <app-railway class="rotate"
-                [gameObjectId]="'railway-1'"
-                name="РИЖСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
-                [players]="getPlayers('railway-1')"
+            <app-railway
+                [gameObject]="objects[5]"
+                [players]="players?.Players"
             ></app-railway>
-            <app-street class="rotate"
-                [gameObjectId]="pinkStreet[0].gameObjectId"
-                [name]="pinkStreet[0].name"
-                [color]="pinkStreet[0].color"
-                [price]="pinkStreet[0].price"
-                [players]="getPlayers(pinkStreet[0].gameObjectId)"
+            <app-street
+                [gameObject]="objects[6]"
+                [players]="players?.Players"
             ></app-street>
-            <app-chance class="rotate"
-                [gameObjectId]="'chance-1'"
-                [players]="getPlayers('chance-1')"
+            <app-chance
+                [gameObject]="objects[7]"
+                [players]="players?.Players"
             ></app-chance>
-            <app-street class="rotate"
-                [gameObjectId]="pinkStreet[1].gameObjectId"
-                [name]="pinkStreet[1].name"
-                [color]="pinkStreet[1].color"
-                [price]="pinkStreet[1].price"
-                [players]="getPlayers(pinkStreet[1].gameObjectId)"
+            <app-street
+                [gameObject]="objects[8]"
+                [players]="players?.Players"
             ></app-street>
-            <app-street class="rotate"
-                [gameObjectId]="pinkStreet[2].gameObjectId"
-                [name]="pinkStreet[2].name"
-                [color]="pinkStreet[2].color"
-                [price]="pinkStreet[2].price"
-                [players]="getPlayers(pinkStreet[2].gameObjectId)"
+            <app-street
+                [gameObject]="objects[9]"
+                [players]="players?.Players"
             ></app-street>
             <app-jail
-                [gameObjectId]="'jail'"
-                [players]="getPlayers('jail')"
+                [gameObject]="objects[10]"
+                [players]="players?.Players"
             ></app-jail>
         </div>
         <div class="second-line">
             <app-street class="rotate"
-                [gameObjectId]="yellowStreet[0].gameObjectId"
-                [name]="yellowStreet[0].name"
-                [color]="yellowStreet[0].color"
-                [price]="yellowStreet[0].price"
-                [players]="getPlayers(yellowStreet[0].gameObjectId)"
+                [gameObject]="objects[11]"
+                [players]="players?.Players"
             ></app-street>
             <app-powerhouse class="rotate"
-                [gameObjectId]="'powerhouse'"
-                [players]="getPlayers('powerhouse')"
+                [gameObject]="objects[12]"
+                [players]="players?.Players"
             ></app-powerhouse>
             <app-street class="rotate"
-                [gameObjectId]="yellowStreet[1].gameObjectId"
-                [name]="yellowStreet[1].name"
-                [color]="yellowStreet[1].color"
-                [price]="yellowStreet[1].price"
-                [players]="getPlayers(yellowStreet[1].gameObjectId)"
+                [gameObject]="objects[13]"
+                [players]="players?.Players"
             ></app-street>
             <app-street class="rotate"
-                [gameObjectId]="yellowStreet[2].gameObjectId"
-                [name]="yellowStreet[2].name"
-                [color]="yellowStreet[2].color"
-                [price]="yellowStreet[2].price"
-                [players]="getPlayers(yellowStreet[2].gameObjectId)"
+                [gameObject]="objects[14]"
+                [players]="players?.Players"
             ></app-street>
             <app-railway class="rotate"
-                [gameObjectId]="'railway-2'"
-                name="КУРСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
-                [players]="getPlayers('railway-2')"
+                [gameObject]="objects[15]"
+                [players]="players?.Players"
             ></app-railway>
             <app-street class="rotate"
-                [gameObjectId]="greenStreet[0].gameObjectId"
-                [name]="greenStreet[0].name"
-                [color]="greenStreet[0].color"
-                [price]="greenStreet[0].price"
-                [players]="getPlayers(greenStreet[0].gameObjectId)"
+                [gameObject]="objects[16]"
+                [players]="players?.Players"
             ></app-street>
             <app-treasury class="rotate"
-                [gameObjectId]="'treasury-2'"
-                [players]="getPlayers('treasury-2')"
+                [gameObject]="objects[17]"
+                [players]="players?.Players"
             ></app-treasury>
             <app-street class="rotate"
-                [gameObjectId]="greenStreet[1].gameObjectId"
-                [name]="greenStreet[1].name"
-                [color]="greenStreet[1].color"
-                [price]="greenStreet[1].price"
-                [players]="getPlayers(greenStreet[1].gameObjectId)"
+                [gameObject]="objects[18]"
+                [players]="players?.Players"
             ></app-street>
             <app-street class="rotate"
-                [gameObjectId]="greenStreet[2].gameObjectId"
-                [name]="greenStreet[2].name"
-                [color]="greenStreet[2].color"
-                [price]="greenStreet[2].price"
-                [players]="getPlayers(greenStreet[2].gameObjectId)"
+                [gameObject]="objects[19]"
+                [players]="players?.Players"
             ></app-street>
         </div>
         <div class="third-line">
             <app-parking
-                [gameObjectId]="'parking'"
-                [players]="getPlayers('parking')"
+                [gameObject]="objects[20]"
+                [players]="players?.Players"
             ></app-parking>
             <app-street
-                [gameObjectId]="blueStreet[0].gameObjectId"
-                [name]="blueStreet[0].name"
-                [color]="blueStreet[0].color"
-                [price]="blueStreet[0].price"
-                [players]="getPlayers(blueStreet[0].gameObjectId)"
+                [gameObject]="objects[21]"
+                [players]="players?.Players"
             ></app-street>
             <app-chance
-                [gameObjectId]="'chance-2'"
-                [players]="getPlayers('chance-2')"
+                [gameObject]="objects[22]"
+                [players]="players?.Players"
             ></app-chance>
             <app-street
-                [gameObjectId]="blueStreet[1].gameObjectId"
-                [name]="blueStreet[1].name"
-                [color]="blueStreet[1].color"
-                [price]="blueStreet[1].price"
-                [players]="getPlayers(blueStreet[1].gameObjectId)"
+                [gameObject]="objects[23]"
+                [players]="players?.Players"
             ></app-street>
             <app-street
-                [gameObjectId]="blueStreet[2].gameObjectId"
-                [name]="blueStreet[2].name"
-                [color]="blueStreet[2].color"
-                [price]="blueStreet[2].price"
-                [players]="getPlayers(blueStreet[2].gameObjectId)"
+                [gameObject]="objects[24]"
+                [players]="players?.Players"
             ></app-street>
             <app-railway
-                [gameObjectId]="'railway-3'"
-                name="КАЗАНСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
-                [players]="getPlayers('railway-3')"
+                [gameObject]="objects[25]"
+                [players]="players?.Players"
             ></app-railway>
             <app-street
-                [gameObjectId]="cornStreet[0].gameObjectId"
-                [name]="cornStreet[0].name"
-                [color]="cornStreet[0].color"
-                [price]="cornStreet[0].price"
-                [players]="getPlayers(cornStreet[0].gameObjectId)"
+                [gameObject]="objects[26]"
+                [players]="players?.Players"
             ></app-street>
             <app-street
-                [gameObjectId]="cornStreet[1].gameObjectId"
-                [name]="cornStreet[1].name"
-                [color]="cornStreet[1].color"
-                [price]="cornStreet[1].price"
-                [players]="getPlayers(cornStreet[1].gameObjectId)"
+                [gameObject]="objects[27]"
+                [players]="players?.Players"
             ></app-street>
             <app-water-supply
-                [gameObjectId]="'water-supply'"
-                [players]="getPlayers('water-supply')"
+                [gameObject]="objects[28]"
+                [players]="players?.Players"
             ></app-water-supply>
             <app-street
-                [gameObjectId]="cornStreet[2].gameObjectId"
-                [name]="cornStreet[2].name"
-                [color]="cornStreet[2].color"
-                [price]="cornStreet[2].price"
-                [players]="getPlayers(cornStreet[2].gameObjectId)"
+                [gameObject]="objects[29]"
+                [players]="players?.Players"
             ></app-street>
             <app-arrested
-                [gameObjectId]="'arrested'"
-                [players]="getPlayers('arrested')"
+                [gameObject]="objects[30]"
+                [players]="players?.Players"
             ></app-arrested>
         </div>
         <div class="fourth-line">
             <app-street class="rotate"
-                [gameObjectId]="orangeStreet[0].gameObjectId"
-                [name]="orangeStreet[0].name"
-                [color]="orangeStreet[0].color"
-                [price]="orangeStreet[0].price"
-                [players]="getPlayers(orangeStreet[0].gameObjectId)"
+                [gameObject]="objects[31]"
+                [players]="players?.Players"
             ></app-street>
             <app-street class="rotate"
-                [gameObjectId]="orangeStreet[1].gameObjectId"
-                [name]="orangeStreet[1].name"
-                [color]="orangeStreet[1].color"
-                [price]="orangeStreet[1].price"
-                [players]="getPlayers(orangeStreet[1].gameObjectId)"
+                [gameObject]="objects[32]"
+                [players]="players?.Players"
             ></app-street>
             <app-treasury class="rotate"
-                [gameObjectId]="'treasury-3'"
-                [players]="getPlayers('treasury-3')"
+                [gameObject]="objects[33]"
+                [players]="players?.Players"
             ></app-treasury>
             <app-street class="rotate"
-                [gameObjectId]="orangeStreet[2].gameObjectId"
-                [name]="orangeStreet[2].name"
-                [color]="orangeStreet[2].color"
-                [price]="orangeStreet[2].price"
-                [players]="getPlayers(orangeStreet[2].gameObjectId)"
+                [gameObject]="objects[34]"
+                [players]="players?.Players"
             ></app-street>
             <app-railway class="rotate"
-                [gameObjectId]="'railway-4'"
-                name="ЛЕНИНГРАДСКАЯ ЖЕЛЕЗНАЯ ДОРОГА"
-                [players]="getPlayers('railway-4')"
+                [gameObject]="objects[35]"
+                [players]="players?.Players"
             ></app-railway>
             <app-chance class="rotate"
-                [gameObjectId]="'chance-3'"
-                [players]="getPlayers('chance-3')"
+                [gameObject]="objects[36]"
+                [players]="players?.Players"
             ></app-chance>
             <app-street class="rotate"
-                [gameObjectId]="redStreet[0].gameObjectId"
-                [name]="redStreet[0].name"
-                [color]="redStreet[0].color"
-                [price]="redStreet[0].price"
-                [players]="getPlayers(redStreet[0].gameObjectId)"
+                [gameObject]="objects[37]"
+                [players]="players?.Players"
             ></app-street>
             <app-income-tax class="rotate"
-                [gameObjectId]="'income-tax-2'"
-                [price]="100"
-                [players]="getPlayers('income-tax-2')"
+                [gameObject]="objects[38]"
+                [players]="players?.Players"
             ></app-income-tax>
             <app-street class="rotate"
-                [gameObjectId]="redStreet[1].gameObjectId"
-                [name]="redStreet[1].name"
-                [color]="redStreet[1].color"
-                [price]="redStreet[1].price"
-                [players]="getPlayers(redStreet[1].gameObjectId)"
+                [gameObject]="objects[39]"
+                [players]="players?.Players"
             ></app-street>
         </div>
         <div class="main">
@@ -261,9 +189,7 @@
                 </div>
             </div>
             <div class="second-quadrant">
-                <app-dice
-                    [(diceValue)]="diceValue"
-                ></app-dice>
+                <app-dice (diceValueChange)="diceValueChange($event)"></app-dice>
             </div>
             <div class="third-quadrant">
                 <div class="treasury-wrapper">

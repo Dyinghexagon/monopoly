@@ -1,9 +1,9 @@
 <div class="wrapper">
     <button class="roll-btn btn" (click)="rollDice()">БРОСИТЬ КОСТИ</button>
     <p class="value">
-        Первое значение: {{ diceValue?.firstValue }}
+        Первое значение: {{ diceValue?.firstValue ?? 1 }}
     </p>
     <p class="value">
-        Второе значение: {{ diceValue?.secondValue }}
+        Второе значение: {{ diceValue?.secondValue ?? 1 }}
     </p>
 </div>
