@@ -97,6 +97,12 @@
 
             .second-quadrant { 
                 grid-area: second-quadrant;
+
+                .btn {
+                    height: 600px;
+                    width: 600px;
+                    font-size: 64px;
+                }
             }
 
             .third-quadrant { 

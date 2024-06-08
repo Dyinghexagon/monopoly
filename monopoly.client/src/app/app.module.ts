@@ -32,6 +32,8 @@ import { ArrestedComponent } from "./components/game-object/arrested/arrested.co
 import { PlayerAreaComponent } from "./components/areas/players-area/players-area.component";
 import { PlayerComponent } from "./components/areas/players-area/player/player.component";
 import { DiceComponent } from "./components/dice/dice.component";
+import { ChanceCardGeneratedService } from "./services/card-generated-services/chance-card-generated-service";
+import { TreasuryCardGeneratedService } from "./services/card-generated-services/treasury-card-generated-service";
 
 @NgModule({
     declarations: [
@@ -75,7 +77,9 @@ import { DiceComponent } from "./components/dice/dice.component";
         AuthGuard,
         AuthService,
         AppConfig,
-        AppState
+        AppState,
+        ChanceCardGeneratedService,
+        TreasuryCardGeneratedService
     ],
     bootstrap: [AppComponent]
 })

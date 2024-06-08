@@ -23,6 +23,11 @@ $street-color: var(--street-color);
         flex-direction: column;
         align-items: center;
         @include child();
+        gap: 15px;
+
+        &.not-color {
+            justify-content: center;
+        }
 
         &.large {
             width: $card-width;
@@ -38,9 +43,6 @@ $street-color: var(--street-color);
             display: flex;
             flex-direction: column;
             align-items: center;
-    
-            margin-top: 52px;            
-            margin-bottom: 34px;
     
             .game-object-name {
                 text-align: center;
