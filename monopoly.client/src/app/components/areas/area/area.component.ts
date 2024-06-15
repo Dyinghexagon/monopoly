@@ -4,8 +4,6 @@ import { IDiceValue } from "../../../models/dice.model";
 import { GameObjectCreateService } from "../../../services/game-object-create.service";
 import { PlayerMoveService } from "../../../services/player-move.service";
 import { IGameObjectBase } from "../../../models/game-objects/game-object.model";
-import { AIChanceCardGeneratedService } from "../../../services/card-generated-services/ai-chance-card-generated.service";
-import { AITreasuryCardGeneratedService } from "../../../services/card-generated-services/ai-treasury-card-generated.service";
 
 @Component({
     selector: "app-area",
@@ -23,8 +21,6 @@ export class AreaComponent implements OnChanges {
     public objects: IGameObjectBase[] = [];
 
     constructor(
-        private readonly chanceCardGenerateService: AIChanceCardGeneratedService,
-        private readonly treasuryCardGenerateService: AITreasuryCardGeneratedService
     ) {
         this.gameObjectCreateService = new GameObjectCreateService();
         this.initObjects();
@@ -96,11 +92,11 @@ export class AreaComponent implements OnChanges {
     }
 
     public async sendToMistral(): Promise<void> {
-        const card = await this.chanceCardGenerateService.generateCard();
-        console.warn("chance card", card);
+        //const card = await this.chanceCardGenerateService.generateCard();
+        console.warn("chance card", "card");
 
-        const treasuryCard = await this.treasuryCardGenerateService.generateCard();
-        console.warn("treasury card", treasuryCard);
+        //const treasuryCard = await this.treasuryCardGenerateService.generateCard();
+        console.warn("treasury card", "treasuryCard");
     }
 
 }
