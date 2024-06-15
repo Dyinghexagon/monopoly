@@ -1,0 +1,146 @@
+[
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 20
+        },
+        "description": "Возврат подоходного налога. Получите 20₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "buildingFees",
+            "targetPosition": 40
+        },
+        "description": "Вам начисляются взносы на ремонт улиц. 40₽ за дом. 160₽ за отель",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 100
+        },
+        "description": "Вы наследуете 100₽!",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "everyonePay",
+            "price": 50
+        },
+        "description": "На открытии театра. соберите по 50₽ с каждого игрока",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 100
+        },
+        "description": "Рождественский фонд пополнился. Получите 100₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 200
+        },
+        "description": "Банковская ошибка в вашу пользу. Получите 200₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "giveCard",
+            "card": "GetOutOfJail"
+        },
+        "description": "Бесплатная карта \"Выйди из тюрьмы\"",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 100
+        },
+        "description": "Заплатите больнице 100₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 25
+        },
+        "description": "Получите за услуги 25₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "moveToJail",
+            "targetPosition": 10
+        },
+        "description": "Отправиться прямиком в \"ТЮРЬМУ\". Не проходите поле \"СТАРТ!\"",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 150
+        },
+        "description": "Оплатите школьный налог в размере 150₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 50
+        },
+        "description": "Оплата услуг врача. Заплатите 50₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 45
+        },
+        "description": "От продажи акций. Вы получаете 45₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 100
+        },
+        "description": "Срок действия страховки истекает. Заплатите 100₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 10
+        },
+        "description": "Вы выиграли второй приз на конкурсе красоты! Получите 10₽",
+        "title": "КАЗНА!"
+    },
+    {
+        "type": "TreasuryCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 15
+        },
+        "description": "Уплатить налог на бедных в размере 15₽",
+        "title": "КАЗНА!"
+    }
+]

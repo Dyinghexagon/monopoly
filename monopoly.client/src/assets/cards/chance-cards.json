@@ -1,0 +1,130 @@
+
+[
+    
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "move",
+            "targetPosition": 25
+        },
+        "description": "Прокатитесь на \"КАЗАНСКОЙ ЖЕЛЕЗНОЙ ДОРОГЕ\"",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "bankPayPlayer",
+            "price": 50
+        },
+        "description": "Банк выплачивает вам дивиденды в размере 50₽",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "move",
+            "targetPosition": 24
+        },
+        "description": "Пройдитесь по \"ПЛОЩАДИ МАЯКОВСКОГО\"",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 150
+        },
+        "description": "Срок погашения вашего здания и кредита истекает. Соберите 150₽",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "giveCard",
+            "card": "GetOutOfJail"
+        },
+        "description": "Бесплатная карта \"Выйди из тюрьмы\"",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "buildingFees",
+            "price": 25
+        },
+        "description": "Сделайте общий ремонт на всей вашей собственности. Заплатите по 25 долларов за каждый дом. Заплатите по 100 долларов за каждый отель",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 15
+        },
+        "description": "Уплатить налог на бедных в размере 15₽",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "move",
+            "targetPosition": 39
+        },
+        "description": "Пройдитесь по \"АРБАТУ\"",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "move",
+            "targetPosition": 34
+        },
+        "description": "Пройдитесь по \"КУТУЗОВСКОМУ ПРОСПЕКТУ\"",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "payEveryone",
+            "price": 50
+        },
+        "description": "Вы были избраны председателем правления. Выплатите каждому игроку по 50₽",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "moveToWaterSupply",
+            "targetPosition": 28
+        },
+        "description": "Пройдитесь к \"ВОДОПРОВОДУ\". Если у вас его нет, вы можете купить его в банке. Если он в собственности, бросьте кости и заплатите владельцу в 5 раз больше стоимости аренды",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "moveBack",
+            "targetPosition": 3
+        },
+        "description": "Вернитесь на 3 поля назад",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "playerPayBank",
+            "price": 200
+        },
+        "description": "Заплатите 200₽",
+        "title": "ШАНС!"
+    },
+    {
+        "type": "ChanceCard",
+        "action": {
+            "type": "moveToJail",
+            "targetPosition": 10
+        },
+        "description": "Отправиться прямиком в \"ТЮРЬМУ\". Не проходите поле \"СТАРТ!\"",
+        "title": "ШАНС!"
+    }
+]
