@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { CardGeneratedServices } from "./card-generated-services";
+import { CardGeneratedServices, ICardGenerateService } from "./card-generated-services";
 import { IChanceCard } from "../../models/game-objects/game-cards/chance-card.model";
-import { ObjectUtil } from "../../utils/object-util";
 
 @Injectable()
-export class ChanceCardGeneratedService extends CardGeneratedServices {
+export class ChanceCardGeneratedService extends CardGeneratedServices<IChanceCard> implements ICardGenerateService {
 
     private readonly content = `
                     Составь карту 'ШАНС' для игры в монополию.
@@ -33,8 +32,7 @@ export class ChanceCardGeneratedService extends CardGeneratedServices {
                     `;
 
     public async generateCard(): Promise<IChanceCard> {
-        const cardRAW = await this.sendRequest("user", this.content, "ChanceCard");
-        return ObjectUtil.toCamelCase<IChanceCard>(JSON.parse(cardRAW));
+        return await this.sendRequest(this.content, "ChanceCard");
     }
 
 }

@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { CardGeneratedServices } from "./card-generated-services";
+import { CardGeneratedServices, ICardGenerateService } from "./card-generated-services";
 import { ITreasuryCard } from "../../models/game-objects/game-cards/treasury-card.model";
-import { ObjectUtil } from "../../utils/object-util";
 
 @Injectable()
-export class TreasuryCardGeneratedService extends CardGeneratedServices {
+export class TreasuryCardGeneratedService extends CardGeneratedServices<ITreasuryCard> implements ICardGenerateService {
 
     private readonly content = `
     Составь карту 'КАЗНЫ' для игры в монополию.
@@ -33,8 +32,7 @@ export class TreasuryCardGeneratedService extends CardGeneratedServices {
     `;
 
     public async generateCard(): Promise<ITreasuryCard> {
-        const cardRAW = await this.sendRequest("user", this.content, "TreasuryCard");
-        return ObjectUtil.toCamelCase<ITreasuryCard>(JSON.parse(cardRAW));
+        return await this.sendRequest(this.content, "TreasuryCard");
     }
 
 }
