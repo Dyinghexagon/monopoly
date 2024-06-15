@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { CardGeneratedServices, ICardGenerateService } from "./card-generated-services";
+import { AICardGeneratedServices } from "./ai-card-generated.services";
 import { IChanceCard } from "../../models/game-objects/game-cards/chance-card.model";
+import { ICardGenerateService } from "./card-generate-base.service";
 
 @Injectable()
-export class ChanceCardGeneratedService extends CardGeneratedServices<IChanceCard> implements ICardGenerateService {
+export class AIChanceCardGeneratedService extends AICardGeneratedServices<IChanceCard> implements ICardGenerateService {
 
     private readonly content = `
                     Составь карту 'ШАНС' для игры в монополию.

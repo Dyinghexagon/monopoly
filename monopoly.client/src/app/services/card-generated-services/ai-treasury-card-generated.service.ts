@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { CardGeneratedServices, ICardGenerateService } from "./card-generated-services";
+import { AICardGeneratedServices } from "./ai-card-generated.services";
 import { ITreasuryCard } from "../../models/game-objects/game-cards/treasury-card.model";
+import { ICardGenerateService } from "./card-generate-base.service";
 
 @Injectable()
-export class TreasuryCardGeneratedService extends CardGeneratedServices<ITreasuryCard> implements ICardGenerateService {
+export class AITreasuryCardGeneratedService extends AICardGeneratedServices<ITreasuryCard> implements ICardGenerateService {
 
     private readonly content = `
     Составь карту 'КАЗНЫ' для игры в монополию.

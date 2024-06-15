@@ -4,7 +4,7 @@ import { CardType, ICardBase } from "../../models/game-objects/game-cards/card-b
 import { ObjectUtil } from "../../utils/object-util";
 
 @Injectable()
-export class CardGeneratedServices<T extends ICardBase> {
+export class AICardGeneratedServices<T extends ICardBase> {
 
     private readonly apiKey = "JOicltv6bQKoGArnlxhMsLtMYbPwdmsz";
     private readonly model = "mistral-large-latest";
@@ -36,8 +36,4 @@ export class CardGeneratedServices<T extends ICardBase> {
         return ObjectUtil.toCamelCase<T>(JSON.parse(chatResponse.choices[0].message.content));
     }
 
-}
-
-export interface ICardGenerateService {
-    generateCard(): Promise<ICardBase>;
 }
