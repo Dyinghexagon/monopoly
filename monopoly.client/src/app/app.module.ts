@@ -34,6 +34,8 @@ import { PlayerComponent } from "./components/areas/players-area/player/player.c
 import { DiceComponent } from "./components/dice/dice.component";
 import { ChanceCardGeneratedService } from "./services/card-generated-services/chance-card-generated.service";
 import { TreasuryCardGeneratedService } from "./services/card-generated-services/treasury-card-generated.service";
+import { AIChanceCardGeneratedService } from "./services/card-generated-services/ai-chance-card-generated.service";
+import { AITreasuryCardGeneratedService } from "./services/card-generated-services/ai-treasury-card-generated.service";
 
 @NgModule({
     declarations: [
@@ -79,7 +81,9 @@ import { TreasuryCardGeneratedService } from "./services/card-generated-services
         AppConfig,
         AppState,
         ChanceCardGeneratedService,
-        TreasuryCardGeneratedService
+        TreasuryCardGeneratedService,
+        AIChanceCardGeneratedService,
+        AITreasuryCardGeneratedService
     ],
     bootstrap: [AppComponent]
 })

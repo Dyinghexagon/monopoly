@@ -6,6 +6,8 @@ import { PlayerMoveService } from "../../../services/player-move.service";
 import { IGameObjectBase } from "../../../models/game-objects/game-object.model";
 import { TreasuryCardGeneratedService } from "../../../services/card-generated-services/treasury-card-generated.service";
 import { ChanceCardGeneratedService } from "../../../services/card-generated-services/chance-card-generated.service";
+import { AIChanceCardGeneratedService } from "../../../services/card-generated-services/ai-chance-card-generated.service";
+import { AITreasuryCardGeneratedService } from "../../../services/card-generated-services/ai-treasury-card-generated.service";
 
 @Component({
     selector: "app-area",
@@ -24,7 +26,9 @@ export class AreaComponent implements OnChanges {
 
     constructor(
         private readonly treasuryCardGeneratedService: TreasuryCardGeneratedService,
-        private readonly chanceCardGeneratedService: ChanceCardGeneratedService
+        private readonly chanceCardGeneratedService: ChanceCardGeneratedService,
+        private readonly AIchanceCardGenerateService: AIChanceCardGeneratedService,
+        private readonly AItreasuryCardGenerateService: AITreasuryCardGeneratedService
     ) {
         this.gameObjectCreateService = new GameObjectCreateService();
         this.initObjects();
