@@ -1,9 +1,10 @@
-import { Directive, OnDestroy, OnInit } from "@angular/core";
+import { AfterContentInit, Directive, OnDestroy, OnInit } from "@angular/core";
 import { NumberUtils } from "../../utils/number-utils";
 import { Subject } from "rxjs";
+import { CSSUtils } from "../../utils/css-utils";
 
 @Directive()
-export class AuthPageBase implements OnDestroy, OnInit {
+export class AuthPageBase implements OnDestroy, OnInit, AfterContentInit {
 
     protected readonly countCircles: number;
     protected readonly unsubscribe$ = new Subject<void>();
@@ -25,6 +26,10 @@ export class AuthPageBase implements OnDestroy, OnInit {
             circle.style.left = `${NumberUtils.randomNumber(0, page.clientWidth)}px`;
             page.append(circle);
         }
+    }
+
+    public ngAfterContentInit(): void {
+        CSSUtils.setScreenMode("full");
     }
 
     public ngOnDestroy(): void {

@@ -3,7 +3,6 @@
 .content-body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     flex: 1 1 1px;
     position: relative;
     background-color: $white-color;
@@ -11,6 +10,6 @@
     .content {
         z-index: $z-index-content;
         position: relative;
-        overflow: auto;
+        overflow: hidden;
     }
 }

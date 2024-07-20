@@ -21,6 +21,14 @@ html {
         margin: 0;
         background-color: $white-color;
 
+        &.full-screen {
+            zoom: 100%;
+        }
+
+        &.quarter-screen {
+            zoom: 25%;
+        }
+
         &.not-scroll {
             overflow: hidden !important;
         }
@@ -30,8 +38,10 @@ html {
             flex-direction: column;
             flex: 1 1 1px;
 
-            .auth-page-wrapper {
-                @include circle($mother-pearl-night-color);
+            .page-wrapper {
+                &.auth-page-wrapper {
+                    @include circle($mother-pearl-night-color);
+                }
             }
         }
     }

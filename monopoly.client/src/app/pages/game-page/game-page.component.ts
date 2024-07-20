@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { AfterContentInit, Component } from "@angular/core";
 import { PlayerModel, Players } from "../../models/player.model";
 import { PlayerNumber } from "../../models/game-objects/game-object.model";
+import { CSSUtils } from "../../utils/css-utils";
 
 @Component({
     selector: "app-game-page-component",
@@ -8,7 +9,7 @@ import { PlayerNumber } from "../../models/game-objects/game-object.model";
     styleUrls: [ "./game-page.component.scss" ]
 })
 
-export class GamePageComponent {
+export class GamePageComponent implements AfterContentInit {
 
     public players: Players = new Players([
         new PlayerModel("1", PlayerNumber.Fifth),
@@ -20,5 +21,9 @@ export class GamePageComponent {
         new PlayerModel("7", PlayerNumber.Seventh),
         new PlayerModel("8", PlayerNumber.Eighth)
     ]);
+
+    public ngAfterContentInit(): void {
+        CSSUtils.setScreenMode("quarter");
+    }
 
 }
