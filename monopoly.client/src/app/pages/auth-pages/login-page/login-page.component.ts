@@ -47,7 +47,7 @@ export class LoginPageComponent extends AuthPageBase {
                 response => {
                     if (response.isSuccess) {
                         this.appState.authState.isSignedInRequest$.next(true);
-                        this.router.navigate(["/game"]);
+                        this.router.navigate(["/create-lobby"]);
                     }
                 },
                 error => {

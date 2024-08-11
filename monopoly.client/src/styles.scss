@@ -21,14 +21,6 @@ html {
         margin: 0;
         background-color: $white-color;
 
-        &.full-screen {
-            zoom: 100%;
-        }
-
-        &.quarter-screen {
-            zoom: 25%;
-        }
-
         &.not-scroll {
             overflow: hidden !important;
         }
@@ -40,6 +32,16 @@ html {
 
             .auth-page-wrapper {
                 @include circle($mother-pearl-night-color);
+            }
+
+            .content-body {
+                &.full-screen {
+                    zoom: 100%;
+                }
+        
+                &.quarter-screen {
+                    zoom: 25%;
+                }
             }
         }
     }

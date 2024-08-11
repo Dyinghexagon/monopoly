@@ -36,6 +36,7 @@ import { ChanceCardGeneratedService } from "./services/card-generated-services/c
 import { TreasuryCardGeneratedService } from "./services/card-generated-services/treasury-card-generated.service";
 import { AIChanceCardGeneratedService } from "./services/card-generated-services/ai-chance-card-generated.service";
 import { AITreasuryCardGeneratedService } from "./services/card-generated-services/ai-treasury-card-generated.service";
+import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
 
 @NgModule({
     declarations: [
@@ -60,7 +61,8 @@ import { AITreasuryCardGeneratedService } from "./services/card-generated-servic
         ArrestedComponent,
         PlayerAreaComponent,
         PlayerComponent,
-        DiceComponent
+        DiceComponent,
+        CreateLobbypageComponent
     ],
     imports: [
         BrowserModule,
