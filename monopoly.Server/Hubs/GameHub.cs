@@ -9,9 +9,4 @@ namespace monopoly.Server.Hubs
             await Clients.All.SendAsync("ReceiveMove", messange);
         }
     }
-
-    public class Game
-    {
-
-    }
 }

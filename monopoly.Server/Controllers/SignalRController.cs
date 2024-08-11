@@ -6,7 +6,7 @@ namespace monopoly.Server.Controllers
 {
     [ApiController]
     [Route("api/game")]
-    public class GameController(IHubContext<GameHub> hub) : Controller
+    public class SignalRController(IHubContext<GameHub> hub) : Controller
     {
         private readonly IHubContext<GameHub> _hub = hub;
 
