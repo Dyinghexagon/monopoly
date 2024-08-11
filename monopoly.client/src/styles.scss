@@ -21,6 +21,14 @@ html {
         margin: 0;
         background-color: $white-color;
 
+        &.full-screen {
+            zoom: 100%;
+        }
+
+        &.quarter-screen {
+            zoom: 25%;
+        }
+
         &.not-scroll {
             overflow: hidden !important;
         }
