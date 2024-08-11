@@ -47,6 +47,7 @@ import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-
         LoginPageComponent,
         SignUpPageComponent,
         NotFoundPageComponent,
+        CreateGameLobbyPageComponent,
         AreaComponent,
         StartComponent,
         StreetObjectComponent,
@@ -85,7 +86,8 @@ import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-
         ChanceCardGeneratedService,
         TreasuryCardGeneratedService,
         AIChanceCardGeneratedService,
-        AITreasuryCardGeneratedService
+        AITreasuryCardGeneratedService,
+        GameLobbyService
     ],
     bootstrap: [AppComponent]
 })
