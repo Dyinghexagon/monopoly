@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
 import { Players } from "../../../models/player.model";
 import { IDiceValue } from "../../../models/dice.model";
 import { GameObjectCreateService } from "../../../services/game-object-create.service";
@@ -6,8 +6,7 @@ import { PlayerMoveService } from "../../../services/player-move.service";
 import { IGameObjectBase } from "../../../models/game-objects/game-object.model";
 import { TreasuryCardGeneratedService } from "../../../services/card-generated-services/treasury-card-generated.service";
 import { ChanceCardGeneratedService } from "../../../services/card-generated-services/chance-card-generated.service";
-import { AIChanceCardGeneratedService } from "../../../services/card-generated-services/ai-chance-card-generated.service";
-import { AITreasuryCardGeneratedService } from "../../../services/card-generated-services/ai-treasury-card-generated.service";
+import { SignalRService } from "../../../services/signalR.service";
 
 @Component({
     selector: "app-area",
@@ -15,11 +14,11 @@ import { AITreasuryCardGeneratedService } from "../../../services/card-generated
     styleUrls: [ "./area.component.scss" ],
     encapsulation: ViewEncapsulation.None
 })
-export class AreaComponent implements OnChanges {
+export class AreaComponent implements OnInit, OnChanges {
 
     @Input() public players?: Players;
 
-    public gameObjectCreateService: GameObjectCreateService;
+    public readonly gameObjectCreateService: GameObjectCreateService;
     public playerMoveService?: PlayerMoveService;
 
     public objects: IGameObjectBase[] = [];
@@ -27,12 +26,26 @@ export class AreaComponent implements OnChanges {
     constructor(
         private readonly treasuryCardGeneratedService: TreasuryCardGeneratedService,
         private readonly chanceCardGeneratedService: ChanceCardGeneratedService,
-        private readonly AIchanceCardGenerateService: AIChanceCardGeneratedService,
-        private readonly AItreasuryCardGenerateService: AITreasuryCardGeneratedService
+        private readonly signalRService: SignalRService
     ) {
         this.gameObjectCreateService = new GameObjectCreateService();
+    }
+
+    public ngOnInit(): void {
         this.initObjects();
         this.initPlayerMoveService();
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if(changes["players"]) {
+            this.players = changes["players"].currentValue;
+            this.initPlayerMoveService();
+        }
+    }
+
+    public makeMove(): void {
+        this.signalRService.send().subscribe(res => console.warn(res));
+        this.signalRService.sendInvoke();
     }
 
     private initObjects(): void {
@@ -76,13 +89,6 @@ export class AreaComponent implements OnChanges {
         this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА МАЛАЯ БРОННАЯ", 350, "Red"));
         this.objects.push(this.gameObjectCreateService.createIncomeTax());
         this.objects.push(this.gameObjectCreateService.createStreet("УЛИЦА АРБАТ", 400, "Red"));
-    }
-
-    public ngOnChanges(changes: SimpleChanges): void {
-        if(changes["players"]) {
-            this.players = changes["players"].currentValue;
-            this.initPlayerMoveService();
-        }
     }
 
     private initPlayerMoveService(): void {

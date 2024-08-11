@@ -36,6 +36,7 @@ import { ChanceCardGeneratedService } from "./services/card-generated-services/c
 import { TreasuryCardGeneratedService } from "./services/card-generated-services/treasury-card-generated.service";
 import { AIChanceCardGeneratedService } from "./services/card-generated-services/ai-chance-card-generated.service";
 import { AITreasuryCardGeneratedService } from "./services/card-generated-services/ai-treasury-card-generated.service";
+import { SignalRService } from "./services/signalR.service";
 
 @NgModule({
     declarations: [
@@ -83,7 +84,8 @@ import { AITreasuryCardGeneratedService } from "./services/card-generated-servic
         ChanceCardGeneratedService,
         TreasuryCardGeneratedService,
         AIChanceCardGeneratedService,
-        AITreasuryCardGeneratedService
+        AITreasuryCardGeneratedService,
+        SignalRService
     ],
     bootstrap: [AppComponent]
 })
