@@ -9,10 +9,9 @@ import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-
 
 const routes: Routes = [
     { path: "game", component: GamePageComponent, canActivate: [AuthGuard] },
-    { path: "createGameLobby", component: CreateGameLobbyPageComponent, canActivate: [AuthGuard] },
+    { path: "create-lobby", component: CreateLobbypageComponent, canActivate: [AuthGuard] },
     { path: "login", component: LoginPageComponent },
     { path: "sign-up", component: SignUpPageComponent },
-    { path: "create-lobby", component: CreateLobbypageComponent },
     { path: "", redirectTo: "create-lobby", pathMatch: "full" },
     { path: "**", component: NotFoundPageComponent }
 ];

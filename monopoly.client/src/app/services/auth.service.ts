@@ -14,15 +14,15 @@ export class AuthService {
         private config: AppConfig
     ) {}
 
-    public signIn(account: IAccountModel): Observable<IResponse> {
-        return this.http.post<IResponse>(`${this.config.authUrl}/signin`, {
+    public signIn(account: IAccountModel): Observable<IResponse<string>> {
+        return this.http.post<IResponse<string>>(`${this.config.authUrl}/signin`, {
             name: account.name,
             password: account.password
         });
     }
 
-    public signUp(account: IAccountModel): Observable<IResponse> {
-        return this.http.post<IResponse>(`${this.config.authUrl}/signup`, {
+    public signUp(account: IAccountModel): Observable<IResponse<string>> {
+        return this.http.post<IResponse<string>>(`${this.config.authUrl}/signup`, {
             name: account.name,
             password: account.password
         });

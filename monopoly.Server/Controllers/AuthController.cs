@@ -24,13 +24,13 @@ namespace monopoly.Server.Controllers
 
             if (account is null)
             {
-                return BadRequest(new Response(false, "Пользователь не найден!"));
+                return BadRequest(new Response<string>(false, new ResponseData<string>("Пользователь не найден!", null)));
             }
 
             var hash = CryptoUtils.HashPasword(accountModel.Password, out var salt);
             if (!CryptoUtils.VerifyPassword(accountModel.Password, hash, salt))
             {
-                return BadRequest(new Response(false, "Пароль не прошёл верификацию!"));
+                return BadRequest(new Response<string>(false, new ResponseData<string>("Пароль не прошёл верификацию!", null)));
             }
 
             var claims = new List<Claim>() 
@@ -50,7 +50,7 @@ namespace monopoly.Server.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
                 });
 
-            return Ok(new Response(true, "Вход в систему успешно выполнен!"));
+            return Ok(new Response<string>(true, new ResponseData<string>("Вход в систему успешно выполнен!", null)));
         }
 
         [HttpPost("signup")]
@@ -72,7 +72,7 @@ namespace monopoly.Server.Controllers
                 };
 
                 var id = await _accountService.AddAsync(accoumt);
-                return Ok(new Response(true, $"Пользователь с id: {id} успешно добавлен!"));
+                return Ok(new Response<string>(true, new ResponseData<string>($"Пользователь с id: {id} успешно добавлен!", null)));
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -95,6 +95,13 @@ namespace monopoly.Server.Controllers
         }
     }
 
-    public record Response(bool IsSuccess, string Message);
+    public record Response<T>(bool IsSuccess, ResponseData<T> Data);
+
+    public class ResponseData<T>(string message, T? data)
+    {
+        public string Message { get; set; } = message;
+        public T? Data { get; set; } = data;
+    }
+
     public record UserClaim(string Type, string Value);
 }

@@ -12,8 +12,8 @@ export class GameLobbyService {
         private config: AppConfig
     ) {}
 
-    public create(): Observable<IResponse> {
-        return this.http.get<IResponse>(`${this.config.gameLobyUrl}/create`);
+    public create(): Observable<IResponse<object>> {
+        return this.http.post<IResponse<object>>(`${this.config.gameLobyUrl}/create`, {});
     }
 
 }
