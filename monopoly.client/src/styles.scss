@@ -33,6 +33,16 @@ html {
             .auth-page-wrapper {
                 @include circle($mother-pearl-night-color);
             }
+
+            .content-body {
+                &.full-screen {
+                    zoom: 100%;
+                }
+        
+                &.quarter-screen {
+                    zoom: 25%;
+                }
+            }
         }
     }
 }
