@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 export class AppConfig {
 
     public get authUrl(): string { return "/api/auth"; }
+    public get gameHubUrl(): string { return "https://localhost:7059/gameHub"; }
     public get gameLobyUrl(): string { return "/api/gameLobby"; }
 
 }

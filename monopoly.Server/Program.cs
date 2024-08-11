@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using monopoly.Server;
 using monopoly.Server.Context;
+using monopoly.Server.Hubs;
 using monopoly.Server.Repositories;
 using monopoly.Server.Services.UserService;
 
@@ -10,6 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins("https://127.0.0.1:4200", "https://localhost:4200") // »спользуйте точные адреса
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()); // ¬ключение кук и токенов
+});
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -25,6 +38,7 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(b
 builder.Services.AddScoped<IDbRepository, DbRepository>();
 
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -38,11 +52,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapControllers();
+app.MapHub<GameHub>("/gameHub"); 
 
 app.MapFallbackToFile("/index.html");
 
