@@ -3,6 +3,7 @@ const PROXY_CONFIG = [
     context: [
       "/api/auth/*",
       "/api/gameLobby/*",
+      "/gameHub/*",
     ],
     target: "https://localhost:7059",
     secure: false
