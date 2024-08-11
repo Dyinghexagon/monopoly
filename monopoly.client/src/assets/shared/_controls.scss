@@ -1,0 +1,22 @@
+@import "./variables";
+
+@mixin control {
+    height: 64px;
+    border-radius: 20px;
+}
+
+@mixin btn (
+    $background-color: $gentian-blue-color,
+    $color: $white-color,
+    $gap: 45px
+) {
+    @include control;
+    
+    background-color: $background-color;
+    color: $color;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: $gap;
+    cursor: pointer;
+    border-color: transparent;
+}
