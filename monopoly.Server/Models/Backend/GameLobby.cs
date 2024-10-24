@@ -2,12 +2,6 @@
 {
     public class GameLobby : Entity
     {
-        public List<PlayerModel> Players { get; set; } = new List<PlayerModel>();
-        public GameArea Game { get; set; } = new GameArea();
-
-        public GameLobby()
-        { 
-            Id = Guid.NewGuid();
-        }
+        public List<Player> Players { get; set; } = [];
     }
 }

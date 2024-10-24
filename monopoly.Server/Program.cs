@@ -4,6 +4,9 @@ using monopoly.Server;
 using monopoly.Server.Context;
 using monopoly.Server.Hubs;
 using monopoly.Server.Repositories;
+using monopoly.Server.Services.CellService;
+using monopoly.Server.Services.GameLobbyService;
+using monopoly.Server.Services.PlayerService;
 using monopoly.Server.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +41,9 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(b
 builder.Services.AddScoped<IDbRepository, DbRepository>();
 
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IGameLobbyService, GameLobbyService>();
+builder.Services.AddTransient<ICellService, CellService>();
+builder.Services.AddTransient<IPlayerService, PlayerService>();
 builder.Services.AddSignalR();
 
 var app = builder.Build();

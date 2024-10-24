@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import MistralClient, { ResponseFormat } from "@mistralai/mistralai";
-import { CardType, ICardBase } from "../../models/game-objects/game-cards/card-base.model";
+import { CardType, ICardBase } from "../../models/game-cards/card-base.model";
 import { ObjectUtil } from "../../utils/object-util";
 
 @Injectable()

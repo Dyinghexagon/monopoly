@@ -5,14 +5,9 @@ using System.Linq.Expressions;
 
 namespace monopoly.Server.Repositories
 {
-    public class DbRepository : IDbRepository
+    public class DbRepository(ApplicationContext context) : IDbRepository
     {
-        private readonly ApplicationContext _context;
-
-        public DbRepository(ApplicationContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationContext _context = context;
 
         public async Task<Guid> AddAsync<T>(T newEntity) where T : class, IEntity
         {

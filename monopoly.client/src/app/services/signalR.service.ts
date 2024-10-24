@@ -30,7 +30,7 @@ export class SignalRService {
 
     public send(): Observable<IResponse<string>> {
         console.warn("send");
-        return this.http.get<IResponse<string>>(`${this.config.gameLobyUrl}/send`);
+        return this.http.get<IResponse<string>>(`${this.config.gameUrl}/send`);
     }
 
     public sendInvoke(): void {

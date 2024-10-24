@@ -6,6 +6,8 @@ namespace monopoly.Server.Context
     public class ApplicationContext(DbContextOptions<ApplicationContext> options) : DbContext(options)
     {
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<GameLobby> GameLobbies { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

@@ -1,0 +1,29 @@
+<div class="card-wrapper">
+    <div class="game-object-wrapper large">
+        <div class="rotate-wrapper">
+            <svg width="201" height="201" viewBox="0 0 201 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_332_1357)">
+                <path d="M12.4073 153.452H94.4386V147.592H106.157V153.452H188.189V130.014H106.157V135.874H94.4386V130.014H12.4073V153.452Z" fill="#292929"/>
+                <path d="M24.1261 165.17H82.7198V200.717H24.1261V165.17Z" fill="#292929"/>
+                <path d="M117.876 165.17H176.47V200.717H117.876V165.17Z" fill="#292929"/>
+                <path d="M176.47 62.6313L150.686 81.9661L143.66 72.5935L164.751 56.772L150.965 37.8161L117.876 62.6372V118.295H176.47V102.772L200.298 73.4747V0.717285H176.47V62.6313Z" fill="#292929"/>
+                <path d="M24.1261 118.295H82.7198V62.6372L49.6308 37.8161L35.8448 56.772L56.9363 72.5935L49.9097 81.9661L24.1261 62.6313V0.717285H0.297974V73.4747L24.1261 102.772V118.295Z" fill="#292929"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_332_1357">
+                <rect width="200" height="200" fill="white" transform="translate(0.297974 0.717285)"/>
+                </clipPath>
+                </defs>
+            </svg>                 
+            <div class="game-object-name-wrapper">
+                <p class="game-object-name">
+                    {{ cell.label }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <app-players-area
+        [position]="cell.id"
+        [players]="getPlayers()"
+    ></app-players-area>
+</div>

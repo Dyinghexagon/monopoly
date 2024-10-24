@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AICardGeneratedServices } from "./ai-card-generated.services";
-import { ITreasuryCard } from "../../models/game-objects/game-cards/treasury-card.model";
+import { ITreasuryCard } from "../../models/game-cards/treasury-card.model";
 import { ICardGenerateService } from "./card-generate-base.service";
 
 @Injectable()

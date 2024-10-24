@@ -1,8 +1,7 @@
-﻿namespace monopoly.Server.Models.Backend
+﻿namespace monopoly.Server.Models.Client
 {
     public class GameLobbyModel : Entity
     {
-        public List<PlayerModel> Players { get; set; } = new List<PlayerModel>();
-        public GameAreaModel Game { get; set; } = new GameAreaModel();
+        public List<PlayerModel> Players { get; set; } = [];
     }
 }

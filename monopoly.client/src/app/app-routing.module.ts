@@ -5,11 +5,11 @@ import { LoginPageComponent } from "./pages/auth-pages/login-page/login-page.com
 import { SignUpPageComponent } from "./pages/auth-pages/sign-up-page/sign-up-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 import { AuthGuard } from "./guards/auth-guard/auth.guard";
-import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
+import { CreateLobbyPageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
 
 const routes: Routes = [
-    { path: "game", component: GamePageComponent, canActivate: [AuthGuard] },
-    { path: "create-lobby", component: CreateLobbypageComponent, canActivate: [AuthGuard] },
+    { path: "game/:id", component: GamePageComponent, canActivate: [AuthGuard] },
+    { path: "create-lobby", component: CreateLobbyPageComponent, canActivate: [AuthGuard] },
     { path: "login", component: LoginPageComponent },
     { path: "sign-up", component: SignUpPageComponent },
     { path: "", redirectTo: "create-lobby", pathMatch: "full" },

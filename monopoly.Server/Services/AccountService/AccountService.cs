@@ -1,4 +1,5 @@
-﻿using monopoly.Server.Models.Backend;
+﻿using Microsoft.EntityFrameworkCore;
+using monopoly.Server.Models.Backend;
 using monopoly.Server.Repositories;
 
 namespace monopoly.Server.Services.UserService
@@ -36,7 +37,7 @@ namespace monopoly.Server.Services.UserService
         public async Task<Account?> GetAsync(Guid id)
         {
             var account = await _dbRepository.GetAsync<Account>(account => account.Id == id);
-            return (Account?)account;
+            return await account.FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Account newEntity, Guid id)

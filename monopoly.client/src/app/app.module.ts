@@ -18,17 +18,15 @@ import { AuthInterceptor } from "./guards/auth-guard/auth.interceptor";
 import { Router } from "@angular/router";
 import { AppState } from "./app.state";
 import { AreaComponent } from "./components/areas/area/area.component";
-import { StreetObjectComponent } from "./components/game-object/street-object/street-object.component";
-import { TreasuryComponent } from "./components/game-object/treasury/treasury.component";
-import { IncomeTaxComponent } from "./components/game-object/income-tax/income-tax.component";
-import { RailwayComponent } from "./components/game-object/railway/railway.component";
-import { StartComponent } from "./components/game-object/start/start.component";
-import { ChanceComponent } from "./components/game-object/chance/chance.component";
-import { JailComponent } from "./components/game-object/jail/jail.component";
-import { PowerhouseComponent } from "./components/game-object/powerhouse/powerhouse.component";
-import { ParkingComponent } from "./components/game-object/parking/parking.component";
-import { WaterSupplyComponent } from "./components/game-object/water-supply/water-supply.component";
-import { ArrestedComponent } from "./components/game-object/arrested/arrested.component";
+import { StreetCellComponent } from "./components/cells/street-cell/street-cell.component";
+import { TreasuryCellComponent } from "./components/cells/treasury-cell/treasury-cell.component";
+import { IncomeTaxCellComponent } from "./components/cells/income-tax-cell/income-tax-cell.component";
+import { RailwayCellComponent } from "./components/cells/railway-cell/railway-cell.component";
+import { ChanceCellComponent } from "./components/cells/chance-cell/chance-cell.component";
+import { JailCellComponent } from "./components/cells/jail-cell/jail-cell.component";
+import { ParkingCellComponent } from "./components/cells/parking-cell/parking-cell.component";
+import { WaterSupplyCellComponent } from "./components/cells/water-supply-cell/water-supply-cell.component";
+import { ArrestedCellComponent } from "./components/cells/arrested-cell/arrested-cell.component";
 import { PlayerAreaComponent } from "./components/areas/players-area/players-area.component";
 import { PlayerComponent } from "./components/areas/players-area/player/player.component";
 import { DiceComponent } from "./components/dice/dice.component";
@@ -37,8 +35,11 @@ import { TreasuryCardGeneratedService } from "./services/card-generated-services
 import { AIChanceCardGeneratedService } from "./services/card-generated-services/ai-chance-card-generated.service";
 import { AITreasuryCardGeneratedService } from "./services/card-generated-services/ai-treasury-card-generated.service";
 import { SignalRService } from "./services/signalR.service";
-import { CreateLobbypageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
+import { CreateLobbyPageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
 import { GameLobbyService } from "./services/game-lobby.service";
+import { StartCellComponent } from "./components/cells/start-cell/start-cell.component";
+import { PowerhouseCellComponent } from "./components/cells/powerhouse-cell/powerhouse-cell.component";
+import { GameDataTransferService } from "./services/game-data-transfer.service";
 
 @NgModule({
     declarations: [
@@ -50,21 +51,21 @@ import { GameLobbyService } from "./services/game-lobby.service";
         SignUpPageComponent,
         NotFoundPageComponent,
         AreaComponent,
-        StartComponent,
-        StreetObjectComponent,
-        TreasuryComponent,
-        IncomeTaxComponent,
-        RailwayComponent,
-        ChanceComponent,
-        JailComponent,
-        PowerhouseComponent,
-        ParkingComponent,
-        WaterSupplyComponent,
-        ArrestedComponent,
+        StartCellComponent,
+        StreetCellComponent,
+        TreasuryCellComponent,
+        IncomeTaxCellComponent,
+        RailwayCellComponent,
+        ChanceCellComponent,
+        JailCellComponent,
+        PowerhouseCellComponent,
+        ParkingCellComponent,
+        WaterSupplyCellComponent,
+        ArrestedCellComponent,
         PlayerAreaComponent,
         PlayerComponent,
         DiceComponent,
-        CreateLobbypageComponent
+        CreateLobbyPageComponent
     ],
     imports: [
         BrowserModule,
@@ -89,7 +90,8 @@ import { GameLobbyService } from "./services/game-lobby.service";
         AIChanceCardGeneratedService,
         AITreasuryCardGeneratedService,
         SignalRService,
-        GameLobbyService
+        GameLobbyService,
+        GameDataTransferService
     ],
     bootstrap: [AppComponent]
 })

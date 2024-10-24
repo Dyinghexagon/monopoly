@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using monopoly.Server.Models.Backend;
+using monopoly.Server.Models.Client;
 
 namespace monopoly.Server
 {
@@ -7,8 +8,7 @@ namespace monopoly.Server
     {
         public ApplicationMappingProfile()
         {
-            CreateMap<CellBase, CellBaseModel>().ReverseMap();
-            CreateMap<GameArea, GameAreaModel>().ReverseMap();
+            CreateMap<Cell, CellModel>().ReverseMap();
             CreateMap<Player, PlayerModel>().ReverseMap();
             CreateMap<GameLobby, GameLobbyModel>().ReverseMap();
         }

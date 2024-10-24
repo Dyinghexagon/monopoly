@@ -1,4 +1,4 @@
-﻿namespace monopoly.Server.Models.CLient
+﻿namespace monopoly.Server.Models.Client
 {
     public class AccountModel : Entity
     {
