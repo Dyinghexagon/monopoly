@@ -24,7 +24,7 @@ monopoly/*/bin/
 monopoly/*/obj/
 monopoly/*/.vs/
 monopoly/*/appsettings.json
-monopoly/*/bin/Debug/
+/monopoly.Server/bin/Debug/
 
 # Файлы секретов и ключей
 *.pfx
