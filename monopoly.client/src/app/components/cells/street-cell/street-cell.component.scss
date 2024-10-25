@@ -9,14 +9,14 @@ $street-color: var(--street-color);
         }
 
         .game-object-icon {
-            margin-bottom: calc($game-object-icon-matgin / 2);
+            margin-bottom: calc($game-object-icon-margin / 2);
         }
 
         .houses-wrapper {
             display: flex;
             height: 64px;
             align-items: center;
-            margin-bottom: calc($game-object-icon-matgin / 2);
+            margin-bottom: calc($game-object-icon-margin / 2);
 
             .game-object-icon {
                 margin-bottom: 0;

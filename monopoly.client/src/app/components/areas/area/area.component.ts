@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
 import { PlayerModel } from "../../../models/player.model";
 import { IDiceValue } from "../../../models/dice.model";
 import { PlayerMoveService } from "../../../services/player-move.service";
@@ -8,6 +8,7 @@ import { SignalRService } from "../../../services/signalR.service";
 import { ICell } from "../../../models/cell.model";
 import { GameLobbyService } from "../../../services/game-lobby.service";
 import { GameDataTransferService } from "../../../services/game-data-transfer.service";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: "app-area",
@@ -15,13 +16,15 @@ import { GameDataTransferService } from "../../../services/game-data-transfer.se
     styleUrls: [ "./area.component.scss" ],
     encapsulation: ViewEncapsulation.None
 })
-export class AreaComponent implements OnInit, OnChanges {
+export class AreaComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() public players?: PlayerModel[] | null;
     @Input() public cells: ICell[] = [];
     @Input() public lobbyId: string = "";
 
     public playerMoveService?: PlayerMoveService;
+
+    private readonly unsubscribe$ = new Subject<void>();
 
     constructor(
         private readonly treasuryCardGeneratedService: TreasuryCardGeneratedService,
@@ -43,26 +46,14 @@ export class AreaComponent implements OnInit, OnChanges {
         }
     }
 
+    public ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
+
     public makeMove(): void {
         this.signalRService.send().subscribe();
         this.signalRService.sendInvoke();
-        const dice = {
-            firstValue: this.getRandomNumber(),
-            secondValue: this.getRandomNumber()
-        };
-        console.warn(dice);
-
-        this.diceValueChange(dice);
-        if (this.players) {
-            const currentPosition = this.playerMoveService?.getTargetPosition(dice);
-            this.gameLobbyService.movePlayer(this.lobbyId, this.players[0].id, currentPosition ?? "start")
-                .pipe()
-                .subscribe(player => console.warn(player));
-        }
-    }
-
-    private getRandomNumber(): number {
-        return Math.floor(Math.random() * 6) + 1;
     }
 
     private initPlayerMoveService(): void {
@@ -77,6 +68,12 @@ export class AreaComponent implements OnInit, OnChanges {
         }
 
         this.playerMoveService.moveCurrentPlayer(diceValue);
+        if (this.players) {
+            const currentPosition = this.playerMoveService?.getTargetPosition(diceValue);
+            this.gameLobbyService.movePlayer(this.lobbyId, this.players[0].id, currentPosition ?? "start")
+                .pipe(takeUntil(this.unsubscribe$))
+                .subscribe(player => console.warn(player));
+        }
     }
 
     public async sendToMistral(): Promise<void> {

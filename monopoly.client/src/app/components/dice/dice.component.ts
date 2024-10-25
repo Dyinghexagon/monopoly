@@ -13,10 +13,24 @@ export class DiceComponent {
     public diceValue?: IDiceValue;
     @Output() public diceValueChange = new EventEmitter<IDiceValue>();
 
-    public rollDice(): void {
+    public rollDice2(): void {
+        const diceFirst = document.querySelector<HTMLElement>(".dice.first");
+        const diceSecond = document.querySelector<HTMLElement>(".dice.second");
+        if (!diceFirst || !diceSecond) {
+            return;
+        }
+
+        const diceFirstValue = NumberUtils.randomIntNumber(1, 6);
+        diceFirst.dataset["side"] = diceFirstValue.toString();
+        diceFirst.classList.toggle("reRoll");
+
+        const diceSecondValue = NumberUtils.randomIntNumber(1, 6);
+        diceSecond.dataset["side"] = diceSecondValue.toString();
+        diceSecond.classList.toggle("reRoll");
+
         this.diceValue = {
-            firstValue: NumberUtils.randomIntNumber(1, 6),
-            secondValue: NumberUtils.randomIntNumber(1, 6)
+            firstValue: diceFirstValue,
+            secondValue: diceSecondValue
         };
         this.diceValueChange.emit(this.diceValue);
     }
