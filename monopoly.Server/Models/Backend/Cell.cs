@@ -28,6 +28,6 @@
         BlueStreet,
         CornStreet,
         OrangeStreet,
-        RedStreet,
+        RedStreet
     }
 }

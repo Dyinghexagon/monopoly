@@ -1,14 +1,14 @@
 @import "../../../../assets/shared/variables";
 
 .card-wrapper {
-    .game-object-wrapper {
+    .cell-wrapper {
         align-items: center;
         justify-content: center;
     
-        .game-object-name-wrapper {
+        .cell-name-wrapper {
             transform: rotate(135deg);
     
-            .game-object-name {
+            .cell-name {
                 font-weight: 700;
                 font-size: 96px;
             }

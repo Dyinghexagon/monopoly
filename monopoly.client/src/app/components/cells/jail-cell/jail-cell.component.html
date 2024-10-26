@@ -1,5 +1,5 @@
 <div class="card-wrapper">
-    <div class="game-object-wrapper large">
+    <div class="cell-wrapper large">
         <div class="container">
             <div class="visitor-wrapper">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,14 +44,14 @@
                         </clipPath>
                         </defs>
                     </svg>
-                    <p class="text">
+                    <p class="text" *ngIf="cell?.label">
                         {{ cell.label }}
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <app-players-area
+    <app-players-area *ngIf="cell?.id"
         [position]="cell.id"
         [players]="getPlayers()"
     ></app-players-area>

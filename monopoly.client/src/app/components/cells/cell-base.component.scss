@@ -15,7 +15,7 @@ $street-color: var(--street-color);
         @include child();
     }
 
-    .game-object-wrapper {
+    .cell-wrapper {
         border: $border-card-width solid $black-color;
         height: $street-card-height;
         width: $street-card-width;
@@ -33,18 +33,18 @@ $street-color: var(--street-color);
             width: $card-width;
         }
     
-        .game-object-color {
+        .cell-color {
             height: 100px;
             width: 100%;
             background-color: $street-color;
         }
     
-        .game-object-name-wrapper {
+        .cell-name-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
     
-            .game-object-name {
+            .cell-name {
                 text-align: center;
                 margin: 0;
                 font-weight: 500;
@@ -52,11 +52,11 @@ $street-color: var(--street-color);
             }
         }
     
-        .game-object-icon {
-            margin-bottom: $game-object-icon-margin;
+        .cell-icon {
+            margin-bottom: $cell-icon-margin;
         }
     
-        .game-object-price {
+        .cell-price {
             margin: 0;
             font-weight: 500;
             font-size: 48px;

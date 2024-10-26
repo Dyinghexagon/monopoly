@@ -1,12 +1,13 @@
 <div class="card-wrapper">
-    <div class="game-object-wrapper" [style.--street-color]="cell.color">
-        <div class="game-object-color"></div>
-        <div class="game-object-name-wrapper">
-            <p class="game-object-name">
+    <div class="cell-wrapper" *ngIf="cell?.color"
+        [style.--street-color]="cell.color">
+        <div class="cell-color"></div>
+        <div class="cell-name-wrapper">
+            <p class="cell-name" *ngIf="cell?.label">
                 {{ cell.label }}
             </p>
         </div>
-        <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="game-object-icon" alt="street arrow icon">
+        <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="cell-icon" alt="street arrow icon">
             <g clip-path="url(#clip0_319_1157)">
             <path 
                 d="M122.031 56.0496L64.6811 1.07681C63.1835 -0.360237 60.8165 -0.360237 59.3189 1.07681L1.91196 56.1063C0.697235 57.3211 0 58.9946 0 60.7051C0 64.265 2.89868 67.1637 6.45865 67.1637H15.5L15.5 113.664C15.5 119.372 20.1243 123.996 25.8336 123.996L98.1664 123.996C103.876 123.996 108.5 119.372 108.5 113.664V67.1637H117.541C121.101 67.1637 124 64.265 124 60.7051C124 58.9946 123.303 57.3211 122.031 56.0496Z"
@@ -19,7 +20,7 @@
             </defs>
         </svg>
         <div class="houses-wrapper">
-            <svg width="64" height="64" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="game-object-icon" alt="street arrow icon">
+            <svg width="64" height="64" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="cell-icon" alt="street arrow icon">
                 <g clip-path="url(#clip0_319_1157)">
                 <path 
                     d="M122.031 56.0496L64.6811 1.07681C63.1835 -0.360237 60.8165 -0.360237 59.3189 1.07681L1.91196 56.1063C0.697235 57.3211 0 58.9946 0 60.7051C0 64.265 2.89868 67.1637 6.45865 67.1637H15.5L15.5 113.664C15.5 119.372 20.1243 123.996 25.8336 123.996L98.1664 123.996C103.876 123.996 108.5 119.372 108.5 113.664V67.1637H117.541C121.101 67.1637 124 64.265 124 60.7051C124 58.9946 123.303 57.3211 122.031 56.0496Z"
@@ -35,11 +36,11 @@
                 X {{ 4 - count }}
             </p>
         </div>
-        <p class="game-object-price">
+        <p class="cell-price" *ngIf="cell?.price">
             {{ cell.price }}₽
         </p>
     </div>
-    <app-players-area
+    <app-players-area *ngIf="cell?.id"
         [position]="cell.id"
         [players]="getPlayers()"
     ></app-players-area>

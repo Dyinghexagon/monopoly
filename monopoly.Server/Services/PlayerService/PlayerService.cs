@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using monopoly.Server.Controllers;
 using monopoly.Server.Models.Backend;
 using monopoly.Server.Repositories;
+using System.Collections.Generic;
 
 namespace monopoly.Server.Services.PlayerService
 {
@@ -12,7 +14,6 @@ namespace monopoly.Server.Services.PlayerService
         {
             var id = await _dbRepository.AddAsync(entity);
             await _dbRepository.SaveChangesAsync();
-
             return id;
         }
 
@@ -40,16 +41,16 @@ namespace monopoly.Server.Services.PlayerService
             return await player.FirstOrDefaultAsync();
         }
 
-        public async Task<List<Player>> GetPlayersByLobbyIdAsync(Guid lobbyId)
-        {
-            var players = await _dbRepository.GetAllAsync<Player>();
-            return players.Where(player => player.GameLobbyId == lobbyId).ToList();
-        }
-
         public async Task UpdateAsync(Player newEntity, Guid id)
         {
             await _dbRepository.UpdateAsync<Player>(newEntity, id);
             await _dbRepository.SaveChangesAsync();
+        }
+
+        public async Task<List<Player>> GetPlayersByLobbyIdAsync(Guid lobbyId)
+        {
+            var players = await _dbRepository.GetAllAsync<Player>();
+            return [.. players.Where(player => player.GameLobbyId == lobbyId)];
         }
     }
 }

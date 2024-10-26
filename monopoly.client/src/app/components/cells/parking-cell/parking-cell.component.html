@@ -1,5 +1,5 @@
 <div class="card-wrapper">
-    <div class="game-object-wrapper large">
+    <div class="cell-wrapper large">
         <div class="rotate-wrapper">
             <svg width="201" height="201" viewBox="0 0 201 201" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_332_1271)">
@@ -11,14 +11,14 @@
                 </clipPath>
                 </defs>
             </svg>        
-            <div class="game-object-name-wrapper">
-                <p class="game-object-name">
+            <div class="cell-name-wrapper">
+                <p class="cell-name" *ngIf="cell?.label">
                     {{ cell.label }}
                 </p>
             </div>
         </div>
     </div>
-    <app-players-area
+    <app-players-area *ngIf="cell?.id"
         [position]="cell.id"
         [players]="getPlayers()"
     ></app-players-area>

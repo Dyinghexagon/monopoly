@@ -1,0 +1,19 @@
+@import "../../../../assets/shared/variables";
+@import "../modal-base.component.scss";
+
+$modal-max-width: calc($card-width + 40px);
+
+.modal-wrapper {
+    .modal-content {        
+        max-width: $modal-max-width;
+
+        .modal-header {
+        }
+    
+        .modal-body {
+        }
+    
+        .modal-footer {
+        }
+    }
+}

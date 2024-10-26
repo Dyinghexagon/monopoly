@@ -1,12 +1,12 @@
 <div class="card-wrapper">
-    <div class="game-object-wrapper not-color">
-        <div class="game-object-color"></div>
-        <div class="game-object-name-wrapper">
-            <p class="game-object-name">
+    <div class="cell-wrapper not-color">
+        <div class="cell-color"></div>
+        <div class="cell-name-wrapper">
+            <p class="cell-name" *ngIf="cell?.label">
                 {{ cell.label }}
             </p>
         </div>
-        <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="game-object-icon">
+        <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg" class="cell-icon">
             <g clip-path="url(#clip0_330_306)">
             <path d="M1.69028 62.1609C0.357328 62.6518 -0.329734 64.1293 0.155835 65.4673L1.77819 69.9312L14.131 57.5781L1.69028 62.1609Z" fill="#E4E4E4"/>
             <path d="M13.382 101.839L20.8218 122.299C21.0542 122.945 21.5398 123.472 22.1598 123.756C22.5059 123.916 22.8779 123.999 23.2498 123.999C23.5547 123.999 23.8543 123.947 24.1437 123.839L32.3533 120.811L13.382 101.839Z" fill="#292929"/>
@@ -19,14 +19,14 @@
             </clipPath>
             </defs>
         </svg>
-        <p class="game-object-price">
+        <p class="cell-price">
             ЗАПЛАТИТЕ
         </p>
-        <p class="game-object-price">
+        <p class="cell-price" *ngIf="cell?.price">
             {{ cell.price }}₽
         </p>
     </div>
-    <app-players-area
+    <app-players-area *ngIf="cell?.id"
         [position]="cell.id"
         [players]="getPlayers()"
     ></app-players-area>

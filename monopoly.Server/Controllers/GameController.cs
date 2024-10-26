@@ -8,6 +8,7 @@ using monopoly.Server.Models.Client;
 using monopoly.Server.Services.GameLobbyService;
 using monopoly.Server.Services.CellService;
 using monopoly.Server.Services.PlayerService;
+using monopoly.Server.Services.MovePlayerService;
 
 namespace monopoly.Server.Controllers
 {
@@ -17,6 +18,7 @@ namespace monopoly.Server.Controllers
         IGameLobbyService gameLobbyService,
         ICellService cellService,
         IPlayerService playerService,
+        IPlayerActionService movePlayerService,
         IHubContext<GameHub> hub,
         IMapper mapper,
         ILogger<GameController> logger
@@ -25,6 +27,7 @@ namespace monopoly.Server.Controllers
         private readonly IGameLobbyService _gameLobbyService = gameLobbyService;
         private readonly ICellService _cellService = cellService;
         private readonly IPlayerService _playerService = playerService;
+        private readonly IPlayerActionService _playerActionService = movePlayerService;
 
         private readonly IMapper _mapper = mapper;
         private readonly IHubContext<GameHub> _hub = hub;
@@ -128,10 +131,19 @@ namespace monopoly.Server.Controllers
         [HttpPut("move/{lobbyId:guid}/{playerId:guid}/{targetPosition}")]
         public async Task<IActionResult> MovePlayer(Guid lobbyId, Guid playerId, string targetPosition)
         {
-            var players = await _playerService.GetPlayersByLobbyIdAsync(lobbyId);
-            var player = players.Where(x => x.Id == playerId).FirstOrDefault();
-
-            if (player is null) {
+            try
+            {
+                var player = await _playerActionService.MovePlayer(lobbyId, playerId, targetPosition);
+                return Ok(
+                    new Response<PlayerModel>(true,
+                        new ResponseData<PlayerModel>(
+                            $"В лобби {lobbyId} найден игрок {playerId} и перемещен на {targetPosition}",
+                            _mapper.Map<Player, PlayerModel>(player)
+                        )
+                    )
+                );
+            }
+            catch {
                 return BadRequest(
                     new Response<string>(true,
                         new ResponseData<string>(
@@ -141,18 +153,6 @@ namespace monopoly.Server.Controllers
                     )
                 );
             }
-
-            player.CurrentPosition = targetPosition;
-            await _playerService.UpdateAsync(player, playerId);
-
-            return Ok(
-                new Response<PlayerModel>(true,
-                    new ResponseData<PlayerModel>(
-                        $"В лобби {lobbyId} найден игрок {playerId} и перемещен на {targetPosition}",
-                        _mapper.Map<Player, PlayerModel>(player)
-                    )
-                )
-            );
         }
     }
 }

@@ -1,12 +1,13 @@
 <div class="card-wrapper">
-    <div class="game-object-wrapper large">
-        <div class="game-object-name-wrapper">
-            <p class="game-object-name">
+    <div class="cell-wrapper large">
+        <div class="cell-name-wrapper">
+            <p class="cell-name" *ngIf="cell?.label">
                 {{ cell.label }}
             </p>
         </div>
     </div>
-    <app-players-area class="child"
+    <app-players-area *ngIf="cell?.id"
+        class="child"
         [position]="cell.id"
         [players]="getPlayers()"
     ></app-players-area>

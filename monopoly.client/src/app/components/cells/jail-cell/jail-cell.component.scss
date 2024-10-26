@@ -1,7 +1,7 @@
 @import "../../../../assets/shared/variables";
 
 .card-wrapper {
-    .game-object-wrapper {
+    .cell-wrapper {
         .container {
             display: grid;
             height: 100%;
@@ -78,8 +78,8 @@
             }
         }     
     
-        .game-object-name-wrapper {
-            .game-object-name {
+        .cell-name-wrapper {
+            .cell-name {
                 font-weight: 700;
                 font-size: 96px;
             }

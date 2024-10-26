@@ -3,22 +3,22 @@
 $street-color: var(--street-color);
 
 .card-wrapper {
-    .game-object-wrapper {
-        .game-object-icon {
+    .cell-wrapper {
+        .cell-icon {
             fill: $street-color;
         }
 
-        .game-object-icon {
-            margin-bottom: calc($game-object-icon-margin / 2);
+        .cell-icon {
+            margin-bottom: calc($cell-icon-margin / 2);
         }
 
         .houses-wrapper {
             display: flex;
             height: 64px;
             align-items: center;
-            margin-bottom: calc($game-object-icon-margin / 2);
+            margin-bottom: calc($cell-icon-margin / 2);
 
-            .game-object-icon {
+            .cell-icon {
                 margin-bottom: 0;
             }
 

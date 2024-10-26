@@ -1,0 +1,101 @@
+@import "../../../assets/shared/variables";
+@import "../../../assets/shared/controls";
+
+$modal-box-shadow: 0 2px 15px -3px rgba($black-color, 0.07), 0 10px 20px -2px rgba($black-color, 0.04);
+$modal-header-padding: 1rem 1rem;
+$modal-header-border-width: 2px;
+$modal-inner-border-radius: calc(0.5rem - 1px);
+$modal-header-border-color: $black-color;
+    
+$modal-padding: 1rem;
+
+$modal-footer-gap: 0.5rem;
+$modal-footer-border-color: $black-color;
+$modal-footer-border-width: 2px;
+
+$modal-bg: $white-color;
+$modal-border-radius: 0.5rem;
+
+
+.modal-wrapper {
+    transition: transform .3s ease-out;
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($color: $black-color, $alpha: .5);
+    z-index: calc($z-index-content + 1);
+
+    .btn {
+        @include btn;
+
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .modal-content {        
+        border: 0;
+        box-shadow: $modal-box-shadow;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: $modal-bg;
+        background-clip: padding-box;
+        border-radius: $modal-border-radius;
+        outline: 0;
+
+        .modal-header {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-between;
+            padding: $modal-header-padding;
+            border-bottom: $modal-header-border-width solid rgba($color: $modal-header-border-color, $alpha: .5);
+            border-top-left-radius: $modal-inner-border-radius;
+            border-top-right-radius: $modal-inner-border-radius;
+
+            .btn-close {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: content-box;
+                padding: .25em;
+                border: 0;
+                border-radius: .25rem;
+                background: transparent;
+                font-size: 2rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    
+        .modal-body {
+            position: relative;
+            flex: 1 1 auto;
+            padding: $modal-padding;
+        }
+    
+        .modal-footer {
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+            padding: calc($modal-padding - $modal-footer-gap * 0.5);
+            gap: $modal-footer-gap;
+            border-top: $modal-footer-border-width solid rgba($color: $modal-footer-border-color, $alpha: .5);
+            border-bottom-right-radius: $modal-inner-border-radius;
+            border-bottom-left-radius: $modal-inner-border-radius;
+        }
+    }
+}

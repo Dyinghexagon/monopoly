@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
+import { ReactiveFormsModule } from "@angular/forms";
+
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { MobileHeaderComponent } from "./components/header/mobile-header/mobile-header.component";
@@ -10,7 +12,6 @@ import { GamePageComponent } from "./pages/game-page/game-page.component";
 import { LoginPageComponent } from "./pages/auth-pages/login-page/login-page.component";
 import { SignUpPageComponent } from "./pages/auth-pages/sign-up-page/sign-up-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
-import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./services/auth.service";
 import { AppConfig } from "./app.config";
 import { AuthGuard } from "./guards/auth-guard/auth.guard";
@@ -40,6 +41,7 @@ import { GameLobbyService } from "./services/game-lobby.service";
 import { StartCellComponent } from "./components/cells/start-cell/start-cell.component";
 import { PowerhouseCellComponent } from "./components/cells/powerhouse-cell/powerhouse-cell.component";
 import { GameDataTransferService } from "./services/game-data-transfer.service";
+import { CellPurchaseModalComponent } from "./components/modals/cell-purchase-modal/cell-purchase-modal.component";
 
 @NgModule({
     declarations: [
@@ -65,7 +67,8 @@ import { GameDataTransferService } from "./services/game-data-transfer.service";
         PlayerAreaComponent,
         PlayerComponent,
         DiceComponent,
-        CreateLobbyPageComponent
+        CreateLobbyPageComponent,
+        CellPurchaseModalComponent
     ],
     imports: [
         BrowserModule,

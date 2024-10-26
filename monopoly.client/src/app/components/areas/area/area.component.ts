@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef, ViewEncapsulation } from "@angular/core";
 import { PlayerModel } from "../../../models/player.model";
 import { IDiceValue } from "../../../models/dice.model";
 import { PlayerMoveService } from "../../../services/player-move.service";
@@ -9,6 +9,7 @@ import { ICell } from "../../../models/cell.model";
 import { GameLobbyService } from "../../../services/game-lobby.service";
 import { GameDataTransferService } from "../../../services/game-data-transfer.service";
 import { Subject, takeUntil } from "rxjs";
+import { AppState } from "../../../app.state";
 
 @Component({
     selector: "app-area",
@@ -22,6 +23,8 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
     @Input() public cells: ICell[] = [];
     @Input() public lobbyId: string = "";
 
+    @ViewChild("dynamic", { read: ViewContainerRef })
+
     public playerMoveService?: PlayerMoveService;
 
     private readonly unsubscribe$ = new Subject<void>();
@@ -32,6 +35,7 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
         private readonly signalRService: SignalRService,
         private readonly gameLobbyService: GameLobbyService,
         private readonly gameDataTransferService: GameDataTransferService,
+        private readonly appState: AppState
     ) {
     }
 
@@ -67,13 +71,18 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
             return;
         }
 
-        this.playerMoveService.moveCurrentPlayer(diceValue);
-        if (this.players) {
-            const currentPosition = this.playerMoveService?.getTargetPosition(diceValue);
-            this.gameLobbyService.movePlayer(this.lobbyId, this.players[0].id, currentPosition ?? "start")
-                .pipe(takeUntil(this.unsubscribe$))
-                .subscribe(player => console.warn(player));
+        if (!this.players) {
+            return;
         }
+
+        this.playerMoveService.moveCurrentPlayer(diceValue);
+        const currentPosition = this.playerMoveService?.getTargetPosition(diceValue);
+        this.gameLobbyService.movePlayer(this.lobbyId, this.players[0].id, currentPosition ?? "start")
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(responseData => {
+                this.appState.modalState.openModal$.next("CellPurchaseModalComponent");
+                console.warn(responseData);
+            });
     }
 
     public async sendToMistral(): Promise<void> {
