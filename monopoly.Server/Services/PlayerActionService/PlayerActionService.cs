@@ -31,7 +31,7 @@ namespace monopoly.Server.Services.MovePlayerService
             player.CurrentPosition = targetPosition;
             var targetCell = _cells.Where(cell => cell.Id == targetPosition).FirstOrDefault();
             Console.Write(targetCell);
-            await _playerService.UpdateAsync(player, playerId);
+            await _playerService.UpdateAsync(player);
             return player;
         }
     }

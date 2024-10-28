@@ -2,7 +2,7 @@
 
 namespace monopoly.Server.Services.GameLobbyService
 {
-    public interface IGameLobbyService : IService<GameLobby>
+    public interface IGameLobbyService : IBaseEntityService<GameLobby>
     {
     }
 }

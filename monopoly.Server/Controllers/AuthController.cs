@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using monopoly.Server.Models.Backend;
 using monopoly.Server.Models.Client;
-using monopoly.Server.Services.UserService;
+using monopoly.Server.Services.AccountService;
 using monopoly.Server.Utils;
 using System.Security.Claims;
 

@@ -38,12 +38,18 @@ namespace monopoly.Server.Controllers
         {
             var gameLobby = new GameLobby
             {
-                Id = Guid.NewGuid()
+                Id = Guid.NewGuid(),
+                IsActive = true,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow
             };
             gameLobby.Players.Add(new()
             {
                 Name = "Игрок #1",
-                Color = "Red"
+                Color = "Red",
+                IsActive = true,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow
             });
 
             await _gameLobbyService.AddAsync(gameLobby);
@@ -134,6 +140,8 @@ namespace monopoly.Server.Controllers
             try
             {
                 var player = await _playerActionService.MovePlayer(lobbyId, playerId, targetPosition);
+                var lobby = await _gameLobbyService.GetAsync(lobbyId);
+
                 return Ok(
                     new Response<PlayerModel>(true,
                         new ResponseData<PlayerModel>(

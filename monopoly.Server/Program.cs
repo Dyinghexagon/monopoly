@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using monopoly.Server;
 using monopoly.Server.Context;
 using monopoly.Server.Hubs;
-using monopoly.Server.Repositories;
+using monopoly.Server.Models;
+using monopoly.Server.Services;
+using monopoly.Server.Services.AccountService;
 using monopoly.Server.Services.CellService;
 using monopoly.Server.Services.GameLobbyService;
 using monopoly.Server.Services.MovePlayerService;
 using monopoly.Server.Services.PlayerService;
-using monopoly.Server.Services.UserService;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,13 +41,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
 
-builder.Services.AddScoped<IDbRepository, DbRepository>();
-
-builder.Services.AddTransient<IAccountService, AccountService>();
-builder.Services.AddTransient<IGameLobbyService, GameLobbyService>();
-builder.Services.AddTransient<ICellService, CellService>();
-builder.Services.AddTransient<IPlayerService, PlayerService>();
-builder.Services.AddTransient<IPlayerActionService, PlayerActionService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IGameLobbyService, GameLobbyService>();
+builder.Services.AddScoped  <ICellService, CellService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IPlayerActionService, PlayerActionService>();
 builder.Services.AddSignalR();
 
 var app = builder.Build();

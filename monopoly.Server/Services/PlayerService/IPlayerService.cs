@@ -2,7 +2,7 @@
 
 namespace monopoly.Server.Services.PlayerService
 {
-    public interface IPlayerService : IService<Player>
+    public interface IPlayerService : IBaseEntityService<Player>
     {
         Task<List<Player>> GetPlayersByLobbyIdAsync(Guid lobbyId);
     }

@@ -1,8 +1,8 @@
 ﻿using monopoly.Server.Models.Backend;
 
-namespace monopoly.Server.Services.UserService
+namespace monopoly.Server.Services.AccountService
 {
-    public interface IAccountService : IService<Account>
+    public interface IAccountService : IBaseEntityService<Account>
     {
 
     }
