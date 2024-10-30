@@ -18,7 +18,6 @@ import { AuthGuard } from "./guards/auth-guard/auth.guard";
 import { AuthInterceptor } from "./guards/auth-guard/auth.interceptor";
 import { Router } from "@angular/router";
 import { AppState } from "./app.state";
-<<<<<<< HEAD
 import { AreaComponent } from "./components/areas/area/area.component";
 import { StreetCellComponent } from "./components/cells/street-cell/street-cell.component";
 import { TreasuryCellComponent } from "./components/cells/treasury-cell/treasury-cell.component";
@@ -43,9 +42,6 @@ import { StartCellComponent } from "./components/cells/start-cell/start-cell.com
 import { PowerhouseCellComponent } from "./components/cells/powerhouse-cell/powerhouse-cell.component";
 import { GameDataTransferService } from "./services/game-data-transfer.service";
 import { CellPurchaseModalComponent } from "./components/modals/cell-purchase-modal/cell-purchase-modal.component";
-=======
-import { CanvasBoxComponent } from "./components/canvas-box/canvas-box.component";
->>>>>>> features/add_tree_js_lib
 
 @NgModule({
     declarations: [
@@ -56,7 +52,6 @@ import { CanvasBoxComponent } from "./components/canvas-box/canvas-box.component
         LoginPageComponent,
         SignUpPageComponent,
         NotFoundPageComponent,
-<<<<<<< HEAD
         AreaComponent,
         StartCellComponent,
         StreetCellComponent,
@@ -74,9 +69,6 @@ import { CanvasBoxComponent } from "./components/canvas-box/canvas-box.component
         DiceComponent,
         CreateLobbyPageComponent,
         CellPurchaseModalComponent
-=======
-        CanvasBoxComponent
->>>>>>> features/add_tree_js_lib
     ],
     imports: [
         BrowserModule,
