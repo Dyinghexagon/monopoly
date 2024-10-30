@@ -12,8 +12,13 @@ const routes: Routes = [
     { path: "create-lobby", component: CreateLobbyPageComponent, canActivate: [AuthGuard] },
     { path: "login", component: LoginPageComponent },
     { path: "sign-up", component: SignUpPageComponent },
+<<<<<<< HEAD
     { path: "", redirectTo: "create-lobby", pathMatch: "full" },
     { path: "**", component: NotFoundPageComponent }
+=======
+    { path: "", redirectTo: "game", pathMatch: "full" },
+    { path: "**", component: NotFoundPageComponent },
+>>>>>>> features/add_tree_js_lib
 ];
 
 @NgModule({
