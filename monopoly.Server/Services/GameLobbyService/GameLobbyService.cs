@@ -15,7 +15,8 @@ namespace monopoly.Server.Services.GameLobbyService
 
         public override async Task<GameLobby?> GetAsync(Guid id)
         {
-            return await Task.Run(() => _context.GameLobbies.Include(x => x.Players).Where(x => x.Id == id).FirstOrDefault());
+            var gameLobbies = await GetAllAsync();
+            return gameLobbies.Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }
