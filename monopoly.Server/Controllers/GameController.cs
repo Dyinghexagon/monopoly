@@ -8,7 +8,7 @@ using monopoly.Server.Models.Client;
 using monopoly.Server.Services.GameLobbyService;
 using monopoly.Server.Services.CellService;
 using monopoly.Server.Services.PlayerService;
-using monopoly.Server.Services.MovePlayerService;
+using monopoly.Server.Services.PlayerActionService;
 
 namespace monopoly.Server.Controllers
 {
@@ -36,14 +36,14 @@ namespace monopoly.Server.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateLobby()
         {
-            var gameLobby = new GameLobby
+            var lobby = new GameLobby
             {
                 Id = Guid.NewGuid(),
                 IsActive = true,
                 DateCreated = DateTime.UtcNow,
                 DateUpdated = DateTime.UtcNow
             };
-            gameLobby.Players.Add(new()
+            lobby.Players.Add(new()
             {
                 Name = "Игрок #1",
                 Color = "Red",
@@ -52,66 +52,33 @@ namespace monopoly.Server.Controllers
                 DateUpdated = DateTime.UtcNow
             });
 
-            await _gameLobbyService.AddAsync(gameLobby);
-
-            return Ok(
-                new Response<GameLobbyModel>(true, 
-                    new ResponseData<GameLobbyModel>(
-                        "Лобби создано!",
-                         _mapper.Map<GameLobby, GameLobbyModel>(gameLobby)
-                    )
-                )
-            );
-        }
-
-        [HttpGet("send")]
-        public async Task<IActionResult> Send()
-        {
-            await _hub.Clients.All.SendAsync("SendFromBackednd", "Messange from Backednd!");
-            return Ok(new Response<string>(true, new ResponseData<string>("Сообщение успещно отправлено!", null)));
-        }
-
-        [HttpGet("cells")]
-        public IActionResult GetGameArea() {
-            var gameArea = _cellService.GetCells();
-            return Ok(
-                new Response<List<CellModel>>(true,
-                    new ResponseData<List<CellModel>>(
-                        "Данные об игровом поле!",
-                         _mapper.Map<List<Cell>, List<CellModel>>(gameArea)
-                    )
-                )
-            );
+            await _gameLobbyService.AddAsync(lobby);
+            _logger.LogInformation($"Лобби id: {lobby.Id} создано!");
+            return Ok(_mapper.Map<GameLobby, GameLobbyModel>(lobby));
         }
 
         [HttpGet("{lobbyId:guid}")]
         public async Task<IActionResult> GetPlayersByLobbyId(Guid lobbyId) {
-            var players = await _playerService.GetPlayersByLobbyIdAsync(lobbyId);
-
-            return Ok(
-                new Response<List<PlayerModel>>(true,
-                    new ResponseData<List<PlayerModel>>(
-                        $"Игроки лобби {lobbyId}",
-                         _mapper.Map<List<Player>, List<PlayerModel>>(players)
-                    )
-                )
-            );
+            var lobby = await _gameLobbyService.GetAsync(lobbyId);
+            _logger.LogInformation($"Игроки лобби {lobbyId}");
+            return Ok(_mapper.Map<List<Player>, List<PlayerModel>>(lobby?.Players ?? []));
         }
 
         [HttpPut("player/{lobbyId:guid}")]
         public async Task<IActionResult> AddNewPlayer(Guid lobbyId)
         {
-            var playersBeforeCreate = await _playerService.GetPlayersByLobbyIdAsync(lobbyId);
+            var lobby = await _gameLobbyService.GetAsync(lobbyId);
+            if (lobby is null)
+            {
+                _logger.LogInformation($"Лобби id: {lobby} не найдено!");
+                return BadRequest();
+            }
+
+            var playersBeforeCreate = lobby.Players;
             if (playersBeforeCreate.Count >= 8)
             {
-                return Ok(
-                    new Response<List<PlayerModel>>(true,
-                        new ResponseData<List<PlayerModel>>(
-                            $"В лобби {lobbyId} нельзя больше добавить игроков",
-                            _mapper.Map<List<Player>, List<PlayerModel>>(playersBeforeCreate)
-                        )
-                    )
-                );
+                _logger.LogInformation($"В лобби {lobbyId} нельзя больше добавить игроков");
+                return Ok(_mapper.Map<List<Player>, List<PlayerModel>>(playersBeforeCreate));
             }
 
             var player = new Player()
@@ -121,46 +88,87 @@ namespace monopoly.Server.Controllers
                 GameLobbyId = lobbyId
             };
 
-            await _playerService.AddAsync(player);
-            var playersAfterCreate = await _playerService.GetPlayersByLobbyIdAsync(lobbyId);
+            lobby.Players.Add(player);
 
-            return Ok(
-                new Response<List<PlayerModel>>(true,
-                    new ResponseData<List<PlayerModel>>(
-                        $"Добавлен новый игрок в лобби {lobbyId}",
-                         _mapper.Map<List<Player>, List<PlayerModel>>(playersAfterCreate)
-                    )
-                )
-            );
+            await _gameLobbyService.UpdateAsync(lobby);
+            await _playerService.AddAsync(player);
+            
+            var playersAfterCreate = lobby.Players;
+            _logger.LogInformation($"Добавлен новый игрок в лобби {lobbyId}");
+
+            return Ok(_mapper.Map<List<Player>, List<PlayerModel>>(playersAfterCreate));
         }
 
-        [HttpPut("move/{lobbyId:guid}/{playerId:guid}/{targetPosition}")]
-        public async Task<IActionResult> MovePlayer(Guid lobbyId, Guid playerId, string targetPosition)
+        [HttpPut("setPlayerPosition/{lobbyId:guid}/{playerId:guid}")]
+        public async Task<IActionResult> MovePlayer(Guid lobbyId, Guid playerId, [FromBody]DiceValues diceValues)
         {
             try
             {
-                var player = await _playerActionService.MovePlayer(lobbyId, playerId, targetPosition);
                 var lobby = await _gameLobbyService.GetAsync(lobbyId);
+                if (lobby is null)
+                {
+                    _logger.LogInformation($"Лобби id: {lobbyId} не найдено!");
+                    return BadRequest();
+                }
 
-                return Ok(
-                    new Response<PlayerModel>(true,
-                        new ResponseData<PlayerModel>(
-                            $"В лобби {lobbyId} найден игрок {playerId} и перемещен на {targetPosition}",
-                            _mapper.Map<Player, PlayerModel>(player)
-                        )
-                    )
-                );
+                var player = lobby.Players.Where(x => x.Id == playerId).FirstOrDefault();
+                if (player is null)
+                {
+                    _logger.LogInformation($"Игрок id: {playerId} не найден!");
+                    return BadRequest();
+                }
+
+                var firstDice = new Dice() { Value = diceValues.FirstValue };
+                var secondDice = new Dice() { Value = diceValues.SecondValue };
+
+                var targetCardId = _playerActionService.CalculateTargetPosition(firstDice, secondDice, player.CurrentPosition);
+
+                _logger.LogInformation($"В лобби {lobbyId} найден игрок {playerId} и перемещен на {targetCardId}");
+                player.CurrentPosition = targetCardId;
+                await _playerService.UpdateAsync(player);
+                await _hub.Clients.All.SendAsync("PlayerMoved", playerId, targetCardId);
+
+                return Ok();
             }
             catch {
-                return BadRequest(
-                    new Response<string>(true,
-                        new ResponseData<string>(
-                            $"В лобби {lobbyId} не найден игрок {playerId}",
-                             $"В лобби {lobbyId} не найден игрок {playerId}"
-                        )
-                    )
-                );
+                _logger.LogError($"В лобби {lobbyId} не найден игрок {playerId}");
+                return BadRequest();
             }
+        }
+
+        [HttpGet("cells")]
+        public IActionResult GetGameArea()
+        {
+            var gameArea = _cellService.GetCells();
+            _logger.LogInformation("Данные об игровом поле созданы!");
+            return Ok(_mapper.Map<List<Cell>, List<CellModel>>(gameArea));
+        }
+
+        [HttpPost("rollDice/{lobbyId:guid}/{playerId:guid}")]
+        public async Task<IActionResult> RollDice(Guid lobbyId, Guid playerId)
+        {
+            var firstDice = new Dice();
+            firstDice.Roll();
+            var secondDice = new Dice();
+            secondDice.Roll();
+
+            var lobby = await _gameLobbyService.GetAsync(lobbyId);
+            if (lobby is null) {
+                _logger.LogInformation($"Лобби id: {lobbyId} не найдено!");
+                return BadRequest();
+            }
+
+            var player = lobby.Players.Where(x => x.Id == playerId).FirstOrDefault();
+            if (player is null)
+            {
+                _logger.LogInformation($"Игрок id: {playerId} не найден!");
+                return BadRequest();
+            }
+
+            return Ok(new DiceValues() { 
+                FirstValue = firstDice.Value,
+                SecondValue = secondDice.Value 
+            });
         }
     }
 }

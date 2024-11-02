@@ -12,9 +12,13 @@ namespace monopoly.Server.Controllers
 {
     [ApiController]
     [Route("/api/auth")]
-    public class AuthController(IAccountService accountService) : Controller
+    public class AuthController(
+        IAccountService accountService,
+        ILogger<AuthController> logger
+    ) : Controller
     {
         private readonly IAccountService _accountService = accountService;
+        private readonly ILogger<AuthController> _logger = logger;
 
         [HttpPost("signin")]
         public async Task<IActionResult> SignInAsync([FromBody] AccountModel accountModel)
@@ -24,13 +28,15 @@ namespace monopoly.Server.Controllers
 
             if (account is null)
             {
-                return BadRequest(new Response<string>(false, new ResponseData<string>("Пользователь не найден!", null)));
+                _logger.LogError($"Пользователь по name: {accountModel.Name} не найден!");
+                return BadRequest();
             }
 
             var hash = CryptoUtils.HashPasword(accountModel.Password, out var salt);
             if (!CryptoUtils.VerifyPassword(accountModel.Password, hash, salt))
             {
-                return BadRequest(new Response<string>(false, new ResponseData<string>("Пароль не прошёл верификацию!", null)));
+                _logger.LogError($"Пароль не прошёл верификацию по name: {accountModel.Name}");
+                return BadRequest();
             }
 
             var claims = new List<Claim>() 
@@ -50,7 +56,8 @@ namespace monopoly.Server.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
                 });
 
-            return Ok(new Response<string>(true, new ResponseData<string>("Вход в систему успешно выполнен!", null)));
+            _logger.LogInformation($"Вход в систему для пользователя: {account.Id} успешно выполнен!");
+            return Ok();
         }
 
         [HttpPost("signup")]
@@ -72,9 +79,12 @@ namespace monopoly.Server.Controllers
                 };
 
                 var id = await _accountService.AddAsync(accoumt);
-                return Ok(new Response<string>(true, new ResponseData<string>($"Пользователь с id: {id} успешно добавлен!", null)));
+                
+                _logger.LogInformation($"Пользователь с id: {id} успешно добавлен!");
+                return Ok();
             } catch (Exception ex)
             {
+                _logger.LogError(ex.Message, ex);
                 return BadRequest(ex.Message);
             }
         }
@@ -93,14 +103,6 @@ namespace monopoly.Server.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
-    }
-
-    public record Response<T>(bool IsSuccess, ResponseData<T> Data);
-
-    public class ResponseData<T>(string message, T? data)
-    {
-        public string Message { get; set; } = message;
-        public T? Data { get; set; } = data;
     }
 
     public record UserClaim(string Type, string Value);

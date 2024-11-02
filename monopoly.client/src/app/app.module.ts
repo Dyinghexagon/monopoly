@@ -37,7 +37,7 @@ import { AIChanceCardGeneratedService } from "./services/card-generated-services
 import { AITreasuryCardGeneratedService } from "./services/card-generated-services/ai-treasury-card-generated.service";
 import { SignalRService } from "./services/signalR.service";
 import { CreateLobbyPageComponent } from "./pages/create-game-lobby-page/create-lobby-page.component";
-import { GameLobbyService } from "./services/game-lobby.service";
+import { GameService } from "./services/game.service";
 import { StartCellComponent } from "./components/cells/start-cell/start-cell.component";
 import { PowerhouseCellComponent } from "./components/cells/powerhouse-cell/powerhouse-cell.component";
 import { GameDataTransferService } from "./services/game-data-transfer.service";
@@ -93,7 +93,7 @@ import { CellPurchaseModalComponent } from "./components/modals/cell-purchase-mo
         AIChanceCardGeneratedService,
         AITreasuryCardGeneratedService,
         SignalRService,
-        GameLobbyService,
+        GameService,
         GameDataTransferService
     ],
     bootstrap: [AppComponent]

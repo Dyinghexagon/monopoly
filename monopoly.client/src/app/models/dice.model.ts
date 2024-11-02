@@ -1,4 +1,4 @@
-export interface IDiceValue {
+export interface IDiceValues {
     firstValue: number;
     secondValue: number;
 }

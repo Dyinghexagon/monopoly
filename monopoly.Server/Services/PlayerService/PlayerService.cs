@@ -10,11 +10,5 @@ namespace monopoly.Server.Services.PlayerService
             var player = await GetAsync(id);
             return player;
         }
-
-        public async Task<List<Player>> GetPlayersByLobbyIdAsync(Guid lobbyId)
-        {
-            var players = await GetAllAsync();
-            return [.. players.Where(player => player.GameLobbyId == lobbyId)];
-        }
     }
 }

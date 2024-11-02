@@ -39,10 +39,8 @@ export class SignUpPageComponent extends AuthPageBase {
         )
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(
-                response => {
-                    if (response.isSuccess) {
-                        console.warn("User sign up success!");
-                    }
+                () => {
+                    console.warn("User sign up success!");
                 },
                 error => {
                     if (!error?.error?.isSuccess) {

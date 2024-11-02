@@ -1,5 +1,5 @@
 <div class="game-area-wrapper" id="game-area-wrapper">
-    <div class="game-area" *ngIf="cells">
+    <div class="game-area" *ngIf="cells && lobbyId && players">
         <div class="first-line">
             <app-start-cell
                 [cell]="cells[0]"
@@ -229,7 +229,11 @@
                 </div>
             </div>
             <div class="second-quadrant">
-                <app-dice (diceValueChange)="diceValueChange($event)"></app-dice>
+                <app-dice
+                    [lobbyId]="lobbyId"
+                    [playerId]="currentPlayer!.id"
+                    (diceValueChange)="setPlayerPosition($event)"
+                ></app-dice>
             </div>
             <div class="third-quadrant">
                 <div class="treasury-wrapper">

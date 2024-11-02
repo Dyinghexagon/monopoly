@@ -1,9 +1,8 @@
 ﻿using monopoly.Server.Models.Backend;
 
-namespace monopoly.Server.Services.MovePlayerService
+namespace monopoly.Server.Services.PlayerActionService;
+
+public interface IPlayerActionService
 {
-    public interface IPlayerActionService
-    {
-        Task<Player> MovePlayer(Guid lobbyId, Guid playerId, string targetPosition);
-    }
+    string CalculateTargetPosition(Dice firstDice, Dice secondDice, string currentPlayerPosition);
 }

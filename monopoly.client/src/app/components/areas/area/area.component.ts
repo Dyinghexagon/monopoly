@@ -1,15 +1,14 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef, ViewEncapsulation } from "@angular/core";
 import { PlayerModel } from "../../../models/player.model";
-import { IDiceValue } from "../../../models/dice.model";
-import { PlayerMoveService } from "../../../services/player-move.service";
 import { TreasuryCardGeneratedService } from "../../../services/card-generated-services/treasury-card-generated.service";
 import { ChanceCardGeneratedService } from "../../../services/card-generated-services/chance-card-generated.service";
 import { SignalRService } from "../../../services/signalR.service";
 import { ICell } from "../../../models/cell.model";
-import { GameLobbyService } from "../../../services/game-lobby.service";
+import { GameService } from "../../../services/game.service";
 import { GameDataTransferService } from "../../../services/game-data-transfer.service";
 import { Subject, takeUntil } from "rxjs";
 import { AppState } from "../../../app.state";
+import { IDiceValues } from "../../../models/dice.model";
 
 @Component({
     selector: "app-area",
@@ -25,7 +24,7 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
 
     @ViewChild("dynamic", { read: ViewContainerRef })
 
-    public playerMoveService?: PlayerMoveService;
+    public currentPlayer?: PlayerModel | null;
 
     private readonly unsubscribe$ = new Subject<void>();
 
@@ -33,20 +32,36 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
         private readonly treasuryCardGeneratedService: TreasuryCardGeneratedService,
         private readonly chanceCardGeneratedService: ChanceCardGeneratedService,
         private readonly signalRService: SignalRService,
-        private readonly gameLobbyService: GameLobbyService,
+        private readonly gameLobbyService: GameService,
         private readonly gameDataTransferService: GameDataTransferService,
         private readonly appState: AppState
-    ) {
-    }
+    ) {}
 
     public ngOnInit(): void {
-        this.initPlayerMoveService();
+        this.gameDataTransferService.players
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(playersData => {
+                this.players = playersData;
+                if (!this.players) {
+                    return;
+                }
+
+                this.currentPlayer = this.players[0];
+            });
+
+        this.signalRService.hubConnection.on("PlayerMoved", (playerId, position: string) => {
+            const player = this.players?.find(player => player.id == playerId);
+            if (!player) {
+                return;
+            }
+
+            player.currentPosition = position;
+        });
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
         if(changes["players"]) {
             this.players = changes["players"].currentValue;
-            this.initPlayerMoveService();
         }
     }
 
@@ -55,33 +70,16 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
         this.unsubscribe$.complete();
     }
 
-    public makeMove(): void {
-        this.signalRService.send().subscribe();
-        this.signalRService.sendInvoke();
-    }
-
-    private initPlayerMoveService(): void {
-        if (this.players) {
-            this.playerMoveService = new PlayerMoveService(this.players, this.cells);
-        }
-    }
-
-    public diceValueChange(diceValue: IDiceValue): void {
-        if (!this.playerMoveService) {
+    public setPlayerPosition(diceValues: IDiceValues): void {
+        if (!this.currentPlayer) {
             return;
         }
 
-        if (!this.players) {
-            return;
-        }
-
-        this.playerMoveService.moveCurrentPlayer(diceValue);
-        const currentPosition = this.playerMoveService?.getTargetPosition(diceValue);
-        this.gameLobbyService.movePlayer(this.lobbyId, this.players[0].id, currentPosition ?? "start")
+        this.gameLobbyService.setPlayerPosition(this.lobbyId, this.currentPlayer.id, diceValues)
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(responseData => {
-                this.appState.modalState.openModal$.next("CellPurchaseModalComponent");
-                console.warn(responseData);
+            .subscribe(() => {
+                //this.appState.modalState.openModal$.next("CellPurchaseModalComponent");
+                console.warn("player position saved!");
             });
     }
 

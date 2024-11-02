@@ -17,11 +17,11 @@ export class GameDataTransferService{
         return this._cellsSubject.asObservable();
     }
 
-    public set playersData(players: PlayerModel[]) {
+    public set players(players: PlayerModel[]) {
         this._playersSubject.next(players);
     }
 
-    public get playersData(): Observable<PlayerModel[] | null> {
+    public get players(): Observable<PlayerModel[] | null> {
         return this._playersSubject.asObservable();
     }
 

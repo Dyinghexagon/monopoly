@@ -1,38 +1,39 @@
-﻿using monopoly.Server.Models.Backend;
+﻿using Microsoft.AspNetCore.SignalR;
+using monopoly.Server.Hubs;
+using monopoly.Server.Models.Backend;
 using monopoly.Server.Services.CellService;
 using monopoly.Server.Services.PlayerService;
 
-namespace monopoly.Server.Services.MovePlayerService
+namespace monopoly.Server.Services.PlayerActionService
 {
     public class PlayerActionService(
         IPlayerService playerService,
+        IHubContext<GameHub> hubContext,
         ICellService cellService
     ) : IPlayerActionService
     {
         private readonly IPlayerService _playerService = playerService;
+        private readonly IHubContext<GameHub> _hubContext = hubContext;
         private readonly List<Cell> _cells = cellService.GetCells();
 
-        public async Task<Player> MovePlayer(Guid lobbyId, Guid playerId, string targetPosition)
+
+        public string CalculateTargetPosition(Dice firstDice, Dice secondDice, string idCurrentPlayerPosition)
         {
-            var players = await _playerService.GetPlayersByLobbyIdAsync(lobbyId);
-            var player = players.Where(x => x.Id == playerId).FirstOrDefault();
-
-            if (player is null)
+            var nextNodeValue = firstDice.Value + secondDice.Value;
+            var currentPosition = _cells.Where(x => x.Id == idCurrentPlayerPosition).FirstOrDefault();
+            if (currentPosition is null)
             {
-                throw new ArgumentNullException(nameof(player));
+                return idCurrentPlayerPosition;
             }
 
-            var propertys = players.Where(player => player.Id != playerId).SelectMany(player => player.Property).ToList();
-            if (propertys.Contains(targetPosition))
+            var currentPositionIndex = _cells.IndexOf(currentPosition);
+            var targetPosition = currentPositionIndex + nextNodeValue;
+            if (targetPosition >= _cells.Count)
             {
-                //ячейка принадлежит кому-то
+                targetPosition -= _cells.Count;
             }
 
-            player.CurrentPosition = targetPosition;
-            var targetCell = _cells.Where(cell => cell.Id == targetPosition).FirstOrDefault();
-            Console.Write(targetCell);
-            await _playerService.UpdateAsync(player);
-            return player;
+            return _cells[targetPosition].Id;
         }
     }
 }

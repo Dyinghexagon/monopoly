@@ -44,11 +44,9 @@ export class LoginPageComponent extends AuthPageBase {
         )
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(
-                response => {
-                    if (response.isSuccess) {
-                        this.appState.authState.isSignedInRequest$.next(true);
-                        this.router.navigate(["/create-lobby"]);
-                    }
+                () => {
+                    this.appState.authState.isSignedInRequest$.next(true);
+                    this.router.navigate(["/create-lobby"]);
                 },
                 error => {
                     if (!error?.error?.isSuccess) {

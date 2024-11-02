@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { NumberUtils } from "../../utils/number-utils";
-import { IDiceValue } from "../../models/dice.model";
+import { Component, EventEmitter, Input, OnDestroy, Output } from "@angular/core";
+import { IDiceValues } from "../../models/dice.model";
+import { GameService } from "../../services/game.service";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: "app-dice",
@@ -8,31 +9,44 @@ import { IDiceValue } from "../../models/dice.model";
     styleUrls: [ "./dice.component.scss" ]
 })
 
-export class DiceComponent {
+export class DiceComponent implements OnDestroy {
 
-    public diceValue?: IDiceValue;
-    @Output() public diceValueChange = new EventEmitter<IDiceValue>();
+    @Input() public lobbyId!: string;
+    @Input() public playerId!: string;
 
-    public rollDice2(): void {
+    @Output() public diceValueChange = new EventEmitter<IDiceValues>();
+
+    private readonly unsubscribe$ = new Subject<void>();
+
+    constructor(private readonly gameService: GameService) {}
+
+    public ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
+
+    public rollDice(): void {
+        this.gameService.rollDice(this.lobbyId, this.playerId)
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(diceValue => {
+                this.animateRollDice(diceValue);
+            });
+    }
+
+    public animateRollDice(diceValue: IDiceValues): void {
         const diceFirst = document.querySelector<HTMLElement>(".dice.first");
         const diceSecond = document.querySelector<HTMLElement>(".dice.second");
         if (!diceFirst || !diceSecond) {
             return;
         }
 
-        const diceFirstValue = NumberUtils.randomIntNumber(1, 6);
-        diceFirst.dataset["side"] = diceFirstValue.toString();
+        diceFirst.dataset["side"] = diceValue.firstValue.toString();
         diceFirst.classList.toggle("reRoll");
 
-        const diceSecondValue = NumberUtils.randomIntNumber(1, 6);
-        diceSecond.dataset["side"] = diceSecondValue.toString();
+        diceSecond.dataset["side"] = diceValue.secondValue.toString();
         diceSecond.classList.toggle("reRoll");
 
-        this.diceValue = {
-            firstValue: diceFirstValue,
-            secondValue: diceSecondValue
-        };
-        this.diceValueChange.emit(this.diceValue);
+        this.diceValueChange.emit(diceValue);
     }
 
 }

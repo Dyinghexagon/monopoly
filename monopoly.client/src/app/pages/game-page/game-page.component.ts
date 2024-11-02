@@ -4,7 +4,7 @@ import { GameDataTransferService } from "../../services/game-data-transfer.servi
 import { Subject, switchMap, takeUntil } from "rxjs";
 import { PlayerModel } from "../../models/player.model";
 import { ICell } from "../../models/cell.model";
-import { GameLobbyService } from "../../services/game-lobby.service";
+import { GameService } from "../../services/game.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -24,7 +24,7 @@ export class GamePageComponent implements OnInit, AfterContentInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private readonly gameDataTransferService: GameDataTransferService,
-        private readonly gameLobbyService: GameLobbyService
+        private readonly gameLobbyService: GameService
     ) {}
 
     public ngOnInit(): void {
@@ -35,21 +35,14 @@ export class GamePageComponent implements OnInit, AfterContentInit, OnDestroy {
             )
             .subscribe(lobbyId => {
                 this.lobbyId = lobbyId;
-                this.gameLobbyService.get(lobbyId)
+                this.gameLobbyService.getLobby(lobbyId)
                     .pipe(takeUntil(this.unsubscribe$))
-                    .subscribe(responseData => this.gameDataTransferService.playersData = responseData.data.data);
+                    .subscribe(players => this.gameDataTransferService.players = players);
             });
 
         this.gameLobbyService.getGameArea()
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(cells => this.cells = cells.data.data ?? []);
-
-        this.gameDataTransferService.playersData
-            .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(playersData => {
-                this.players = playersData;
-                console.warn(this.players);
-            });
+            .subscribe(cells => this.cells = cells ?? []);
     }
 
     public ngAfterContentInit(): void {
