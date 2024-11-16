@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Новая папка1\**" />
+    <Content Remove="Models\Новая папка1\**" />
+    <EmbeddedResource Remove="Models\Новая папка1\**" />
+    <None Remove="Models\Новая папка1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core.ru" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">

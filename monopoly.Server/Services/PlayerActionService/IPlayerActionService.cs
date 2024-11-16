@@ -4,5 +4,5 @@ namespace monopoly.Server.Services.PlayerActionService;
 
 public interface IPlayerActionService
 {
-    string CalculateTargetPosition(Dice firstDice, Dice secondDice, string currentPlayerPosition);
+    Task MovePlayer(Dice firstDice, Dice secondDice, List<Player> players, Guid targetPlayerId);
 }

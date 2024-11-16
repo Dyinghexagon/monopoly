@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using monopoly.Server.Models.Backend;
+using monopoly.Server.Models.SignalR;
 
 namespace monopoly.Server.Hubs
 {
@@ -18,7 +19,18 @@ namespace monopoly.Server.Hubs
         /// <returns></returns>
         public async Task MovePlayer(Guid playerId, string targetCardId)
         {
-            await Clients.All.SendAsync("PlayerMoved", playerId, targetCardId);
+            await Clients.All.SendAsync("MovePlayer", playerId, targetCardId);
+        }
+
+        public async Task PromptToBuyProperty(PromptToBuyPropertyInfo promptToBuyPropertyInfo)
+        {
+            await Clients.All.SendAsync("PromptToBuyProperty", promptToBuyPropertyInfo);
+        }
+
+        public async Task SendMessage(string message) {
+            await Task.CompletedTask;
+
+            Console.WriteLine(message);
         }
     }
 }

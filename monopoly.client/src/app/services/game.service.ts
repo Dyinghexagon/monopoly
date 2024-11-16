@@ -20,7 +20,7 @@ export class GameService {
     }
 
     public rollDice(lobbyId: string, playerId: string): Observable<IDiceValues> {
-        return this.http.post<IDiceValues>(`${this.config.gameUrl}/rollDice/${lobbyId}/${playerId}`, {});
+        return this.http.post<IDiceValues>(`${this.config.gameUrl}/roll-dice/${lobbyId}/${playerId}`, {});
     }
 
     public addNewPlayer(lobbyId: string): Observable<PlayerModel[]> {
@@ -28,7 +28,7 @@ export class GameService {
     }
 
     public setPlayerPosition(lobbyId: string, playerId: string, diceValues: IDiceValues): Observable<PlayerModel> {
-        return this.http.put<PlayerModel>(`${this.config.gameUrl}/setPlayerPosition/${lobbyId}/${playerId}`, diceValues);
+        return this.http.put<PlayerModel>(`${this.config.gameUrl}/set-player-position/${lobbyId}/${playerId}`, diceValues);
     }
 
     public getLobby(lobbyId: string): Observable<PlayerModel[]> {

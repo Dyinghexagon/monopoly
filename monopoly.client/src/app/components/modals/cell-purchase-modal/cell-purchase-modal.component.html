@@ -4,7 +4,12 @@
             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
             <button type="button" class="btn-close" aria-label="Close" (click)="close()">&times;</button>
         </div>
-        <div class="modal-body">{{ playerId }}</div>
+        <div class="modal-body">
+            {{ playerId }}
+            <pre>
+                {{ cellPurchaseModalRequest }}
+            </pre>
+        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="close()">
                 Close

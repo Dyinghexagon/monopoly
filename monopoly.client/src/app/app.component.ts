@@ -4,6 +4,7 @@ import { Subject, takeUntil } from "rxjs";
 import { AppState } from "./app.state";
 import { Router } from "@angular/router";
 import { CellPurchaseModalComponent } from "./components/modals/cell-purchase-modal/cell-purchase-modal.component";
+import { CellPurchaseModalRequest } from "./states/modal/cell-purchase.state";
 
 @Component({
     selector: "app-root",
@@ -24,22 +25,20 @@ export class AppComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit(): void {
-        this.appState.modalState.openModal$
+        this.appState.modalState.cellPurchaseModalComponentState.openModal$
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((modalId: string) => {
+            .subscribe((cellPurchaseModalRequest: CellPurchaseModalRequest) => {
                 this.viewRef.clear();
 
-                if (modalId == "CellPurchaseModalComponent") {
-                    this.cellPurchaseModalComponentRef = this.viewRef.createComponent(CellPurchaseModalComponent);
-                }
+                this.cellPurchaseModalComponentRef = this.viewRef.createComponent(CellPurchaseModalComponent);
+                this.cellPurchaseModalComponentRef.instance.cellPurchaseModalRequest = cellPurchaseModalRequest;
             });
 
-        this.appState.modalState.closeModal$
+        this.appState.modalState.cellPurchaseModalComponentState.onCancel$
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((modalId: string) => {
-                if (modalId == "CellPurchaseModalComponent") {
-                    this.cellPurchaseModalComponentRef.destroy();
-                }
+            .subscribe(() => {
+                this.cellPurchaseModalComponentRef.destroy();
+                this.appState.modalState.cellPurchaseModalComponentState.result$.next();
             });
     }
 

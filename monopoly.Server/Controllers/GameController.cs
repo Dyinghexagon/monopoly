@@ -99,7 +99,7 @@ namespace monopoly.Server.Controllers
             return Ok(_mapper.Map<List<Player>, List<PlayerModel>>(playersAfterCreate));
         }
 
-        [HttpPut("setPlayerPosition/{lobbyId:guid}/{playerId:guid}")]
+        [HttpPut("set-player-position/{lobbyId:guid}/{playerId:guid}")]
         public async Task<IActionResult> MovePlayer(Guid lobbyId, Guid playerId, [FromBody]DiceValues diceValues)
         {
             try
@@ -111,22 +111,9 @@ namespace monopoly.Server.Controllers
                     return BadRequest();
                 }
 
-                var player = lobby.Players.Where(x => x.Id == playerId).FirstOrDefault();
-                if (player is null)
-                {
-                    _logger.LogInformation($"Игрок id: {playerId} не найден!");
-                    return BadRequest();
-                }
-
                 var firstDice = new Dice() { Value = diceValues.FirstValue };
                 var secondDice = new Dice() { Value = diceValues.SecondValue };
-
-                var targetCardId = _playerActionService.CalculateTargetPosition(firstDice, secondDice, player.CurrentPosition);
-
-                _logger.LogInformation($"В лобби {lobbyId} найден игрок {playerId} и перемещен на {targetCardId}");
-                player.CurrentPosition = targetCardId;
-                await _playerService.UpdateAsync(player);
-                await _hub.Clients.All.SendAsync("PlayerMoved", playerId, targetCardId);
+                await _playerActionService.MovePlayer(firstDice, secondDice, lobby.Players, playerId);
 
                 return Ok();
             }
@@ -144,7 +131,7 @@ namespace monopoly.Server.Controllers
             return Ok(_mapper.Map<List<Cell>, List<CellModel>>(gameArea));
         }
 
-        [HttpPost("rollDice/{lobbyId:guid}/{playerId:guid}")]
+        [HttpPost("roll-dice/{lobbyId:guid}/{playerId:guid}")]
         public async Task<IActionResult> RollDice(Guid lobbyId, Guid playerId)
         {
             var firstDice = new Dice();

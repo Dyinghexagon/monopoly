@@ -6,9 +6,10 @@ import { SignalRService } from "../../../services/signalR.service";
 import { ICell } from "../../../models/cell.model";
 import { GameService } from "../../../services/game.service";
 import { GameDataTransferService } from "../../../services/game-data-transfer.service";
-import { Subject, takeUntil } from "rxjs";
+import { Subject, take, takeUntil } from "rxjs";
 import { AppState } from "../../../app.state";
 import { IDiceValues } from "../../../models/dice.model";
+import { CellPurchaseModalRequest } from "../../../states/modal/cell-purchase.state";
 
 @Component({
     selector: "app-area",
@@ -49,7 +50,7 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
                 this.currentPlayer = this.players[0];
             });
 
-        this.signalRService.hubConnection.on("PlayerMoved", (playerId, position: string) => {
+        this.signalRService.hubConnection.on("MovePlayer", (playerId, position: string) => {
             const player = this.players?.find(player => player.id == playerId);
             if (!player) {
                 return;
@@ -57,6 +58,19 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
 
             player.currentPosition = position;
         });
+
+        this.signalRService.hubConnection.on("PromptToBuyProperty", obj => {
+            this.appState.modalState.cellPurchaseModalComponentState.openModal$.next(new CellPurchaseModalRequest(obj));
+        });
+        /**
+         *    this.hubConnection.invoke('SendMessage', playerId, message)
+      .catch(err => console.error('Error while sending message:', err));
+         */
+        this.appState.modalState.cellPurchaseModalComponentState.result$
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(() => {
+                this.signalRService.hubConnection.invoke("SendMessage", "123");
+            });
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -78,7 +92,6 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
         this.gameLobbyService.setPlayerPosition(this.lobbyId, this.currentPlayer.id, diceValues)
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(() => {
-                //this.appState.modalState.openModal$.next("CellPurchaseModalComponent");
                 console.warn("player position saved!");
             });
     }

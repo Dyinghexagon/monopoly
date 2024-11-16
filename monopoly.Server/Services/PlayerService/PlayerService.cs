@@ -5,10 +5,5 @@ namespace monopoly.Server.Services.PlayerService
 {
     public class PlayerService(ApplicationContext context) : BaseEntityService<Player>(context), IPlayerService
     {
-        public async Task<Player?> GetAsync(Guid id)
-        {
-            var player = await GetAsync(id);
-            return player;
-        }
     }
 }

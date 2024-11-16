@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { AuthService } from "./services/auth.service";
 import { Subject } from "rxjs";
 import { AuthState } from "./states/auth.state";
-import { ModalState } from "./states/modal.state";
+import { ModalState } from "./states/modal/modal-base.state";
 
 @Injectable()
 export class AppState implements OnDestroy {

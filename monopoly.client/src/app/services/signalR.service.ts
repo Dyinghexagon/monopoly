@@ -20,10 +20,6 @@ export class SignalRService {
         this.hubConnection.start()
             .then(() => console.warn("conected start!"))
             .catch(err => console.warn("Error while starting connection: " + err));
-
-        this.hubConnection.on("SendFromBackednd", (message: string) => {
-            console.warn(message);
-        });
     }
 
 }
