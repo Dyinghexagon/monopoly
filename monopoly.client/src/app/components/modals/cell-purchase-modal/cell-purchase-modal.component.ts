@@ -20,13 +20,20 @@ export class CellPurchaseModalComponent implements OnInit {
         console.warn(this.cellPurchaseModalRequest);
     }
 
-    public close(): void {
-        this.appState.modalState.cellPurchaseModalComponentState.onCancel$.next();
-        console.warn("close modal!");
+    public onClose(): void {
+        this.appState.modalState.cellPurchaseModalComponentState.onCancelSubject$.next({
+            isSold: false,
+            buyerPlayerId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.targetPlayerId,
+            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cardInfo.id
+        });
     }
 
-    public yes(): void {
-        console.warn("yes");
+    public onConfirm(): void {
+        this.appState.modalState.cellPurchaseModalComponentState.onConfirmSubject$.next({
+            isSold: true,
+            buyerPlayerId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.targetPlayerId,
+            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cardInfo.id
+        });
     }
 
 }

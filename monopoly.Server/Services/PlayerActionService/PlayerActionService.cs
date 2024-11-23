@@ -1,24 +1,34 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using monopoly.Server.Hubs;
-using monopoly.Server.Models.Backend;
+﻿using monopoly.Server.Models.Backend;
 using monopoly.Server.Models.Exceptions;
 using monopoly.Server.Models.SignalR;
 using monopoly.Server.Services.CellService;
+using monopoly.Server.Services.GameHubClient;
 using monopoly.Server.Services.PlayerService;
 
 namespace monopoly.Server.Services.PlayerActionService;
 
 public class PlayerActionService(
     IPlayerService playerService,
-    IHubContext<GameHub> hub,
     ICellService cellService,
+    IGameHubClient gameHubClient,
     ILogger<PlayerActionService> logger
 ) : IPlayerActionService
 {
     private readonly IPlayerService _playerService = playerService;
-    private readonly IHubContext<GameHub> _hub = hub;
+    private readonly IGameHubClient _gameHubClient = gameHubClient;
+
     private readonly List<Cell> _cells = cellService.GetCells();
     private readonly ILogger<PlayerActionService> _logger = logger;
+
+
+    public async Task ProcessPurchaseDecision(PurchaseOfferDecision purchaseOfferDecision)
+    {
+        var player = await _playerService.GetAsync(purchaseOfferDecision.BuyerPlayerId) ?? throw new PlayerNotFoundException(purchaseOfferDecision.BuyerPlayerId);
+        player.Property.Add(purchaseOfferDecision.PropertyId);
+        var card = _cells.FirstOrDefault(c => c.Id == purchaseOfferDecision.PropertyId);
+        player.Balance -= card?.Price ?? 0;
+        await _playerService.UpdateAsync(player);
+    }
 
     public async Task MovePlayer(Dice firstDice, Dice secondDice, List<Player> players, Guid targetPlayerId)
     {
@@ -28,12 +38,15 @@ public class PlayerActionService(
 
         targetPlayer.CurrentPosition = targetCardId;
         await _playerService.UpdateAsync(targetPlayer);
-        await _hub.Clients.All.SendAsync("MovePlayer", targetPlayer.Id, targetCardId);
-        await _hub.Clients.All.SendAsync("PromptToBuyProperty", new PromptToBuyPropertyInfo()
+
+
+        await _gameHubClient.SendMovePlayer(targetPlayer.Id, targetCardId);
+        await _gameHubClient.SendPromptToBuyProperty(new()
         {
             TargetPlayerId = targetPlayer.Id,
             CardInfo = GetCardInfo(players, targetCardId)
         });
+
         _logger.LogInformation($"Игрок: {targetPlayer.Id} перемещен с {prevPlayerPositionId} на {targetCardId}");
     }
     

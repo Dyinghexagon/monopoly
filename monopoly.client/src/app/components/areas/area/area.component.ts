@@ -6,7 +6,7 @@ import { SignalRService } from "../../../services/signalR.service";
 import { ICell } from "../../../models/cell.model";
 import { GameService } from "../../../services/game.service";
 import { GameDataTransferService } from "../../../services/game-data-transfer.service";
-import { Subject, take, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { AppState } from "../../../app.state";
 import { IDiceValues } from "../../../models/dice.model";
 import { CellPurchaseModalRequest } from "../../../states/modal/cell-purchase.state";
@@ -62,15 +62,19 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
         this.signalRService.hubConnection.on("PromptToBuyProperty", obj => {
             this.appState.modalState.cellPurchaseModalComponentState.openModal$.next(new CellPurchaseModalRequest(obj));
         });
-        /**
-         *    this.hubConnection.invoke('SendMessage', playerId, message)
-      .catch(err => console.error('Error while sending message:', err));
-         */
-        this.appState.modalState.cellPurchaseModalComponentState.result$
+
+        this.appState.modalState.cellPurchaseModalComponentState.onCancel$
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(() => {
-                this.signalRService.hubConnection.invoke("SendMessage", "123");
+            .subscribe(purchaseOfferDecision => {
+                this.signalRService.invokePropertyOffer(purchaseOfferDecision);
             });
+
+        this.appState.modalState.cellPurchaseModalComponentState.onConfirm$
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(purchaseOfferDecision => {
+                this.signalRService.invokePropertyOffer(purchaseOfferDecision);
+            });
+
     }
 
     public ngOnChanges(changes: SimpleChanges): void {

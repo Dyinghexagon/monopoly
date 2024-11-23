@@ -38,7 +38,12 @@ export class AppComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(() => {
                 this.cellPurchaseModalComponentRef.destroy();
-                this.appState.modalState.cellPurchaseModalComponentState.result$.next();
+            });
+
+        this.appState.modalState.cellPurchaseModalComponentState.onConfirm$
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(() => {
+                this.cellPurchaseModalComponentRef.destroy();
             });
     }
 

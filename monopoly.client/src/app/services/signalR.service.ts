@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { HttpClient } from "@angular/common/http";
 import { AppConfig } from "../app.config";
+import { IPurchaseOfferDecision } from "../models/purchase-offer-decision.model";
 
 @Injectable()
 export class SignalRService {
@@ -20,6 +21,10 @@ export class SignalRService {
         this.hubConnection.start()
             .then(() => console.warn("conected start!"))
             .catch(err => console.warn("Error while starting connection: " + err));
+    }
+
+    public invokePropertyOffer(purchaseOfferDecision: IPurchaseOfferDecision): void {
+        this.hubConnection.invoke("HandlePropertyOfferResponse", purchaseOfferDecision);
     }
 
 }

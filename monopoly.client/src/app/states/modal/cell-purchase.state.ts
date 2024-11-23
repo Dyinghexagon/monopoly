@@ -1,21 +1,26 @@
-import { Subject } from "rxjs";
+import { concatMap, of, Subject } from "rxjs";
 import { IModalRequest } from "./modal-base.state";
+import { IPromptToBuyPropertyInfo } from "../../models/prompt-to-buy-property-info.model";
+import { IPurchaseOfferDecision } from "../../models/purchase-offer-decision.model";
 
 export class CellPurchaseModalComponentState {
 
     public readonly openModal$ = new Subject<CellPurchaseModalRequest>();
-    public readonly onCancel$ = new Subject<void>();
-    public readonly onConfirm$ = new Subject<void>();
-    public readonly result$ = new Subject<void>();
+
+    public readonly onCancelSubject$ = new Subject<IPurchaseOfferDecision>();
+    public readonly onCancel$ = this.onCancelSubject$.pipe(concatMap(purchaseOfferDecision => of(purchaseOfferDecision)));
+
+    public readonly onConfirmSubject$ = new Subject<IPurchaseOfferDecision>();
+    public readonly onConfirm$ = this.onConfirmSubject$.pipe(concatMap(purchaseOfferDecision => of(purchaseOfferDecision)));
 
 }
 
 export class CellPurchaseModalRequest implements ICellPurchaseModalComponentState {
 
-    public promptToBuyPropertyInfo: object;
+    public promptToBuyPropertyInfo: IPromptToBuyPropertyInfo;
     public modalId: string;
 
-    constructor(promptToBuyPropertyInfo: object) {
+    constructor(promptToBuyPropertyInfo: IPromptToBuyPropertyInfo) {
         this.promptToBuyPropertyInfo = promptToBuyPropertyInfo;
         this.modalId = "CellPurchaseModalComponent";
     }
@@ -23,5 +28,5 @@ export class CellPurchaseModalRequest implements ICellPurchaseModalComponentStat
 }
 
 export interface ICellPurchaseModalComponentState extends IModalRequest {
-    promptToBuyPropertyInfo: object;
+    promptToBuyPropertyInfo: IPromptToBuyPropertyInfo;
 }
