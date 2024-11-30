@@ -7,6 +7,15 @@
         public float? Price { get; set; } = price;
         public string? Color { get; set; } = color;
         public CellType Type { get; set; } = type;
+
+        public bool IsStreet => Type == CellType.GreyStreet ||
+                Type == CellType.PinkStreet ||
+                Type == CellType.YellowStreet ||
+                Type == CellType.GreenStreet ||
+                Type == CellType.BlueStreet ||
+                Type == CellType.CornStreet ||
+                Type == CellType.OrangeStreet ||
+                Type == CellType.RedStreet;
     }
 
     public enum CellType

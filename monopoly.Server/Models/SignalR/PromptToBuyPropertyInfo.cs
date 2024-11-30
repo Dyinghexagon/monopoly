@@ -2,7 +2,8 @@
 {
     public class PromptToBuyPropertyInfo
     {
-        public Guid TargetPlayerId { get; set; }
-        public required CardInfo CardInfo { get; set; }
+        public required Guid TargetPlayerId { get; set; }
+        public required CellDetailInfo CellDetailInfo { get; set; }
+        public Guid? OwnerId { get; set; }
     }
 }

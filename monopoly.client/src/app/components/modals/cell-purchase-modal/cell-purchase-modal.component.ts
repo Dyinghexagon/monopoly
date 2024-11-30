@@ -24,7 +24,7 @@ export class CellPurchaseModalComponent implements OnInit {
         this.appState.modalState.cellPurchaseModalComponentState.onCancelSubject$.next({
             isSold: false,
             buyerPlayerId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.targetPlayerId,
-            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cardInfo.id
+            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cellDetailInfo.id
         });
     }
 
@@ -32,7 +32,7 @@ export class CellPurchaseModalComponent implements OnInit {
         this.appState.modalState.cellPurchaseModalComponentState.onConfirmSubject$.next({
             isSold: true,
             buyerPlayerId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.targetPlayerId,
-            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cardInfo.id
+            propertyId: this.cellPurchaseModalRequest.promptToBuyPropertyInfo.cellDetailInfo.id
         });
     }
 

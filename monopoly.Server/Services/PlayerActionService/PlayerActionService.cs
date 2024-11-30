@@ -16,6 +16,7 @@ public class PlayerActionService(
 {
     private readonly IPlayerService _playerService = playerService;
     private readonly IGameHubClient _gameHubClient = gameHubClient;
+    private readonly ICellService _cellService = cellService;
 
     private readonly List<Cell> _cells = cellService.GetCells();
     private readonly ILogger<PlayerActionService> _logger = logger;
@@ -40,11 +41,11 @@ public class PlayerActionService(
         await _playerService.UpdateAsync(targetPlayer);
 
 
-        await _gameHubClient.SendMovePlayer(targetPlayer.Id, targetCardId);
-        await _gameHubClient.SendPromptToBuyProperty(new()
+        await _gameHubClient.SendMovePlayer(targetPlayer.Id, targetCardId, new()
         {
             TargetPlayerId = targetPlayer.Id,
-            CardInfo = GetCardInfo(players, targetCardId)
+            OwnerId = players.Where(player => player.Property.Contains(targetCardId))?.FirstOrDefault()?.Id,
+            CellDetailInfo = _cellService.GetCellDetailInfo(targetCardId)
         });
 
         _logger.LogInformation($"Игрок: {targetPlayer.Id} перемещен с {prevPlayerPositionId} на {targetCardId}");
@@ -67,14 +68,5 @@ public class PlayerActionService(
         }
 
         return _cells[targetPosition].Id;
-    }
-
-    private CardInfo GetCardInfo(List<Player> players, string cardId) {
-        return new()
-        {
-            Id = cardId,
-            OwnerId = players.Where(player => player.Property.Contains(cardId))?.FirstOrDefault()?.Id,
-            Price = _cells.Find(x => x.Id == cardId)?.Price ?? 0.0f,
-        };
     }
 }

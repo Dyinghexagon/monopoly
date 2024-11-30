@@ -8,14 +8,9 @@ namespace monopoly.Server.Services.GameHubClient
     {
         private readonly IHubContext<GameHub> _hub = hub;
 
-        public async Task SendMovePlayer(Guid targetPlayerId, string targetCardId)
+        public async Task SendMovePlayer(Guid targetPlayerId, string targetCardId, PromptToBuyPropertyInfo promptToBuyPropertyInfo)
         {
-            await _hub.Clients.All.SendAsync("MovePlayer", targetPlayerId, targetCardId);
-        }
-
-        public async Task SendPromptToBuyProperty(PromptToBuyPropertyInfo promptToBuyPropertyInfo)
-        {
-            await _hub.Clients.All.SendAsync("PromptToBuyProperty", promptToBuyPropertyInfo);
+            await _hub.Clients.All.SendAsync("MovePlayer", targetPlayerId, targetCardId, promptToBuyPropertyInfo);
         }
     }
 }

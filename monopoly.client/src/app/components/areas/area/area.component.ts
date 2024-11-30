@@ -10,6 +10,7 @@ import { Subject, takeUntil } from "rxjs";
 import { AppState } from "../../../app.state";
 import { IDiceValues } from "../../../models/dice.model";
 import { CellPurchaseModalRequest } from "../../../states/modal/cell-purchase.state";
+import { CellDetailInfo } from "../../../models/prompt-to-buy-property-info.model";
 
 @Component({
     selector: "app-area",
@@ -50,17 +51,16 @@ export class AreaComponent implements OnInit, OnChanges, OnDestroy {
                 this.currentPlayer = this.players[0];
             });
 
-        this.signalRService.hubConnection.on("MovePlayer", (playerId, position: string) => {
+        this.signalRService.hubConnection.on("MovePlayer", (playerId, position: string, cellPurchaseModalRequest, cellDetailInfo) => {
             const player = this.players?.find(player => player.id == playerId);
             if (!player) {
                 return;
             }
 
             player.currentPosition = position;
-        });
-
-        this.signalRService.hubConnection.on("PromptToBuyProperty", obj => {
-            this.appState.modalState.cellPurchaseModalComponentState.openModal$.next(new CellPurchaseModalRequest(obj));
+            console.warn(new CellPurchaseModalRequest(cellPurchaseModalRequest));
+            console.warn(new CellDetailInfo(cellDetailInfo));
+            //this.appState.modalState.cellPurchaseModalComponentState.openModal$.next(new CellPurchaseModalRequest(cellPurchaseModalRequest));
         });
 
         this.appState.modalState.cellPurchaseModalComponentState.onCancel$

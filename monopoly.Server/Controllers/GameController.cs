@@ -18,7 +18,7 @@ namespace monopoly.Server.Controllers
         IGameLobbyService gameLobbyService,
         ICellService cellService,
         IPlayerService playerService,
-        IPlayerActionService movePlayerService,
+        IPlayerActionService playerActionService,
         IHubContext<GameHub> hub,
         IMapper mapper,
         ILogger<GameController> logger
@@ -27,7 +27,7 @@ namespace monopoly.Server.Controllers
         private readonly IGameLobbyService _gameLobbyService = gameLobbyService;
         private readonly ICellService _cellService = cellService;
         private readonly IPlayerService _playerService = playerService;
-        private readonly IPlayerActionService _playerActionService = movePlayerService;
+        private readonly IPlayerActionService _playerActionService = playerActionService;
 
         private readonly IMapper _mapper = mapper;
         private readonly IHubContext<GameHub> _hub = hub;

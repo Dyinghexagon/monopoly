@@ -1,6 +1,6 @@
 import { concatMap, of, Subject } from "rxjs";
 import { IModalRequest } from "./modal-base.state";
-import { IPromptToBuyPropertyInfo } from "../../models/prompt-to-buy-property-info.model";
+import { CellDetailInfo, ICellDetailInfo, IPromptToBuyPropertyInfo } from "../../models/prompt-to-buy-property-info.model";
 import { IPurchaseOfferDecision } from "../../models/purchase-offer-decision.model";
 
 export class CellPurchaseModalComponentState {
@@ -21,8 +21,22 @@ export class CellPurchaseModalRequest implements ICellPurchaseModalComponentStat
     public modalId: string;
 
     constructor(promptToBuyPropertyInfo: IPromptToBuyPropertyInfo) {
-        this.promptToBuyPropertyInfo = promptToBuyPropertyInfo;
+        this.promptToBuyPropertyInfo = new PromptToBuyPropertyInfo(promptToBuyPropertyInfo);
         this.modalId = "CellPurchaseModalComponent";
+    }
+
+}
+
+export class PromptToBuyPropertyInfo implements IPromptToBuyPropertyInfo {
+
+    public targetPlayerId: string;
+    public ownerId: string | null;
+    public cellDetailInfo: ICellDetailInfo;
+
+    constructor(promptToBuyPropertyInfo: IPromptToBuyPropertyInfo) {
+        this.targetPlayerId = promptToBuyPropertyInfo.targetPlayerId;
+        this.ownerId = promptToBuyPropertyInfo.ownerId;
+        this.cellDetailInfo = new CellDetailInfo(promptToBuyPropertyInfo.cellDetailInfo);
     }
 
 }
